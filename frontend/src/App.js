@@ -1,52 +1,123 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, NavLink, useLocation } from "react-router-dom";
 import axios from "axios";
+import { motion, AnimatePresence } from "framer-motion";
+import { Toaster } from "./components/ui/sonner";
+import { toast } from "sonner";
+import { Map, Compass, Camera, CheckSquare, Users, Home as HomeIcon, Plus, X, MapPin, Calendar } from "lucide-react";
+
+// Pages
+import HomePage from "./pages/HomePage";
+import MapPage from "./pages/MapPage";
+import TripsPage from "./pages/TripsPage";
+import PackingPage from "./pages/PackingPage";
+import FamilyPage from "./pages/FamilyPage";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+export const API = `${BACKEND_URL}/api`;
 
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
+// Navigation Component
+const Navigation = () => {
+  const location = useLocation();
+  
   return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
+    <nav className="floating-nav" data-testid="main-navigation">
+      <NavLink 
+        to="/" 
+        className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+        data-testid="nav-home"
+      >
+        <HomeIcon className="w-4 h-4 inline mr-1" />
+        Start
+      </NavLink>
+      <NavLink 
+        to="/map" 
+        className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+        data-testid="nav-map"
+      >
+        <Map className="w-4 h-4 inline mr-1" />
+        Karte
+      </NavLink>
+      <NavLink 
+        to="/trips" 
+        className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+        data-testid="nav-trips"
+      >
+        <Camera className="w-4 h-4 inline mr-1" />
+        Reisen
+      </NavLink>
+      <NavLink 
+        to="/packing" 
+        className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+        data-testid="nav-packing"
+      >
+        <CheckSquare className="w-4 h-4 inline mr-1" />
+        Packlisten
+      </NavLink>
+      <NavLink 
+        to="/family" 
+        className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+        data-testid="nav-family"
+      >
+        <Users className="w-4 h-4 inline mr-1" />
+        Familie
+      </NavLink>
+    </nav>
+  );
+};
+
+// Page transition wrapper
+const PageWrapper = ({ children }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.3 }}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+// Animated Routes
+const AnimatedRoutes = () => {
+  const location = useLocation();
+  
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<PageWrapper><HomePage /></PageWrapper>} />
+        <Route path="/map" element={<PageWrapper><MapPage /></PageWrapper>} />
+        <Route path="/trips" element={<PageWrapper><TripsPage /></PageWrapper>} />
+        <Route path="/packing" element={<PageWrapper><PackingPage /></PageWrapper>} />
+        <Route path="/family" element={<PageWrapper><FamilyPage /></PageWrapper>} />
+      </Routes>
+    </AnimatePresence>
   );
 };
 
 function App() {
+  // Initialize family on app load
+  useEffect(() => {
+    const initFamily = async () => {
+      try {
+        await axios.post(`${API}/init-family`);
+      } catch (error) {
+        console.error("Failed to init family:", error);
+      }
+    };
+    initFamily();
+  }, []);
+
   return (
-    <div className="App">
+    <div className="app-container paper-texture">
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
+        <Navigation />
+        <AnimatedRoutes />
       </BrowserRouter>
+      <Toaster position="bottom-right" richColors />
     </div>
   );
 }

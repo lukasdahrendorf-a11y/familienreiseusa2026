@@ -1,34 +1,274 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+/* Main App Styles */
+.app-container {
+    min-height: 100vh;
+    position: relative;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
-}
-
-.App-header {
-    background-color: #0f0f10;
+/* Hero Section */
+.hero-section {
+    position: relative;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: calc(10px + 2vmin);
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(38, 70, 83, 0) 0%, rgba(38, 70, 83, 0.8) 100%);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Navigation */
+.floating-nav {
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-radius: 9999px;
+    padding: 0.75rem 2rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    border: 1px solid rgba(224, 224, 208, 0.5);
+}
+
+.nav-link {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #264653;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    background: rgba(42, 157, 143, 0.1);
+    color: #2A9D8F;
+}
+
+.nav-link.active {
+    background: #264653;
     color: white;
 }
 
-.App-link {
-    color: #61dafb;
+/* Cards */
+.trip-card {
+    background: white;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+    border: 1px solid #E0E0D0;
+    transition: all 0.3s ease;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.trip-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+
+/* Memory Card / Polaroid Style */
+.memory-card {
+    background: white;
+    padding: 1rem;
+    padding-bottom: 3rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.memory-card:nth-child(odd) {
+    transform: rotate(1deg);
+}
+
+.memory-card:nth-child(even) {
+    transform: rotate(-1deg);
+}
+
+.memory-card:hover {
+    transform: rotate(0deg) scale(1.02);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+/* Buttons */
+.btn-primary {
+    background: #264653;
+    color: white;
+    border-radius: 9999px;
+    padding: 0.75rem 2rem;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: rgba(38, 70, 83, 0.9);
+    transform: translateY(-2px);
+}
+
+.btn-primary:active {
+    transform: scale(0.95);
+}
+
+.btn-outline {
+    background: transparent;
+    color: #264653;
+    border: 2px solid #264653;
+    border-radius: 9999px;
+    padding: 0.75rem 2rem;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+    background: rgba(38, 70, 83, 0.05);
+}
+
+/* Map Container */
+.map-container {
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    border: 4px solid white;
+}
+
+/* Packing List */
+.packing-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: #F9F9F7;
+    border-radius: 0.75rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.packing-item:hover {
+    background: #F0EFEB;
+}
+
+.packing-item.checked {
+    opacity: 0.6;
+}
+
+.packing-item.checked span {
+    text-decoration: line-through;
+}
+
+/* Family Avatar */
+.family-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border: 3px solid white;
+    transition: transform 0.2s ease;
+}
+
+.family-avatar:hover {
+    transform: scale(1.1);
+}
+
+/* Section Headings */
+.section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    color: #264653;
+    letter-spacing: -0.02em;
+}
+
+/* Status badges */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-planned {
+    background: #E9C46A;
+    color: #264653;
+}
+
+.status-ongoing {
+    background: #2A9D8F;
+    color: white;
+}
+
+.status-completed {
+    background: #264653;
+    color: white;
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #8D99AE;
+}
+
+/* Form inputs */
+.form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #E0E0D0;
+    border-radius: 0.75rem;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+    background: white;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #2A9D8F;
+}
+
+/* Glass panel */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    border-radius: 1.5rem;
+}
+
+/* Page transitions */
+.page-enter {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.3s ease;
 }
