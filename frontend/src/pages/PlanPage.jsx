@@ -45,6 +45,7 @@ const PlanPage = () => {
   const getIcon = (title) => {
     if (title.includes("Helens")) return Flame;
     if (title.includes("Leavenworth")) return TreePine;
+    if (title.includes("Chuckwagon") || title.includes("Bar J")) return Beef;
     return Mountain;
   };
 
