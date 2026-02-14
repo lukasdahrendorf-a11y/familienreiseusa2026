@@ -34,20 +34,20 @@ const Navigation = () => {
         <span className="text-[9px] md:text-sm">Start</span>
       </NavLink>
       <NavLink 
-        to="/map" 
-        className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-        data-testid="nav-map"
-      >
-        <Map className="w-4 h-4 md:w-4 md:h-4" />
-        <span className="text-[9px] md:text-sm">Karte</span>
-      </NavLink>
-      <NavLink 
         to="/trips" 
         className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
         data-testid="nav-trips"
       >
         <Camera className="w-4 h-4 md:w-4 md:h-4" />
-        <span className="text-[9px] md:text-sm">Reisen</span>
+        <span className="text-[9px] md:text-sm">Reise</span>
+      </NavLink>
+      <NavLink 
+        to="/suggestions" 
+        className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+        data-testid="nav-suggestions"
+      >
+        <Sparkles className="w-4 h-4 md:w-4 md:h-4" />
+        <span className="text-[9px] md:text-sm">Tipps</span>
       </NavLink>
       <NavLink 
         to="/packing" 
