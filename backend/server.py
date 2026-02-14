@@ -270,6 +270,84 @@ async def init_family():
         return {"message": "Family initialized"}
     return {"message": "Family already exists"}
 
+# ==================== AI CHAT ====================
+
+# System prompt for the travel assistant
+TRAVEL_ASSISTANT_PROMPT = """Du bist ein freundlicher Reise-Assistent für die Familie Dahrendorf (Lukas, Laura und ihre 3 Söhne).
+
+Die Familie plant einen 26-tägigen Roadtrip an der USA Westküste im Sommer 2025:
+- Start: Las Vegas (17.-18. Juli)
+- Los Angeles & Disneyland (19.-21. Juli)
+- Sequoia National Park (22.-23. Juli)
+- Yosemite National Park (24.-26. Juli)
+- San Francisco (27.-28. Juli) - hier Wohnmobil-Übernahme
+- Redwood National Park (29.-31. Juli)
+- Oregon Coast (1.-3. August)
+- Olympic National Park (4.-6. August)
+- Alex' Tipps: Mount St. Helens & Leavenworth (7.-8. August)
+- Seattle (9.-11. August) - Ende & Rückflug
+
+Optionale Verlängerung: Yellowstone National Park (+4-5 Tage)
+
+Du hilfst bei:
+- Tipps für Familienreisen mit Kindern
+- Restaurant-Empfehlungen
+- Aktivitäten an jedem Ort
+- Packlisten-Vorschläge
+- Wetter und beste Reisezeiten
+- Junior Ranger Programme in Nationalparks
+- Hotelbuchungen und Campingplätze
+
+Antworte immer auf Deutsch, freundlich und familienorientiert. Halte Antworten kompakt aber hilfreich."""
+
+# Store chat sessions in memory (for demo purposes)
+chat_sessions = {}
+
+@api_router.post("/chat", response_model=ChatResponse)
+async def chat_with_assistant(request: ChatRequest):
+    session_id = request.session_id or str(uuid.uuid4())
+    
+    if not ANTHROPIC_API_KEY:
+        raise HTTPException(status_code=500, detail="Anthropic API key not configured")
+    
+    try:
+        # Get or create chat instance for this session
+        if session_id not in chat_sessions:
+            chat_sessions[session_id] = LlmChat(
+                api_key=ANTHROPIC_API_KEY,
+                session_id=session_id,
+                system_message=TRAVEL_ASSISTANT_PROMPT
+            ).with_model("anthropic", "claude-sonnet-4-5-20250929")
+        
+        chat = chat_sessions[session_id]
+        
+        # Send message and get response
+        user_message = UserMessage(text=request.message)
+        response = await chat.send_message(user_message)
+        
+        # Store in database for persistence
+        chat_record = {
+            "session_id": session_id,
+            "user_message": request.message,
+            "assistant_response": response,
+            "timestamp": datetime.now(timezone.utc).isoformat()
+        }
+        await db.chat_history.insert_one(chat_record)
+        
+        return ChatResponse(response=response, session_id=session_id)
+        
+    except Exception as e:
+        logger.error(f"Chat error: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Chat error: {str(e)}")
+
+@api_router.get("/chat/history/{session_id}")
+async def get_chat_history(session_id: str):
+    history = await db.chat_history.find(
+        {"session_id": session_id}, 
+        {"_id": 0}
+    ).sort("timestamp", 1).to_list(100)
+    return history
+
 # Include the router in the main app
 app.include_router(api_router)
 
