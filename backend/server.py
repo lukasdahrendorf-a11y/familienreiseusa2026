@@ -249,6 +249,23 @@ async def toggle_packing_item(list_id: str, item_id: str):
     await db.packing_lists.update_one({"id": list_id}, {"$set": {"items": items}})
     return {"message": "Item toggled"}
 
+# ==================== SUGGESTIONS (Alex' Vorschläge) ====================
+
+@api_router.get("/suggestions", response_model=List[Suggestion])
+async def get_suggestions():
+    suggestions = await db.suggestions.find({}, {"_id": 0}).to_list(100)
+    return suggestions
+
+@api_router.patch("/suggestions/{suggestion_id}/toggle")
+async def toggle_suggestion(suggestion_id: str):
+    suggestion = await db.suggestions.find_one({"id": suggestion_id}, {"_id": 0})
+    if not suggestion:
+        raise HTTPException(status_code=404, detail="Suggestion not found")
+    
+    new_status = not suggestion.get("added_to_trip", False)
+    await db.suggestions.update_one({"id": suggestion_id}, {"$set": {"added_to_trip": new_status}})
+    return {"message": "Suggestion toggled", "added_to_trip": new_status}
+
 # Status (keeping original)
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
