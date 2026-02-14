@@ -247,12 +247,12 @@ const PackingPage = () => {
                     <label className="font-nunito font-semibold text-[#264653] block mb-2">
                       Für welche Reise? (optional)
                     </label>
-                    <Select value={newListTripId} onValueChange={setNewListTripId}>
+                    <Select value={newListTripId || "none"} onValueChange={(val) => setNewListTripId(val === "none" ? "" : val)}>
                       <SelectTrigger className="form-input" data-testid="list-trip-select">
                         <SelectValue placeholder="Keine Reise ausgewählt" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">Keine Reise</SelectItem>
+                        <SelectItem value="none">Keine Reise</SelectItem>
                         {trips.map((trip) => (
                           <SelectItem key={trip.id} value={trip.id}>
                             {trip.title}
