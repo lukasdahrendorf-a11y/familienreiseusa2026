@@ -53,13 +53,14 @@
     font-size: 0.65rem;
     color: #264653;
     text-decoration: none;
-    padding: 0.5rem 0.5rem;
+    padding: 0.35rem 0.35rem;
     border-radius: 9999px;
     transition: all 0.2s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.15rem;
+    gap: 0.1rem;
+    min-width: 50px;
 }
 
 @media (min-width: 768px) {
@@ -68,6 +69,7 @@
         flex-direction: row;
         padding: 0.5rem 1rem;
         gap: 0.25rem;
+        min-width: auto;
     }
 }
 
