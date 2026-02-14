@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route, NavLink, useLocation } from "react-router-dom";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { Toaster } from "./components/ui/sonner";
-import { toast } from "sonner";
-import { Map, Compass, Camera, CheckSquare, Users, Home as HomeIcon, Plus, X, MapPin, Calendar, Sparkles } from "lucide-react";
+import { Home, MapPinned, CalendarDays, CheckSquare, Users } from "lucide-react";
 
-// Pages
 import HomePage from "./pages/HomePage";
 import RoutePage from "./pages/RoutePage";
 import PlanPage from "./pages/PlanPage";
@@ -18,109 +16,75 @@ import ChatWidget from "./components/ChatWidget";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 export const API = `${BACKEND_URL}/api`;
 
-// Navigation Component - Mobile Optimized
+const navItems = [
+  { to: "/", icon: Home, label: "Start" },
+  { to: "/route", icon: MapPinned, label: "Route" },
+  { to: "/planen", icon: CalendarDays, label: "Planen" },
+  { to: "/packen", icon: CheckSquare, label: "Packen" },
+  { to: "/familie", icon: Users, label: "Familie" },
+];
+
 const Navigation = () => {
   const location = useLocation();
-  
   return (
-    <nav className="floating-nav" data-testid="main-navigation">
-      <NavLink 
-        to="/" 
-        className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-        data-testid="nav-home"
-      >
-        <HomeIcon className="w-4 h-4 md:w-4 md:h-4" />
-        <span className="text-[9px] md:text-sm">Start</span>
-      </NavLink>
-      <NavLink 
-        to="/trips" 
-        className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-        data-testid="nav-trips"
-      >
-        <Camera className="w-4 h-4 md:w-4 md:h-4" />
-        <span className="text-[9px] md:text-sm">Reise</span>
-      </NavLink>
-      <NavLink 
-        to="/suggestions" 
-        className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-        data-testid="nav-suggestions"
-      >
-        <Sparkles className="w-4 h-4 md:w-4 md:h-4" />
-        <span className="text-[9px] md:text-sm">Tipps</span>
-      </NavLink>
-      <NavLink 
-        to="/packing" 
-        className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-        data-testid="nav-packing"
-      >
-        <CheckSquare className="w-4 h-4 md:w-4 md:h-4" />
-        <span className="text-[9px] md:text-sm">Listen</span>
-      </NavLink>
-      <NavLink 
-        to="/family" 
-        className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-        data-testid="nav-family"
-      >
-        <Users className="w-4 h-4 md:w-4 md:h-4" />
-        <span className="text-[9px] md:text-sm">Familie</span>
-      </NavLink>
+    <nav className="app-nav" data-testid="main-navigation">
+      {navItems.map(({ to, icon: Icon, label }) => (
+        <NavLink
+          key={to}
+          to={to}
+          end={to === "/"}
+          className={({ isActive }) => `app-nav-item ${isActive ? "active" : ""}`}
+          data-testid={`nav-${label.toLowerCase()}`}
+        >
+          <Icon className="w-5 h-5" />
+          <span>{label}</span>
+        </NavLink>
+      ))}
     </nav>
   );
 };
 
-// Page transition wrapper
-const PageWrapper = ({ children }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.3 }}
-    >
-      {children}
-    </motion.div>
-  );
-};
+const PageWrapper = ({ children }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 12 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -12 }}
+    transition={{ duration: 0.25 }}
+  >
+    {children}
+  </motion.div>
+);
 
-// Animated Routes
 const AnimatedRoutes = () => {
   const location = useLocation();
-  
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageWrapper><HomePage /></PageWrapper>} />
-        <Route path="/map" element={<PageWrapper><MapPage /></PageWrapper>} />
-        <Route path="/trips" element={<PageWrapper><TripsPage /></PageWrapper>} />
-        <Route path="/suggestions" element={<PageWrapper><SuggestionsPage /></PageWrapper>} />
-        <Route path="/packing" element={<PageWrapper><PackingPage /></PageWrapper>} />
-        <Route path="/family" element={<PageWrapper><FamilyPage /></PageWrapper>} />
+        <Route path="/route" element={<PageWrapper><RoutePage /></PageWrapper>} />
+        <Route path="/planen" element={<PageWrapper><PlanPage /></PageWrapper>} />
+        <Route path="/packen" element={<PageWrapper><PackingPage /></PageWrapper>} />
+        <Route path="/familie" element={<PageWrapper><FamilyPage /></PageWrapper>} />
       </Routes>
     </AnimatePresence>
   );
 };
 
 function App() {
-  // Initialize family on app load
   useEffect(() => {
-    const initFamily = async () => {
-      try {
-        await axios.post(`${API}/init-family`);
-      } catch (error) {
-        console.error("Failed to init family:", error);
-      }
-    };
-    initFamily();
+    axios.post(`${API}/init-family`).catch(() => {});
   }, []);
 
   return (
     <div className="app-container paper-texture">
       <BrowserRouter>
+        <div className="app-content">
+          <AnimatedRoutes />
+        </div>
         <Navigation />
-        <AnimatedRoutes />
         <ChatWidget />
       </BrowserRouter>
-      <Toaster position="bottom-right" richColors />
+      <Toaster position="top-center" richColors />
     </div>
   );
 }
