@@ -29,7 +29,7 @@ const Navigation = () => {
         data-testid="nav-home"
       >
         <HomeIcon className="w-5 h-5 md:w-4 md:h-4" />
-        <span>Start</span>
+        <span className="text-[10px] md:text-sm">Start</span>
       </NavLink>
       <NavLink 
         to="/map" 
@@ -37,7 +37,7 @@ const Navigation = () => {
         data-testid="nav-map"
       >
         <Map className="w-5 h-5 md:w-4 md:h-4" />
-        <span>Karte</span>
+        <span className="text-[10px] md:text-sm">Karte</span>
       </NavLink>
       <NavLink 
         to="/trips" 
@@ -45,7 +45,7 @@ const Navigation = () => {
         data-testid="nav-trips"
       >
         <Camera className="w-5 h-5 md:w-4 md:h-4" />
-        <span>Reisen</span>
+        <span className="text-[10px] md:text-sm">Reisen</span>
       </NavLink>
       <NavLink 
         to="/packing" 
@@ -53,7 +53,7 @@ const Navigation = () => {
         data-testid="nav-packing"
       >
         <CheckSquare className="w-5 h-5 md:w-4 md:h-4" />
-        <span>Listen</span>
+        <span className="text-[10px] md:text-sm">Listen</span>
       </NavLink>
       <NavLink 
         to="/family" 
@@ -61,7 +61,7 @@ const Navigation = () => {
         data-testid="nav-family"
       >
         <Users className="w-5 h-5 md:w-4 md:h-4" />
-        <span>Familie</span>
+        <span className="text-[10px] md:text-sm">Familie</span>
       </NavLink>
     </nav>
   );
