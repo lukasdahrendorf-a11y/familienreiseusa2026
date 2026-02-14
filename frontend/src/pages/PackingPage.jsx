@@ -197,7 +197,7 @@ const PackingPage = () => {
   }, {}) || {};
 
   return (
-    <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 bg-[#F9F9F7]" data-testid="packing-page">
+    <div className="min-h-screen pb-4 bg-[#F9F9F7]" data-testid="packing-page">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -205,15 +205,16 @@ const PackingPage = () => {
           transition={{ duration: 0.5 }}
         >
           {/* Header */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-            <div>
-              <h1 className="font-fraunces text-3xl sm:text-4xl font-bold text-[#264653]">
-                Packlisten
-              </h1>
-              <p className="font-nunito text-[#8D99AE] mt-2">
-                Für stressfreies Packen mit der ganzen Familie
-              </p>
-            </div>
+          <div className="bg-[#264653] text-white px-4 py-5 -mx-4 sm:-mx-6 lg:-mx-8 mb-6">
+            <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+              <div>
+                <h1 className="font-fraunces text-2xl sm:text-3xl font-bold">
+                  Packlisten
+                </h1>
+                <p className="font-nunito text-sm text-white/70 mt-1">
+                  Fur stressfreies Packen mit der Familie
+                </p>
+              </div>
             
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
@@ -281,9 +282,10 @@ const PackingPage = () => {
                 </div>
               </DialogContent>
             </Dialog>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 px-4 sm:px-6 lg:px-8">
             {/* Lists Sidebar */}
             <div className="lg:col-span-1">
               <h2 className="font-fraunces text-xl font-bold text-[#264653] mb-4">

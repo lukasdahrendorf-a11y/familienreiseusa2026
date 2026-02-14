@@ -134,7 +134,7 @@ const FamilyPage = () => {
   const children = family.filter(m => m.role === "child");
 
   return (
-    <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 bg-[#F9F9F7]" data-testid="family-page">
+    <div className="min-h-screen pb-4 bg-[#F9F9F7]" data-testid="family-page">
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -142,21 +142,16 @@ const FamilyPage = () => {
           transition={{ duration: 0.5 }}
         >
           {/* Header */}
-          <div className="text-center mb-12">
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: "spring" }}
-              className="w-20 h-20 mx-auto mb-6 rounded-full bg-[#264653] flex items-center justify-center"
-            >
-              <Heart className="w-10 h-10 text-[#E9C46A]" />
-            </motion.div>
-            <h1 className="font-fraunces text-3xl sm:text-4xl lg:text-5xl font-bold text-[#264653] mb-4">
-              Unsere Familie
-            </h1>
-            <p className="font-nunito text-lg text-[#8D99AE] max-w-xl mx-auto">
-              Die Abenteurer, die gemeinsam die Welt erkunden.
-            </p>
+          <div className="bg-[#264653] text-white px-4 py-5 -mx-4 sm:-mx-6 lg:-mx-8 mb-8 text-center">
+            <div className="max-w-5xl mx-auto">
+              <Heart className="w-8 h-8 mx-auto mb-3 text-[#E9C46A]" />
+              <h1 className="font-fraunces text-2xl sm:text-3xl font-bold mb-1">
+                Unsere Familie
+              </h1>
+              <p className="font-nunito text-sm text-white/70">
+                Die Abenteurer, die gemeinsam die Welt erkunden.
+              </p>
+            </div>
           </div>
 
           {/* Add Member Button */}
