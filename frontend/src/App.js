@@ -9,11 +9,10 @@ import { Map, Compass, Camera, CheckSquare, Users, Home as HomeIcon, Plus, X, Ma
 
 // Pages
 import HomePage from "./pages/HomePage";
-import MapPage from "./pages/MapPage";
-import TripsPage from "./pages/TripsPage";
+import RoutePage from "./pages/RoutePage";
+import PlanPage from "./pages/PlanPage";
 import PackingPage from "./pages/PackingPage";
 import FamilyPage from "./pages/FamilyPage";
-import SuggestionsPage from "./pages/SuggestionsPage";
 import ChatWidget from "./components/ChatWidget";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
