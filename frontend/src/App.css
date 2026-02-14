@@ -50,16 +50,16 @@
 .nav-link {
     font-family: 'Nunito Sans', sans-serif;
     font-weight: 600;
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     color: #264653;
     text-decoration: none;
-    padding: 0.3rem 0.4rem;
+    padding: 0.25rem 0.2rem;
     border-radius: 9999px;
     transition: all 0.2s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.1rem;
+    gap: 0.05rem;
     flex-shrink: 0;
     white-space: nowrap;
 }
