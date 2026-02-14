@@ -73,7 +73,7 @@ const ChatWidget = () => {
     <>
       {/* Chat Toggle Button */}
       <motion.button
-        className="fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full bg-[#2A9D8F] text-white shadow-lg flex items-center justify-center hover:bg-[#238b7e] transition-colors"
+        className="fixed bottom-20 right-4 z-[100] w-14 h-14 rounded-full bg-[#2A9D8F] text-white shadow-lg flex items-center justify-center hover:bg-[#238b7e] transition-colors"
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
@@ -90,7 +90,7 @@ const ChatWidget = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed bottom-20 right-4 z-50 w-[calc(100vw-2rem)] max-w-[380px] h-[500px] max-h-[70vh] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-[#E0E0D0]"
+            className="fixed bottom-36 right-4 z-[100] w-[calc(100vw-2rem)] max-w-[380px] h-[450px] max-h-[60vh] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-[#E0E0D0]"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
