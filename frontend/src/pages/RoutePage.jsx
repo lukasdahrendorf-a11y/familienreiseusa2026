@@ -29,6 +29,7 @@ const optionalStops = [
   { name: "Mt. St. Helens", state: "Washington", lat: 46.1914, lng: -122.1956, day: "22", color: "#F4A261", optional: true, dates: "7. Aug" },
   { name: "Leavenworth", state: "Washington", lat: 47.5962, lng: -120.6615, day: "22-23", color: "#F4A261", optional: true, dates: "7.-8. Aug" },
   { name: "Yellowstone NP", state: "Wyoming", lat: 44.428, lng: -110.5885, day: "+4-5", color: "#E76F51", optional: true, extension: true, dates: "Optional" },
+  { name: "Bar J Chuckwagon", state: "Wyoming", lat: 43.4799, lng: -110.8752, day: "Abend", color: "#F4A261", optional: true, dates: "Bei Yellowstone" },
 ];
 
 const mapOptions = {
