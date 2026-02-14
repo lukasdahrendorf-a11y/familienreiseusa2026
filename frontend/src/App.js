@@ -28,40 +28,40 @@ const Navigation = () => {
         className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
         data-testid="nav-home"
       >
-        <HomeIcon className="w-5 h-5 md:w-4 md:h-4" />
-        <span className="text-[10px] md:text-sm">Start</span>
+        <HomeIcon className="w-4 h-4 md:w-4 md:h-4" />
+        <span className="text-[9px] md:text-sm">Start</span>
       </NavLink>
       <NavLink 
         to="/map" 
         className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
         data-testid="nav-map"
       >
-        <Map className="w-5 h-5 md:w-4 md:h-4" />
-        <span className="text-[10px] md:text-sm">Karte</span>
+        <Map className="w-4 h-4 md:w-4 md:h-4" />
+        <span className="text-[9px] md:text-sm">Karte</span>
       </NavLink>
       <NavLink 
         to="/trips" 
         className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
         data-testid="nav-trips"
       >
-        <Camera className="w-5 h-5 md:w-4 md:h-4" />
-        <span className="text-[10px] md:text-sm">Reisen</span>
+        <Camera className="w-4 h-4 md:w-4 md:h-4" />
+        <span className="text-[9px] md:text-sm">Reisen</span>
       </NavLink>
       <NavLink 
         to="/packing" 
         className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
         data-testid="nav-packing"
       >
-        <CheckSquare className="w-5 h-5 md:w-4 md:h-4" />
-        <span className="text-[10px] md:text-sm">Listen</span>
+        <CheckSquare className="w-4 h-4 md:w-4 md:h-4" />
+        <span className="text-[9px] md:text-sm">Listen</span>
       </NavLink>
       <NavLink 
         to="/family" 
         className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
         data-testid="nav-family"
       >
-        <Users className="w-5 h-5 md:w-4 md:h-4" />
-        <span className="text-[10px] md:text-sm">Familie</span>
+        <Users className="w-4 h-4 md:w-4 md:h-4" />
+        <span className="text-[9px] md:text-sm">Familie</span>
       </NavLink>
     </nav>
   );
