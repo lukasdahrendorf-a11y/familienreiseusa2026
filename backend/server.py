@@ -425,16 +425,62 @@ async def init_database():
     # Initialize trips if empty
     trips_count = await db.trips.count_documents({})
     if trips_count == 0:
-        logger.info("Initializing USA Westküste 2026 trips...")
+        logger.info("Initializing USA Westküste 2026 trip...")
         default_trips = [
-            {"id": str(uuid.uuid4()), "title": "USA Westküste 2026 - Family Road Trip", "description": "26-tägiger Familien-Roadtrip für Lukas, Laura, Louie, Levi & Noah.\n\n🗓️ 17. Juli - 11. August 2026\n\n📍 ROUTE:\n• Tag 1-2: Las Vegas - Ankunft, Strip, Helikopterflug\n• Tag 3-5: Los Angeles - Disneyland, Hollywood, Santa Monica\n• Tag 6-7: Sequoia NP - General Sherman Tree\n• Tag 8-10: Yosemite NP - El Capitan, Half Dome\n• Tag 11-12: San Francisco - Cable Car, Alcatraz\n• Tag 13-15: Redwood NP - Avenue of the Giants\n• Tag 16-18: Oregon Coast - Cannon Beach\n• Tag 19-21: Olympic NP - Hoh Rainforest\n• Tag 22-23: ★ Alex Tipps: Mt. St. Helens & Leavenworth\n• Tag 24-26: Seattle - Space Needle\n\n🌟 OPTIONAL: Yellowstone NP (+4-5 Tage)", "location": "Las Vegas → Seattle (USA Westküste)", "latitude": 39.5, "longitude": -119.5, "start_date": "2026-07-17", "end_date": "2026-08-11", "status": "planned", "photos": [{"id": "p1", "url": "https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d?w=800&q=80", "caption": "Las Vegas"}], "created_at": datetime.now(timezone.utc).isoformat()},
-            {"id": str(uuid.uuid4()), "title": "★ Mount St. Helens - Alex Tipp", "description": "Tag 22: Der Vulkan, dessen Nordseite 1980 weggesprengt wurde!\n\n🌋 Johnston Ridge Observatory - Blick direkt in den Krater", "location": "Mount St. Helens, Washington", "latitude": 46.1914, "longitude": -122.1956, "start_date": "2026-08-07", "end_date": "2026-08-07", "status": "planned", "photos": [{"id": "helens", "url": "https://customer-assets.emergentagent.com/job_family-travel-hub/artifacts/34y8hl7i_IMG_2693.jpeg", "caption": "Mt. St. Helens"}], "created_at": datetime.now(timezone.utc).isoformat()},
-            {"id": str(uuid.uuid4()), "title": "★ Leavenworth - Little Bavaria - Alex Tipp", "description": "Tag 22-23: Bayerisches Dorf in den Cascade Mountains!\n\n🏔️ Fachwerkhäuser, Biergärten, Brezeln, Nussknacker-Museum", "location": "Leavenworth, Washington", "latitude": 47.5962, "longitude": -120.6615, "start_date": "2026-08-07", "end_date": "2026-08-08", "status": "planned", "photos": [{"id": "leaven", "url": "https://customer-assets.emergentagent.com/job_family-travel-hub/artifacts/e9libzqo_IMG_2692.jpeg", "caption": "Leavenworth"}], "created_at": datetime.now(timezone.utc).isoformat()},
-            {"id": str(uuid.uuid4()), "title": "★★ Yellowstone - Alex Top-Empfehlung (Optional)", "description": "Verlängerung +4-5 Tage: Old Faithful, Grand Prismatic Spring, Mammoth Hot Springs, Bisons!", "location": "Yellowstone National Park, Wyoming", "latitude": 44.4280, "longitude": -110.5885, "start_date": "2026-08-12", "end_date": "2026-08-16", "status": "planned", "photos": [{"id": "yellow", "url": "https://customer-assets.emergentagent.com/job_family-travel-hub/artifacts/95zuar5m_IMG_2694.webp", "caption": "Yellowstone"}], "created_at": datetime.now(timezone.utc).isoformat()},
+            {"id": str(uuid.uuid4()), "title": "USA Westküste 2026 - Family Road Trip", "description": "26-tägiger Familien-Roadtrip für Lukas, Laura, Louie, Levi & Noah.\n\n🗓️ 17. Juli - 11. August 2026\n\n📍 ROUTE:\n• Tag 1-2: Las Vegas - Ankunft, Strip, Helikopterflug\n• Tag 3-5: Los Angeles - Disneyland, Hollywood, Santa Monica\n• Tag 6-7: Sequoia NP - General Sherman Tree\n• Tag 8-10: Yosemite NP - El Capitan, Half Dome\n• Tag 11-12: San Francisco - Cable Car, Alcatraz\n• Tag 13-15: Redwood NP - Avenue of the Giants\n• Tag 16-18: Oregon Coast - Cannon Beach\n• Tag 19-21: Olympic NP - Hoh Rainforest\n• Tag 24-26: Seattle - Space Needle", "location": "Las Vegas → Seattle (USA Westküste)", "latitude": 39.5, "longitude": -119.5, "start_date": "2026-07-17", "end_date": "2026-08-11", "status": "planned", "photos": [{"id": "p1", "url": "https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d?w=800&q=80", "caption": "Las Vegas"}], "created_at": datetime.now(timezone.utc).isoformat()},
         ]
         for trip in default_trips:
             await db.trips.insert_one(trip.copy())
-        logger.info(f"Initialized {len(default_trips)} trips!")
+        logger.info(f"Initialized {len(default_trips)} trip!")
+    
+    # Initialize suggestions (Alex' Vorschläge) if empty
+    suggestions_count = await db.suggestions.count_documents({})
+    if suggestions_count == 0:
+        logger.info("Initializing Alex suggestions...")
+        default_suggestions = [
+            {
+                "id": str(uuid.uuid4()),
+                "title": "Mount St. Helens",
+                "description": "Der Vulkan, dessen Nordseite 1980 weggesprengt wurde - eine Explosion 500-mal stärker als Hiroshima! Johnston Ridge Observatory mit Blick direkt in den Krater.",
+                "location": "Mount St. Helens, Washington",
+                "latitude": 46.1914,
+                "longitude": -122.1956,
+                "duration": "1 Tag",
+                "image_url": "https://customer-assets.emergentagent.com/job_family-travel-hub/artifacts/34y8hl7i_IMG_2693.jpeg",
+                "highlights": ["Johnston Ridge Observatory", "Blick in den Krater", "Interaktive Ausstellungen", "Umgestürzte Baumstämme"],
+                "is_extension": False,
+                "added_to_trip": False
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "title": "Leavenworth - Little Bavaria",
+                "description": "Ein komplettes bayerisches Dorf mitten in den Cascade Mountains! Fachwerkhäuser, Biergärten, Brezeln - als wärt ihr in Garmisch gelandet.",
+                "location": "Leavenworth, Washington",
+                "latitude": 47.5962,
+                "longitude": -120.6615,
+                "duration": "1-2 Tage",
+                "image_url": "https://customer-assets.emergentagent.com/job_family-travel-hub/artifacts/e9libzqo_IMG_2692.jpeg",
+                "highlights": ["Bayerische Biergärten", "Nussknacker-Museum", "Tubing am Wenatchee River", "Wandern in den Cascades"],
+                "is_extension": False,
+                "added_to_trip": False
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "title": "Yellowstone National Park",
+                "description": "Der älteste Nationalpark der Welt - sitzt auf einem Supervulkan! Old Faithful, Grand Prismatic Spring, Mammoth Hot Springs und wilde Tiere.",
+                "location": "Yellowstone National Park, Wyoming",
+                "latitude": 44.4280,
+                "longitude": -110.5885,
+                "duration": "+4-5 Tage",
+                "image_url": "https://customer-assets.emergentagent.com/job_family-travel-hub/artifacts/95zuar5m_IMG_2694.webp",
+                "highlights": ["Old Faithful Geysir", "Grand Prismatic Spring", "Mammoth Hot Springs", "Bisons im Lamar Valley", "Junior Ranger Badge"],
+                "is_extension": True,
+                "added_to_trip": False
+            }
+        ]
+        for suggestion in default_suggestions:
+            await db.suggestions.insert_one(suggestion.copy())
+        logger.info(f"Initialized {len(default_suggestions)} suggestions!")
     
     # Initialize packing list if empty
     packing_count = await db.packing_lists.count_documents({})
