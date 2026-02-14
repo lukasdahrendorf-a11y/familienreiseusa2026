@@ -344,8 +344,6 @@
 }
 
 /* ====== PAGE WRAPPER ====== */
-@layer base {
-  [data-debug-wrapper="true"] {
-    display: contents !important;
-  }
+[data-debug-wrapper="true"] {
+  display: contents !important;
 }
