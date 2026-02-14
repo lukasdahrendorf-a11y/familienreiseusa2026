@@ -1,40 +1,40 @@
-import { useEffect, useState, useCallback } from "react";
-import { GoogleMap, useJsApiLoader, Marker, InfoWindow, Polyline } from "@react-google-maps/api";
+import { useEffect, useState, useCallback, useRef } from "react";
+import {
+  GoogleMap,
+  useJsApiLoader,
+  Marker,
+  InfoWindow,
+  DirectionsRenderer,
+} from "@react-google-maps/api";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { API } from "../App";
-import { MapPin, Navigation, Loader2, Route, Clock, Calendar } from "lucide-react";
-import { Button } from "../components/ui/button";
+import { MapPin, Navigation, Loader2, Route, Clock, Calendar, Car } from "lucide-react";
 
-const mapContainerStyle = {
-  width: "100%",
-  height: "100%",
-};
+const mapContainerStyle = { width: "100%", height: "100%" };
 
-// Route waypoints for USA West Coast 2026
 const routeStops = [
-  { name: "Las Vegas", state: "Nevada", lat: 36.1699, lng: -115.1398, day: "1-2", color: "#E76F51" },
-  { name: "Los Angeles", state: "Kalifornien", lat: 34.0522, lng: -118.2437, day: "3-5", color: "#E9C46A" },
-  { name: "Sequoia NP", state: "Kalifornien", lat: 36.4864, lng: -118.5658, day: "6-7", color: "#2A9D8F" },
-  { name: "Yosemite NP", state: "Kalifornien", lat: 37.8651, lng: -119.5383, day: "8-10", color: "#2A9D8F" },
-  { name: "San Francisco", state: "Kalifornien", lat: 37.7749, lng: -122.4194, day: "11-12", color: "#E9C46A" },
-  { name: "Redwood NP", state: "Kalifornien", lat: 41.2132, lng: -124.0046, day: "13-15", color: "#2A9D8F" },
-  { name: "Oregon Coast", state: "Oregon", lat: 45.8918, lng: -123.9615, day: "16-18", color: "#264653" },
-  { name: "Olympic NP", state: "Washington", lat: 47.8021, lng: -123.6044, day: "19-21", color: "#2A9D8F" },
-  { name: "Seattle", state: "Washington", lat: 47.6062, lng: -122.3321, day: "24-26", color: "#E76F51" },
+  { name: "Las Vegas", state: "Nevada", lat: 36.1699, lng: -115.1398, day: "1-2", color: "#E76F51", dates: "17.-18. Juli" },
+  { name: "Los Angeles", state: "Kalifornien", lat: 34.0522, lng: -118.2437, day: "3-5", color: "#E9C46A", dates: "19.-21. Juli" },
+  { name: "Sequoia NP", state: "Kalifornien", lat: 36.4864, lng: -118.5658, day: "6-7", color: "#2A9D8F", dates: "22.-23. Juli" },
+  { name: "Yosemite NP", state: "Kalifornien", lat: 37.8651, lng: -119.5383, day: "8-10", color: "#2A9D8F", dates: "24.-26. Juli" },
+  { name: "San Francisco", state: "Kalifornien", lat: 37.7749, lng: -122.4194, day: "11-12", color: "#E9C46A", dates: "27.-28. Juli" },
+  { name: "Redwood NP", state: "Kalifornien", lat: 41.2132, lng: -124.0046, day: "13-15", color: "#2A9D8F", dates: "29.-31. Juli" },
+  { name: "Oregon Coast", state: "Oregon", lat: 45.8918, lng: -123.9615, day: "16-18", color: "#264653", dates: "1.-3. Aug" },
+  { name: "Olympic NP", state: "Washington", lat: 47.8021, lng: -123.6044, day: "19-21", color: "#2A9D8F", dates: "4.-6. Aug" },
+  { name: "Seattle", state: "Washington", lat: 47.6062, lng: -122.3321, day: "24-26", color: "#E76F51", dates: "9.-11. Aug" },
 ];
 
-// Optional stops (Alex suggestions)
 const optionalStops = [
-  { name: "Mt. St. Helens", state: "Washington", lat: 46.1914, lng: -122.1956, day: "22", color: "#F4A261", optional: true },
-  { name: "Leavenworth", state: "Washington", lat: 47.5962, lng: -120.6615, day: "22-23", color: "#F4A261", optional: true },
-  { name: "Yellowstone NP", state: "Wyoming", lat: 44.4280, lng: -110.5885, day: "+4-5", color: "#E76F51", optional: true, extension: true },
+  { name: "Mt. St. Helens", state: "Washington", lat: 46.1914, lng: -122.1956, day: "22", color: "#F4A261", optional: true, dates: "7. Aug" },
+  { name: "Leavenworth", state: "Washington", lat: 47.5962, lng: -120.6615, day: "22-23", color: "#F4A261", optional: true, dates: "7.-8. Aug" },
+  { name: "Yellowstone NP", state: "Wyoming", lat: 44.428, lng: -110.5885, day: "+4-5", color: "#E76F51", optional: true, extension: true, dates: "Optional" },
 ];
 
 const mapOptions = {
-  disableDefaultUI: false,
+  disableDefaultUI: true,
   zoomControl: true,
-  mapTypeControl: true,
+  mapTypeControl: false,
   streetViewControl: false,
   fullscreenControl: true,
   styles: [
@@ -42,118 +42,142 @@ const mapOptions = {
     { featureType: "landscape", elementType: "geometry", stylers: [{ color: "#f5f5f2" }] },
     { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#ffffff" }] },
     { featureType: "road.highway", elementType: "geometry.stroke", stylers: [{ color: "#c9c9c9" }] },
+    { featureType: "poi", stylers: [{ visibility: "off" }] },
   ],
 };
 
 const RoutePage = () => {
-  const [map, setMap] = useState(null);
   const [selectedStop, setSelectedStop] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const [showOptional, setShowOptional] = useState(true);
+  const [directions, setDirections] = useState(null);
+  const [totalDistance, setTotalDistance] = useState("");
+  const [totalDuration, setTotalDuration] = useState("");
+  const mapRef = useRef(null);
 
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
   useEffect(() => {
-    const fetchSuggestions = async () => {
-      try {
-        const response = await axios.get(`${API}/suggestions`);
-        setSuggestions(response.data);
-      } catch (error) {
-        console.error("Error fetching suggestions:", error);
+    axios.get(`${API}/suggestions`).then(r => setSuggestions(r.data)).catch(console.error);
+  }, []);
+
+  // Calculate route using Directions API
+  const calculateRoute = useCallback(() => {
+    if (!isLoaded || !window.google) return;
+
+    const directionsService = new window.google.maps.DirectionsService();
+    const origin = { lat: routeStops[0].lat, lng: routeStops[0].lng };
+    const destination = { lat: routeStops[routeStops.length - 1].lat, lng: routeStops[routeStops.length - 1].lng };
+    const waypoints = routeStops.slice(1, -1).map(s => ({
+      location: { lat: s.lat, lng: s.lng },
+      stopover: true,
+    }));
+
+    directionsService.route(
+      {
+        origin,
+        destination,
+        waypoints,
+        travelMode: window.google.maps.TravelMode.DRIVING,
+        optimizeWaypoints: false,
+      },
+      (result, status) => {
+        if (status === "OK") {
+          setDirections(result);
+          // Calculate totals
+          const legs = result.routes[0].legs;
+          const distKm = legs.reduce((sum, l) => sum + l.distance.value, 0);
+          const durSec = legs.reduce((sum, l) => sum + l.duration.value, 0);
+          setTotalDistance(`${Math.round(distKm / 1000).toLocaleString("de-DE")} km`);
+          setTotalDuration(`${Math.round(durSec / 3600)} Std.`);
+        }
       }
-    };
-    fetchSuggestions();
-  }, []);
+    );
+  }, [isLoaded]);
 
-  const onLoad = useCallback((mapInstance) => {
-    setMap(mapInstance);
-    // Fit bounds to show all stops
-    const bounds = new window.google.maps.LatLngBounds();
-    routeStops.forEach(stop => bounds.extend({ lat: stop.lat, lng: stop.lng }));
-    mapInstance.fitBounds(bounds, { padding: 50 });
-  }, []);
+  const onLoad = useCallback(
+    (mapInstance) => {
+      mapRef.current = mapInstance;
+      const bounds = new window.google.maps.LatLngBounds();
+      routeStops.forEach((s) => bounds.extend({ lat: s.lat, lng: s.lng }));
+      mapInstance.fitBounds(bounds, { padding: 50 });
+      // trigger route calculation
+      calculateRoute();
+    },
+    [calculateRoute]
+  );
 
-  const onUnmount = useCallback(() => setMap(null), []);
-
-  // Create route path
-  const routePath = routeStops.map(stop => ({ lat: stop.lat, lng: stop.lng }));
-
-  // Get added suggestions
-  const addedSuggestions = suggestions.filter(s => s.added_to_trip);
+  const scrollToStop = (stop) => {
+    setSelectedStop(stop);
+    mapRef.current?.panTo({ lat: stop.lat, lng: stop.lng });
+    mapRef.current?.setZoom(8);
+  };
 
   if (loadError) {
     return (
-      <div className="min-h-screen pt-20 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center p-8">
         <div className="text-center">
-          <MapPin className="w-16 h-16 mx-auto text-[#E76F51] mb-4" />
-          <h2 className="font-fraunces text-xl font-bold text-[#264653]">Karte konnte nicht geladen werden</h2>
+          <MapPin className="w-12 h-12 mx-auto text-[#E76F51] mb-3" />
+          <h2 className="font-fraunces text-lg font-bold text-[#264653]">Karte nicht verfugbar</h2>
         </div>
       </div>
     );
   }
 
+  const addedSuggestions = suggestions.filter((s) => s.added_to_trip);
+
   return (
     <div className="min-h-screen bg-[#F9F9F7]" data-testid="route-page">
       {/* Header */}
-      <div className="pt-20 pb-4 px-4 bg-[#264653] text-white">
+      <div className="bg-[#264653] text-white px-4 py-5">
         <div className="max-w-4xl mx-auto">
-          <div className="flex items-center gap-2 mb-2">
-            <Route className="w-5 h-5 text-[#E9C46A]" />
-            <span className="font-nunito text-sm text-white/70">USA Westküste 2026</span>
+          <div className="flex items-center gap-2 mb-1">
+            <Route className="w-4 h-4 text-[#E9C46A]" />
+            <span className="font-nunito text-xs text-white/70">USA Westkuste 2026</span>
           </div>
-          <h1 className="font-fraunces text-2xl sm:text-3xl font-bold mb-2">
+          <h1 className="font-fraunces text-2xl sm:text-3xl font-bold" data-testid="route-title">
             Unsere Route
           </h1>
-          <div className="flex flex-wrap gap-4 text-sm">
-            <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-[#E9C46A]" />
-              <span>17. Juli - 11. August</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-[#E9C46A]" />
-              <span>{routeStops.length} Stopps</span>
-            </div>
-            {addedSuggestions.length > 0 && (
-              <div className="flex items-center gap-2 text-[#F4A261]">
-                <span>+ {addedSuggestions.length} Extras</span>
-              </div>
+          <div className="flex flex-wrap gap-4 mt-2 text-sm">
+            <span className="flex items-center gap-1">
+              <Calendar className="w-3.5 h-3.5 text-[#E9C46A]" /> 17. Juli - 11. August
+            </span>
+            <span className="flex items-center gap-1">
+              <MapPin className="w-3.5 h-3.5 text-[#E9C46A]" /> {routeStops.length} Stopps
+            </span>
+            {totalDistance && (
+              <span className="flex items-center gap-1">
+                <Car className="w-3.5 h-3.5 text-[#E9C46A]" /> {totalDistance} &middot; {totalDuration}
+              </span>
             )}
           </div>
         </div>
       </div>
 
       {/* Legend */}
-      <div className="px-4 py-3 bg-white border-b border-[#E0E0D0]">
-        <div className="max-w-4xl mx-auto flex flex-wrap gap-4 text-xs">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-[#E76F51]" />
-            <span className="text-[#264653]">Start/Ende</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-[#2A9D8F]" />
-            <span className="text-[#264653]">Nationalparks</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-[#E9C46A]" />
-            <span className="text-[#264653]">Städte</span>
-          </div>
-          <button 
+      <div className="px-4 py-2.5 bg-white border-b border-[#E0E0D0]">
+        <div className="max-w-4xl mx-auto flex flex-wrap gap-3 text-xs">
+          <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-[#E76F51]" /> Start/Ende</span>
+          <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-[#2A9D8F]" /> Nationalparks</span>
+          <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-[#E9C46A]" /> Stadte</span>
+          <button
             onClick={() => setShowOptional(!showOptional)}
-            className={`flex items-center gap-2 px-2 py-1 rounded-full transition-colors ${showOptional ? 'bg-[#F4A261]/20' : 'bg-gray-100'}`}
+            className={`flex items-center gap-1.5 px-2 py-0.5 rounded-full transition-colors ${showOptional ? "bg-[#F4A261]/20" : "bg-gray-100"}`}
+            data-testid="toggle-optional-stops"
           >
-            <div className="w-3 h-3 rounded-full bg-[#F4A261]" />
-            <span className="text-[#264653]">Alex-Tipps {showOptional ? '✓' : ''}</span>
+            <span className="w-2.5 h-2.5 rounded-full bg-[#F4A261]" />
+            Alex-Tipps {showOptional ? "an" : "aus"}
           </button>
         </div>
       </div>
 
       {/* Map */}
-      <div className="h-[50vh] sm:h-[60vh]" data-testid="google-map">
+      <div className="h-[45vh] sm:h-[55vh]" data-testid="google-map">
         {!isLoaded ? (
           <div className="w-full h-full flex items-center justify-center bg-[#F0EFEB]">
-            <Loader2 className="w-10 h-10 text-[#264653] animate-spin" />
+            <Loader2 className="w-8 h-8 text-[#264653] animate-spin" />
           </div>
         ) : (
           <GoogleMap
@@ -161,80 +185,72 @@ const RoutePage = () => {
             center={{ lat: 39.5, lng: -119.5 }}
             zoom={5}
             onLoad={onLoad}
-            onUnmount={onUnmount}
             options={mapOptions}
           >
-            {/* Route Line */}
-            <Polyline
-              path={routePath}
-              options={{
-                strokeColor: "#264653",
-                strokeOpacity: 0.8,
-                strokeWeight: 3,
-              }}
-            />
+            {/* Directions Route */}
+            {directions && (
+              <DirectionsRenderer
+                directions={directions}
+                options={{
+                  suppressMarkers: true,
+                  polylineOptions: {
+                    strokeColor: "#264653",
+                    strokeOpacity: 0.85,
+                    strokeWeight: 4,
+                  },
+                }}
+              />
+            )}
 
-            {/* Main Route Markers */}
+            {/* Main Markers */}
             {routeStops.map((stop, idx) => (
               <Marker
                 key={stop.name}
                 position={{ lat: stop.lat, lng: stop.lng }}
                 onClick={() => setSelectedStop(stop)}
-                label={{
-                  text: String(idx + 1),
-                  color: "white",
-                  fontWeight: "bold",
-                  fontSize: "12px",
-                }}
+                label={{ text: String(idx + 1), color: "#fff", fontWeight: "bold", fontSize: "11px" }}
                 icon={{
                   path: window.google.maps.SymbolPath.CIRCLE,
                   scale: 14,
                   fillColor: stop.color,
                   fillOpacity: 1,
-                  strokeColor: "#FFFFFF",
+                  strokeColor: "#fff",
                   strokeWeight: 2,
                 }}
               />
             ))}
 
-            {/* Optional Markers (Alex Tips) */}
-            {showOptional && optionalStops.map((stop) => (
-              <Marker
-                key={stop.name}
-                position={{ lat: stop.lat, lng: stop.lng }}
-                onClick={() => setSelectedStop(stop)}
-                icon={{
-                  path: window.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-                  scale: 6,
-                  fillColor: stop.color,
-                  fillOpacity: 1,
-                  strokeColor: "#FFFFFF",
-                  strokeWeight: 2,
-                }}
-              />
-            ))}
+            {/* Optional Markers */}
+            {showOptional &&
+              optionalStops.map((stop) => (
+                <Marker
+                  key={stop.name}
+                  position={{ lat: stop.lat, lng: stop.lng }}
+                  onClick={() => setSelectedStop(stop)}
+                  icon={{
+                    path: window.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                    scale: 6,
+                    fillColor: stop.color,
+                    fillOpacity: 1,
+                    strokeColor: "#fff",
+                    strokeWeight: 2,
+                  }}
+                />
+              ))}
 
             {/* Info Window */}
             {selectedStop && (
-              <InfoWindow
-                position={{ lat: selectedStop.lat, lng: selectedStop.lng }}
-                onCloseClick={() => setSelectedStop(null)}
-              >
-                <div className="p-2 min-w-[150px]">
-                  <h3 className="font-fraunces text-lg font-bold text-[#264653]">{selectedStop.name}</h3>
-                  <p className="text-sm text-[#8D99AE]">{selectedStop.state}</p>
-                  <div className="flex items-center gap-1 mt-2 text-sm">
-                    <Clock className="w-4 h-4 text-[#2A9D8F]" />
-                    <span className="text-[#264653]">Tag {selectedStop.day}</span>
+              <InfoWindow position={{ lat: selectedStop.lat, lng: selectedStop.lng }} onCloseClick={() => setSelectedStop(null)}>
+                <div className="p-1.5 min-w-[140px]">
+                  <h3 className="font-bold text-[#264653] text-base">{selectedStop.name}</h3>
+                  <p className="text-xs text-[#8D99AE]">{selectedStop.state}</p>
+                  <div className="flex items-center gap-1 mt-1.5 text-xs">
+                    <Clock className="w-3.5 h-3.5 text-[#2A9D8F]" />
+                    <span className="text-[#264653]">{selectedStop.dates || `Tag ${selectedStop.day}`}</span>
                   </div>
                   {selectedStop.optional && (
-                    <span className="inline-block mt-2 px-2 py-1 bg-[#F4A261]/20 text-[#F4A261] text-xs rounded-full font-medium">
+                    <span className="inline-block mt-1.5 px-2 py-0.5 bg-[#F4A261]/20 text-[#F4A261] text-[10px] rounded-full font-semibold">
                       Alex-Tipp
-                    </span>
-                  )}
-                  {selectedStop.extension && (
-                    <span className="inline-block mt-1 px-2 py-1 bg-[#E76F51]/20 text-[#E76F51] text-xs rounded-full font-medium">
-                      Verlängerung
                     </span>
                   )}
                 </div>
@@ -245,62 +261,70 @@ const RoutePage = () => {
       </div>
 
       {/* Route List */}
-      <div className="px-4 py-6">
+      <div className="px-4 py-5">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-fraunces text-xl font-bold text-[#264653] mb-4">Reiseverlauf</h2>
-          
-          <div className="space-y-2">
+          <h2 className="font-fraunces text-lg font-bold text-[#264653] mb-3">Reiseverlauf</h2>
+
+          <div className="space-y-1.5">
             {routeStops.map((stop, idx) => (
-              <motion.div
+              <motion.button
                 key={stop.name}
-                className="flex items-center gap-3 p-3 bg-white rounded-xl border border-[#E0E0D0]"
-                initial={{ opacity: 0, x: -20 }}
+                className={`w-full flex items-center gap-3 p-3 rounded-xl border text-left transition-colors ${
+                  selectedStop?.name === stop.name
+                    ? "bg-[#264653]/5 border-[#264653]/30"
+                    : "bg-white border-[#E0E0D0] hover:bg-[#F0EFEB]"
+                }`}
+                onClick={() => scrollToStop(stop)}
+                initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: idx * 0.05 }}
+                transition={{ delay: idx * 0.04 }}
+                data-testid={`route-stop-${idx}`}
               >
-                <div 
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm"
+                <div
+                  className="w-7 h-7 rounded-full flex items-center justify-center text-white font-bold text-xs flex-shrink-0"
                   style={{ backgroundColor: stop.color }}
                 >
                   {idx + 1}
                 </div>
-                <div className="flex-1">
-                  <h3 className="font-nunito font-semibold text-[#264653]">{stop.name}</h3>
-                  <p className="text-xs text-[#8D99AE]">{stop.state}</p>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-nunito font-semibold text-sm text-[#264653]">{stop.name}</h3>
+                  <p className="text-[11px] text-[#8D99AE]">{stop.state}</p>
                 </div>
-                <div className="text-right">
-                  <span className="font-nunito text-sm font-medium text-[#264653]">Tag {stop.day}</span>
+                <div className="text-right flex-shrink-0">
+                  <span className="font-nunito text-xs font-medium text-[#264653]">{stop.dates}</span>
+                  <div className="text-[10px] text-[#8D99AE]">Tag {stop.day}</div>
                 </div>
-              </motion.div>
+              </motion.button>
             ))}
 
-            {/* Optional Stops */}
+            {/* Optional Section */}
             {showOptional && (
               <>
                 <div className="py-2 text-center">
-                  <span className="text-xs text-[#F4A261] font-medium">── Alex-Tipps ──</span>
+                  <span className="text-xs text-[#F4A261] font-semibold">-- Alex-Tipps --</span>
                 </div>
                 {optionalStops.map((stop, idx) => (
-                  <motion.div
+                  <motion.button
                     key={stop.name}
-                    className="flex items-center gap-3 p-3 bg-[#F4A261]/10 rounded-xl border-2 border-dashed border-[#F4A261]/30"
-                    initial={{ opacity: 0, x: -20 }}
+                    className="w-full flex items-center gap-3 p-3 bg-[#F4A261]/8 rounded-xl border-2 border-dashed border-[#F4A261]/25 text-left hover:bg-[#F4A261]/15 transition-colors"
+                    onClick={() => scrollToStop(stop)}
+                    initial={{ opacity: 0, x: -16 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.5 + idx * 0.1 }}
+                    transition={{ delay: 0.4 + idx * 0.08 }}
+                    data-testid={`route-optional-${idx}`}
                   >
-                    <div className="w-8 h-8 rounded-full bg-[#F4A261] flex items-center justify-center text-white">
-                      ★
+                    <div className="w-7 h-7 rounded-full bg-[#F4A261] flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                      *
                     </div>
-                    <div className="flex-1">
-                      <h3 className="font-nunito font-semibold text-[#264653]">{stop.name}</h3>
-                      <p className="text-xs text-[#8D99AE]">{stop.state}</p>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-nunito font-semibold text-sm text-[#264653]">{stop.name}</h3>
+                      <p className="text-[11px] text-[#8D99AE]">{stop.state}</p>
                     </div>
-                    <div className="text-right">
-                      <span className="font-nunito text-sm font-medium text-[#F4A261]">
-                        {stop.extension ? stop.day : `Tag ${stop.day}`}
-                      </span>
+                    <div className="text-right flex-shrink-0">
+                      <span className="font-nunito text-xs font-medium text-[#F4A261]">{stop.dates}</span>
+                      {stop.extension && <div className="text-[10px] text-[#E76F51]">Verlängerung</div>}
                     </div>
-                  </motion.div>
+                  </motion.button>
                 ))}
               </>
             )}
