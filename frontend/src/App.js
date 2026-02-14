@@ -17,7 +17,7 @@ import FamilyPage from "./pages/FamilyPage";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 export const API = `${BACKEND_URL}/api`;
 
-// Navigation Component
+// Navigation Component - Mobile Optimized
 const Navigation = () => {
   const location = useLocation();
   
@@ -28,40 +28,40 @@ const Navigation = () => {
         className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
         data-testid="nav-home"
       >
-        <HomeIcon className="w-4 h-4 inline mr-1" />
-        Start
+        <HomeIcon className="w-5 h-5 md:w-4 md:h-4" />
+        <span>Start</span>
       </NavLink>
       <NavLink 
         to="/map" 
         className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
         data-testid="nav-map"
       >
-        <Map className="w-4 h-4 inline mr-1" />
-        Karte
+        <Map className="w-5 h-5 md:w-4 md:h-4" />
+        <span>Karte</span>
       </NavLink>
       <NavLink 
         to="/trips" 
         className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
         data-testid="nav-trips"
       >
-        <Camera className="w-4 h-4 inline mr-1" />
-        Reisen
+        <Camera className="w-5 h-5 md:w-4 md:h-4" />
+        <span>Reisen</span>
       </NavLink>
       <NavLink 
         to="/packing" 
         className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
         data-testid="nav-packing"
       >
-        <CheckSquare className="w-4 h-4 inline mr-1" />
-        Packlisten
+        <CheckSquare className="w-5 h-5 md:w-4 md:h-4" />
+        <span>Listen</span>
       </NavLink>
       <NavLink 
         to="/family" 
         className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
         data-testid="nav-family"
       >
-        <Users className="w-4 h-4 inline mr-1" />
-        Familie
+        <Users className="w-5 h-5 md:w-4 md:h-4" />
+        <span>Familie</span>
       </NavLink>
     </nav>
   );
