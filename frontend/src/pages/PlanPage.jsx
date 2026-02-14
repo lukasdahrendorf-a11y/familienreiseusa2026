@@ -5,7 +5,7 @@ import { API } from "../App";
 import { toast } from "sonner";
 import {
   MapPin, Clock, Check, Plus, Sparkles, ChevronDown, ChevronUp,
-  Mountain, TreePine, Flame, CalendarDays, Plane
+  Mountain, TreePine, Flame, CalendarDays, Plane, Beef
 } from "lucide-react";
 import { Button } from "../components/ui/button";
 
