@@ -5,7 +5,7 @@ import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { Toaster } from "./components/ui/sonner";
 import { toast } from "sonner";
-import { Map, Compass, Camera, CheckSquare, Users, Home as HomeIcon, Plus, X, MapPin, Calendar } from "lucide-react";
+import { Map, Compass, Camera, CheckSquare, Users, Home as HomeIcon, Plus, X, MapPin, Calendar, Sparkles } from "lucide-react";
 
 // Pages
 import HomePage from "./pages/HomePage";
