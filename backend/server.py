@@ -102,6 +102,21 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
+# Suggestion Models (Alex' Vorschläge)
+class Suggestion(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    title: str
+    description: str
+    location: str
+    latitude: float
+    longitude: float
+    duration: str  # e.g. "1 Tag", "+4-5 Tage"
+    image_url: str
+    highlights: List[str] = []
+    is_extension: bool = False  # True for Yellowstone (adds days to trip)
+    added_to_trip: bool = False
+
 # Chat Models
 class ChatMessage(BaseModel):
     role: str  # "user" or "assistant"
