@@ -476,6 +476,19 @@ async def init_database():
                 "highlights": ["Old Faithful Geysir", "Grand Prismatic Spring", "Mammoth Hot Springs", "Bisons im Lamar Valley", "Junior Ranger Badge"],
                 "is_extension": True,
                 "added_to_trip": False
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "title": "Bar J Chuckwagon",
+                "description": "Legendäre Cowboy-Dinner-Show auf einer echten Ranch. Die Humphrey-Familie betreibt das seit über 40 Jahren. Deftiges Chuckwagon-Essen (BBQ, Steaks, Bohnen, Biscuits) auf Blechtellern, danach eine geniale Live-Show mit den Bar J Wranglers – echte Cowboys mit Western-Musik, Comedy und Yodeling. Perfekt für die ganze Familie! Checkt vorher: travelwyoming.com/listing/bar-j-chuckwagon-suppers/88/",
+                "location": "Wilson/Jackson Hole, Wyoming",
+                "latitude": 43.4799,
+                "longitude": -110.8752,
+                "duration": "1 Abend",
+                "image_url": "https://customer-assets.emergentagent.com/job_2b2386c2-84ba-4ac6-aaff-7fc29c17627e/artifacts/bjnbg562_IMG_2698.jpeg",
+                "highlights": ["BBQ & Steaks auf Blechtellern", "Live-Show mit Bar J Wranglers", "Western-Musik & Comedy", "Echte Ranch-Atmosphäre", "Seit über 40 Jahren Familientradition"],
+                "is_extension": False,
+                "added_to_trip": False
             }
         ]
         for suggestion in default_suggestions:
