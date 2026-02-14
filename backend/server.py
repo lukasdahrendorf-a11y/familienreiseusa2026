@@ -488,7 +488,7 @@ async def init_database():
         logger.info("Initializing packing list...")
         packing_list = {
             "id": str(uuid.uuid4()),
-            "title": "USA Westküste 2026 - Packliste",
+            "title": "USA Westkuste 2026 - Packliste",
             "trip_id": None,
             "items": [
                 {"id": "i1", "name": "Reisepässe für alle 5", "checked": False, "category": "dokumente"},
