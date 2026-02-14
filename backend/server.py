@@ -246,8 +246,10 @@ async def init_family():
             {"id": str(uuid.uuid4()), "name": "Kind 2", "role": "child", "emoji": "👧", "color": "#E9C46A"},
             {"id": str(uuid.uuid4()), "name": "Kind 3", "role": "child", "emoji": "🧒", "color": "#F4A261"},
         ]
-        await db.family_members.insert_many(default_family)
-        return {"message": "Family initialized", "members": default_family}
+        # Insert without returning documents to avoid ObjectId issues
+        for member in default_family:
+            await db.family_members.insert_one(member.copy())
+        return {"message": "Family initialized"}
     return {"message": "Family already exists"}
 
 # Include the router in the main app
