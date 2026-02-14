@@ -1,0 +1,97 @@
+{
+  "identity": {
+    "name": "Lukas & Laura's Family Travel Journal",
+    "persona": "The Modern Scrapbook - Warm, Adventurous, Organized Chaos",
+    "vibe": "A digital campfire where family stories are told. Not a corporate travel agent.",
+    "emotional_archetype": "Organic & Earthy (Archetype 1) mixed with Vibrant Play"
+  },
+  "typography": {
+    "primary_font": "Fraunces",
+    "secondary_font": "Nunito Sans",
+    "mono_font": "JetBrains Mono",
+    "import_statement": "@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;400;600;700&family=Nunito+Sans:opsz,wght@6..12,300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap');",
+    "rules": {
+      "headings": "font-fraunces font-bold tracking-tight text-primary-900",
+      "body": "font-nunito text-base leading-relaxed text-slate-700",
+      "ui_elements": "font-nunito font-semibold tracking-wide uppercase text-xs"
+    }
+  },
+  "colors": {
+    "palette": {
+      "background": "#F9F9F7",
+      "foreground": "#264653",
+      "primary": "#264653",
+      "primary_foreground": "#FFFFFF",
+      "secondary": "#E9C46A",
+      "secondary_foreground": "#264653",
+      "accent": "#E76F51",
+      "accent_foreground": "#FFFFFF",
+      "muted": "#F0EFEB",
+      "muted_foreground": "#8D99AE",
+      "card": "#FFFFFF",
+      "card_foreground": "#264653",
+      "border": "#E0E0D0",
+      "input": "#E0E0D0",
+      "ring": "#2A9D8F",
+      "success": "#2A9D8F",
+      "warning": "#F4A261",
+      "error": "#E76F51"
+    },
+    "gradients": {
+      "hero_overlay": "linear-gradient(180deg, rgba(38, 70, 83, 0) 0%, rgba(38, 70, 83, 0.8) 100%)",
+      "warm_glow": "radial-gradient(circle at center, rgba(233, 196, 106, 0.2) 0%, rgba(255, 255, 255, 0) 70%)"
+    }
+  },
+  "layout_strategy": {
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "section_spacing": "py-24 md:py-32",
+    "grid_bento": "grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8",
+    "card_style": "bg-white rounded-2xl shadow-sm border border-stone-100 hover:shadow-md transition-all duration-300 hover:-translate-y-1",
+    "glass_panel": "bg-white/80 backdrop-blur-xl border border-white/20 shadow-lg"
+  },
+  "components": {
+    "Button": {
+      "default": "bg-primary text-white rounded-full px-8 py-3 font-semibold hover:bg-primary/90 transition-transform active:scale-95",
+      "outline": "border-2 border-primary text-primary bg-transparent rounded-full px-8 py-3 font-semibold hover:bg-primary/5"
+    },
+    "MapContainer": {
+      "style": "rounded-3xl overflow-hidden shadow-2xl border-4 border-white",
+      "interaction": "Focus on smooth zooming and custom markers using overlay views"
+    },
+    "MemoryCard": {
+      "style": "bg-white p-4 pb-12 shadow-md rotate-1 hover:rotate-0 transition-transform duration-300 relative",
+      "effect": "Add a 'tape' visual element at the top center using CSS ::before"
+    },
+    "Navbar": {
+      "style": "fixed top-6 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-md rounded-full px-8 py-4 shadow-xl z-50 flex items-center gap-8 border border-stone-200/50"
+    }
+  },
+  "visual_enhancers": {
+    "textures": "Use a subtle paper grain texture overlay (opacity 0.03) on the main background to reduce digital flatness.",
+    "shadows": "Soft, diffused shadows: shadow-[0_8px_30px_rgb(0,0,0,0.04)]",
+    "border_radius": "rounded-2xl or rounded-3xl for almost everything. Avoid sharp edges unless for specific 'ticket' UI elements."
+  },
+  "image_urls": {
+    "hero_background": "https://images.unsplash.com/photo-1769674109636-5d7e503e77d7",
+    "planning_hero": "https://images.unsplash.com/photo-1619467416348-6a782839e95f",
+    "family_portrait_placeholder": "https://images.unsplash.com/photo-1769674110189-4a979d15ff03",
+    "hiking_activity": "https://images.unsplash.com/photo-1770564512486-c2f7cd3f853b",
+    "beach_activity": "https://images.unsplash.com/photo-1769674109881-e932c8534844"
+  },
+  "instructions_to_main_agent": {
+    "1": "Install 'react-map-gl' or '@react-google-maps/api' for the map integration.",
+    "2": "Use Framer Motion for page transitions. Family websites should feel 'alive'.",
+    "3": "Implement the 'MemoryCard' component with the 'tape' effect for the photo gallery.",
+    "4": "The Packing List should be a drag-and-drop interface (use 'dnd-kit' or 'react-beautiful-dnd') or simple checklist with satisfying 'check' animations.",
+    "5": "Use the Google Maps API Key provided in the prompt context.",
+    "6": "Ensure the 'Family Profiles' section allows for custom avatars/emojis for the kids."
+  },
+  "universal_guidelines": [
+    "Do NOT use 'Inter' for headings. Use 'Fraunces'.",
+    "Avoid pure black (#000000). Use Deep Charcoal (#264653).",
+    "Buttons should be pill-shaped (rounded-full), not rectangular.",
+    "Use generous padding (p-8, p-12) to create breathing room.",
+    "Map markers should be custom circular avatars of the family members if possible, or fun icons.",
+    "ALL interactive elements must have `data-testid`."
+  ]
+}
