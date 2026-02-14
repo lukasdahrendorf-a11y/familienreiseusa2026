@@ -369,3 +369,76 @@ logger = logging.getLogger(__name__)
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
+
+@app.on_event("startup")
+async def init_database():
+    """Initialize database with default data on startup"""
+    logger.info("Checking database initialization...")
+    
+    # Initialize family if empty
+    family_count = await db.family_members.count_documents({})
+    if family_count == 0:
+        logger.info("Initializing family members...")
+        default_family = [
+            {"id": str(uuid.uuid4()), "name": "Lukas", "role": "parent", "emoji": "👨", "color": "#264653"},
+            {"id": str(uuid.uuid4()), "name": "Laura", "role": "parent", "emoji": "👩", "color": "#E76F51"},
+            {"id": str(uuid.uuid4()), "name": "Louie", "role": "child", "emoji": "👦", "color": "#2A9D8F"},
+            {"id": str(uuid.uuid4()), "name": "Levi", "role": "child", "emoji": "👦", "color": "#E9C46A"},
+            {"id": str(uuid.uuid4()), "name": "Noah", "role": "child", "emoji": "👦", "color": "#F4A261"},
+        ]
+        for member in default_family:
+            await db.family_members.insert_one(member.copy())
+        logger.info("Family initialized!")
+    
+    # Initialize trips if empty
+    trips_count = await db.trips.count_documents({})
+    if trips_count == 0:
+        logger.info("Initializing USA Westküste 2026 trips...")
+        default_trips = [
+            {"id": str(uuid.uuid4()), "title": "USA Westküste 2026 - The Great American West", "description": "26-tägiger Familien-Roadtrip von Las Vegas nach Seattle. 5 Bundesstaaten, endlose Erinnerungen!", "location": "Las Vegas, Nevada", "latitude": 36.1699, "longitude": -115.1398, "start_date": "2026-07-17", "end_date": "2026-08-11", "status": "planned", "photos": [{"id": "p1", "url": "https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d?w=800&q=80", "caption": "Las Vegas Strip"}], "created_at": datetime.now(timezone.utc).isoformat()},
+            {"id": str(uuid.uuid4()), "title": "Los Angeles - Hollywood & Disneyland", "description": "Tag 3-5: Themenparks, Walk of Fame, Santa Monica Pier. Disneyland oder Universal Studios für die Jungs!", "location": "Los Angeles, Kalifornien", "latitude": 34.0522, "longitude": -118.2437, "start_date": "2026-07-19", "end_date": "2026-07-21", "status": "planned", "photos": [{"id": "p2", "url": "https://images.unsplash.com/photo-1534190760961-74e8c1c5c3da?w=800&q=80", "caption": "Santa Monica Pier"}], "created_at": datetime.now(timezone.utc).isoformat()},
+            {"id": str(uuid.uuid4()), "title": "Sequoia National Park - Riesenbäume", "description": "Tag 6-7: General Sherman Tree - der mächtigste Baum der Erde (2.200 Jahre alt). Moro Rock, Tunnel Log.", "location": "Sequoia National Park, Kalifornien", "latitude": 36.4864, "longitude": -118.5658, "start_date": "2026-07-22", "end_date": "2026-07-23", "status": "planned", "photos": [{"id": "p3", "url": "https://images.unsplash.com/photo-1535567465397-7523840f2ae9?w=800&q=80", "caption": "Sequoia"}], "created_at": datetime.now(timezone.utc).isoformat()},
+            {"id": str(uuid.uuid4()), "title": "Yosemite National Park", "description": "Tag 8-10: El Capitan, Half Dome, Yosemite Falls. Radfahren, Baden, Junior Ranger Badge verdienen!", "location": "Yosemite Valley, Kalifornien", "latitude": 37.8651, "longitude": -119.5383, "start_date": "2026-07-24", "end_date": "2026-07-26", "status": "planned", "photos": [{"id": "p4", "url": "https://images.unsplash.com/photo-1562310503-a918c4c61e38?w=800&q=80", "caption": "Yosemite Valley"}], "created_at": datetime.now(timezone.utc).isoformat()},
+            {"id": str(uuid.uuid4()), "title": "San Francisco - City by the Bay", "description": "Tag 11-12: Cable Car, Alcatraz, Golden Gate Bridge, Pier 39 Seelöwen. Wohnmobil-Übernahme!", "location": "San Francisco, Kalifornien", "latitude": 37.7749, "longitude": -122.4194, "start_date": "2026-07-27", "end_date": "2026-07-28", "status": "planned", "photos": [{"id": "p5", "url": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800&q=80", "caption": "Golden Gate"}], "created_at": datetime.now(timezone.utc).isoformat()},
+            {"id": str(uuid.uuid4()), "title": "Redwood National Park", "description": "Tag 13-15: Avenue of the Giants, 100m hohe Bäume, Roosevelt-Elk-Herden, Gold Bluffs Beach.", "location": "Redwood National Park, Kalifornien", "latitude": 41.2132, "longitude": -124.0046, "start_date": "2026-07-29", "end_date": "2026-07-31", "status": "planned", "photos": [{"id": "p6", "url": "https://images.unsplash.com/photo-1604251405711-4d5585be5e56?w=800&q=80", "caption": "Redwoods"}], "created_at": datetime.now(timezone.utc).isoformat()},
+            {"id": str(uuid.uuid4()), "title": "Oregon Coast", "description": "Tag 16-18: Cannon Beach, Haystack Rock, Sea Lion Caves, Tillamook Creamery. Goonies-Drehort!", "location": "Cannon Beach, Oregon", "latitude": 45.8918, "longitude": -123.9615, "start_date": "2026-08-01", "end_date": "2026-08-03", "status": "planned", "photos": [{"id": "p7", "url": "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=800&q=80", "caption": "Cannon Beach"}], "created_at": datetime.now(timezone.utc).isoformat()},
+            {"id": str(uuid.uuid4()), "title": "Olympic National Park", "description": "Tag 19-21: Hoh Rainforest (Märchenwald!), Hurricane Ridge, Lake Crescent, Sol Duc Hot Springs.", "location": "Olympic National Park, Washington", "latitude": 47.8021, "longitude": -123.6044, "start_date": "2026-08-04", "end_date": "2026-08-06", "status": "planned", "photos": [{"id": "p8", "url": "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80", "caption": "Olympic"}], "created_at": datetime.now(timezone.utc).isoformat()},
+            {"id": str(uuid.uuid4()), "title": "★ Mount St. Helens - Alex Tipp", "description": "Tag 22: Der Vulkan, dessen Nordseite 1980 weggesprengt wurde! Johnston Ridge Observatory.", "location": "Mount St. Helens, Washington", "latitude": 46.1914, "longitude": -122.1956, "start_date": "2026-08-07", "end_date": "2026-08-07", "status": "planned", "photos": [], "created_at": datetime.now(timezone.utc).isoformat()},
+            {"id": str(uuid.uuid4()), "title": "★ Leavenworth - Little Bavaria - Alex Tipp", "description": "Tag 22-23: Bayerisches Dorf in den Cascade Mountains! Fachwerkhäuser, Biergärten, Brezeln.", "location": "Leavenworth, Washington", "latitude": 47.5962, "longitude": -120.6615, "start_date": "2026-08-07", "end_date": "2026-08-08", "status": "planned", "photos": [], "created_at": datetime.now(timezone.utc).isoformat()},
+            {"id": str(uuid.uuid4()), "title": "Seattle - Finale", "description": "Tag 24-26: Space Needle, Pike Place Market, Museum of Pop Culture, Chihuly Garden. Abreise!", "location": "Seattle, Washington", "latitude": 47.6062, "longitude": -122.3321, "start_date": "2026-08-09", "end_date": "2026-08-11", "status": "planned", "photos": [{"id": "p9", "url": "https://images.unsplash.com/photo-1502175353174-a7a70e73b362?w=800&q=80", "caption": "Seattle"}], "created_at": datetime.now(timezone.utc).isoformat()},
+            {"id": str(uuid.uuid4()), "title": "★★ Yellowstone - Alex Top-Empfehlung (Optional)", "description": "Verlängerung +4-5 Tage: Old Faithful, Grand Prismatic Spring, Mammoth Hot Springs, Bisons!", "location": "Yellowstone National Park, Wyoming", "latitude": 44.4280, "longitude": -110.5885, "start_date": "2026-08-12", "end_date": "2026-08-16", "status": "planned", "photos": [{"id": "p10", "url": "https://images.unsplash.com/photo-1570180875526-9e1eadc0aac2?w=800&q=80", "caption": "Yellowstone"}], "created_at": datetime.now(timezone.utc).isoformat()},
+        ]
+        for trip in default_trips:
+            await db.trips.insert_one(trip.copy())
+        logger.info(f"Initialized {len(default_trips)} trips!")
+    
+    # Initialize packing list if empty
+    packing_count = await db.packing_lists.count_documents({})
+    if packing_count == 0:
+        logger.info("Initializing packing list...")
+        packing_list = {
+            "id": str(uuid.uuid4()),
+            "title": "USA Westküste 2026 - Packliste",
+            "trip_id": None,
+            "items": [
+                {"id": "i1", "name": "Reisepässe für alle 5", "checked": False, "category": "dokumente"},
+                {"id": "i2", "name": "ESTA Genehmigungen", "checked": False, "category": "dokumente"},
+                {"id": "i3", "name": "Führerschein (international)", "checked": False, "category": "dokumente"},
+                {"id": "i4", "name": "Kreditkarten", "checked": False, "category": "dokumente"},
+                {"id": "i5", "name": "Wanderschuhe (5x)", "checked": False, "category": "kleidung"},
+                {"id": "i6", "name": "Regenjacken", "checked": False, "category": "kleidung"},
+                {"id": "i7", "name": "Badekleidung", "checked": False, "category": "kleidung"},
+                {"id": "i8", "name": "Kamera + Ladegerät", "checked": False, "category": "elektronik"},
+                {"id": "i9", "name": "Tablet für Autofahrten", "checked": False, "category": "elektronik"},
+                {"id": "i10", "name": "Fernglas (Wildtiere!)", "checked": False, "category": "elektronik"},
+                {"id": "i11", "name": "Sonnencreme LSF 50", "checked": False, "category": "toilettenartikel"},
+                {"id": "i12", "name": "Reiseapotheke", "checked": False, "category": "toilettenartikel"},
+                {"id": "i13", "name": "Junior Ranger Hefte", "checked": False, "category": "kinder"},
+                {"id": "i14", "name": "Snacks für Autofahrten", "checked": False, "category": "essen"},
+            ],
+            "created_at": datetime.now(timezone.utc).isoformat()
+        }
+        await db.packing_lists.insert_one(packing_list.copy())
+        logger.info("Packing list initialized!")
+    
+    logger.info("Database initialization complete!")
