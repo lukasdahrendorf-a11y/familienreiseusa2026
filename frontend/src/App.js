@@ -117,6 +117,7 @@ function App() {
       <BrowserRouter>
         <Navigation />
         <AnimatedRoutes />
+        <ChatWidget />
       </BrowserRouter>
       <Toaster position="bottom-right" richColors />
     </div>
