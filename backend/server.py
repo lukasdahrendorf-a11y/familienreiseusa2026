@@ -275,8 +275,8 @@ async def init_family():
 # System prompt for the travel assistant
 TRAVEL_ASSISTANT_PROMPT = """Du bist ein freundlicher Reise-Assistent für die Familie Dahrendorf (Lukas, Laura und ihre 3 Söhne).
 
-Die Familie plant einen 26-tägigen Roadtrip an der USA Westküste im Sommer 2025:
-- Start: Las Vegas (17.-18. Juli)
+Die Familie plant einen 26-tägigen Roadtrip an der USA Westküste im Sommer 2026:
+- Start: Las Vegas (17.-18. Juli 2026)
 - Los Angeles & Disneyland (19.-21. Juli)
 - Sequoia National Park (22.-23. Juli)
 - Yosemite National Park (24.-26. Juli)
