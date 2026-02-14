@@ -30,6 +30,7 @@ const HomePage = () => {
 
   const completedTrips = trips.filter(t => t.status === "completed").length;
   const plannedTrips = trips.filter(t => t.status === "planned").length;
+  const upcomingTrips = trips.filter(t => t.status === "planned" || t.status === "ongoing");
 
   return (
     <div className="min-h-screen" data-testid="home-page">
@@ -159,7 +160,7 @@ const HomePage = () => {
               viewport={{ once: true }}
             >
               <h2 className="font-fraunces text-3xl sm:text-4xl font-bold text-[#264653] text-center mb-12">
-                Unsere letzten Abenteuer
+                Unsere geplanten Abenteuer
               </h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
