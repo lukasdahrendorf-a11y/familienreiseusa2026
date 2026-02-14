@@ -135,7 +135,7 @@ const FamilyPage = () => {
 
   return (
     <div className="min-h-screen pb-4 bg-[#F9F9F7]" data-testid="family-page">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
