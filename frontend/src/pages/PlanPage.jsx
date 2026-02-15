@@ -54,7 +54,51 @@ const itinerary = [
   { day: "24-26", dates: "9.-11. Aug", place: "Seattle", info: "Space Needle, Ende & Ruckflug", color: "#E76F51", accom: "Residence Inn Marriott" },
 ];
 
+// ============ SORTABLE ITEM ============
+
+const SortableStop = ({ item, onDelete }) => {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: item.id });
+  const style = { transform: CSS.Transform.toString(transform), transition, opacity: isDragging ? 0.5 : 1, zIndex: isDragging ? 10 : 1 };
+
+  return (
+    <div ref={setNodeRef} style={style} className="flex gap-2 items-start relative">
+      <button {...attributes} {...listeners} className="mt-3 p-1 text-[#8D99AE] hover:text-[#264653] cursor-grab active:cursor-grabbing touch-none flex-shrink-0" data-testid={`drag-${item.id}`}>
+        <GripVertical className="w-4 h-4" />
+      </button>
+      <div className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-[10px] flex-shrink-0 border-2 border-white shadow-sm mt-1" style={{ backgroundColor: item.color }}>
+        {item.day}
+      </div>
+      <div className={`flex-1 rounded-xl border p-3 ${item.activity ? "bg-[#E9C46A]/10 border-[#E9C46A]/30" : "bg-white border-[#E0E0D0]"}`}>
+        <div className="flex justify-between items-start">
+          <div className="min-w-0 flex-1">
+            <h3 className="font-nunito font-semibold text-sm text-[#264653]">
+              {item.activity && <Ticket className="w-3.5 h-3.5 inline mr-1 text-[#E9C46A]" />}
+              {item.place}
+            </h3>
+            <p className="font-nunito text-xs text-[#8D99AE] mt-0.5">{item.info}</p>
+          </div>
+          <div className="flex items-center gap-1 flex-shrink-0 ml-2">
+            <span className="font-nunito text-[10px] text-[#8D99AE]">{item.dates}</span>
+            <button onClick={() => onDelete(item.id)} className="p-1 text-[#8D99AE] hover:text-[#E76F51] transition-colors" data-testid={`delete-stop-${item.id}`}>
+              <Trash2 className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+        {item.accom && (
+          <div className="mt-2 pt-2 border-t border-[#E0E0D0]/60 flex items-start gap-1.5">
+            <MapPin className="w-3 h-3 text-[#2A9D8F] mt-0.5 flex-shrink-0" />
+            <span className="font-nunito text-[11px] text-[#2A9D8F] leading-tight">{item.accom}</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 // ============ COMPONENT ============
+
+const STORAGE_KEY = "dahrendorf_itinerary";
+const DEFAULT_ITINERARY = itinerary.map((item, idx) => ({ ...item, id: `stop-${idx}` }));
 
 const PlanPage = () => {
   const [trips, setTrips] = useState([]);
@@ -62,6 +106,44 @@ const PlanPage = () => {
   const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState(null);
   const [activeTab, setActiveTab] = useState("plan");
+
+  // Draggable itinerary state
+  const [stops, setStops] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : DEFAULT_ITINERARY;
+    } catch { return DEFAULT_ITINERARY; }
+  });
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 5 } })
+  );
+
+  const saveStops = useCallback((newStops) => {
+    setStops(newStops);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(newStops));
+  }, []);
+
+  const handleDragEnd = useCallback((event) => {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      const oldIndex = stops.findIndex(s => s.id === active.id);
+      const newIndex = stops.findIndex(s => s.id === over.id);
+      saveStops(arrayMove(stops, oldIndex, newIndex));
+      toast.success("Route aktualisiert");
+    }
+  }, [stops, saveStops]);
+
+  const deleteStop = useCallback((id) => {
+    saveStops(stops.filter(s => s.id !== id));
+    toast.success("Stopp entfernt");
+  }, [stops, saveStops]);
+
+  const resetStops = useCallback(() => {
+    saveStops(DEFAULT_ITINERARY);
+    toast.success("Route zuruckgesetzt");
+  }, [saveStops]);
 
   useEffect(() => {
     Promise.all([
