@@ -156,6 +156,18 @@ const RoutePage = () => {
               </span>
             )}
           </div>
+          <button
+            onClick={() => {
+              const origin = `${routeStops[0].lat},${routeStops[0].lng}`;
+              const dest = `${routeStops[routeStops.length - 1].lat},${routeStops[routeStops.length - 1].lng}`;
+              const waypoints = routeStops.slice(1, -1).map(s => `${s.lat},${s.lng}`).join("|");
+              window.open(`https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${dest}&waypoints=${waypoints}&travelmode=driving`, "_blank");
+            }}
+            className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/15 hover:bg-white/25 rounded-full text-xs font-semibold transition-colors"
+            data-testid="export-google-maps"
+          >
+            <ExternalLink className="w-3.5 h-3.5" /> In Google Maps offnen
+          </button>
         </div>
       </div>
 
