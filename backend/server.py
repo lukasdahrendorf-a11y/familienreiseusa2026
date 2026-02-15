@@ -414,11 +414,11 @@ async def init_database():
     if family_count == 0:
         logger.info("Initializing family members...")
         default_family = [
-            {"id": str(uuid.uuid4()), "name": "Lukas", "role": "parent", "emoji": "👨", "color": "#264653"},
-            {"id": str(uuid.uuid4()), "name": "Laura", "role": "parent", "emoji": "👩", "color": "#E76F51"},
-            {"id": str(uuid.uuid4()), "name": "Louie", "role": "child", "emoji": "👦", "color": "#2A9D8F"},
-            {"id": str(uuid.uuid4()), "name": "Levi", "role": "child", "emoji": "👦", "color": "#E9C46A"},
-            {"id": str(uuid.uuid4()), "name": "Noah", "role": "child", "emoji": "👦", "color": "#F4A261"},
+            {"id": str(uuid.uuid4()), "name": "Lukas", "role": "parent", "emoji": "👨", "color": "#264653", "avatar_url": "https://customer-assets.emergentagent.com/job_2b2386c2-84ba-4ac6-aaff-7fc29c17627e/artifacts/h54hss2g_Lukas.jpeg"},
+            {"id": str(uuid.uuid4()), "name": "Laura", "role": "parent", "emoji": "👩", "color": "#E76F51", "avatar_url": "https://customer-assets.emergentagent.com/job_2b2386c2-84ba-4ac6-aaff-7fc29c17627e/artifacts/i1e6nwmw_Laura.jpeg"},
+            {"id": str(uuid.uuid4()), "name": "Louie", "role": "child", "emoji": "👦", "color": "#2A9D8F", "avatar_url": "https://customer-assets.emergentagent.com/job_2b2386c2-84ba-4ac6-aaff-7fc29c17627e/artifacts/qweag9iu_Louie.jpg"},
+            {"id": str(uuid.uuid4()), "name": "Levi", "role": "child", "emoji": "👦", "color": "#E9C46A", "avatar_url": "https://customer-assets.emergentagent.com/job_2b2386c2-84ba-4ac6-aaff-7fc29c17627e/artifacts/jneoby5a_Levi.jpeg"},
+            {"id": str(uuid.uuid4()), "name": "Noah", "role": "child", "emoji": "👦", "color": "#F4A261", "avatar_url": "https://customer-assets.emergentagent.com/job_2b2386c2-84ba-4ac6-aaff-7fc29c17627e/artifacts/y6swu8gc_Noah.jpg"},
         ]
         for member in default_family:
             await db.family_members.insert_one(member.copy())
