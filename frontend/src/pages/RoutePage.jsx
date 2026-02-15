@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 import { motion } from "framer-motion";
 import { API } from "../App";
-import { MapPin, Navigation, Loader2, Route, Clock, Calendar, Car } from "lucide-react";
+import { MapPin, Navigation, Loader2, Route, Clock, Calendar, Car, ExternalLink } from "lucide-react";
 
 const mapContainerStyle = { width: "100%", height: "100%" };
 
