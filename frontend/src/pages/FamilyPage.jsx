@@ -208,6 +208,14 @@ const FamilyPage = () => {
             <h3 className="font-fraunces text-xl font-bold text-[#264653]">Noch keine Mitglieder</h3>
           </div>
         )}
+
+        {/* Familienfoto */}
+        <section className="mt-10" data-testid="family-photo-section">
+          <h2 className="font-fraunces text-xl font-bold text-[#264653] text-center mb-4">Unser Familienfoto</h2>
+          <div className="max-w-2xl mx-auto rounded-2xl overflow-hidden shadow-lg">
+            <img src={FAMILY_PHOTO} alt="Familie Dahrendorf" className="w-full" />
+          </div>
+        </section>
       </div>
     </div>
   );
