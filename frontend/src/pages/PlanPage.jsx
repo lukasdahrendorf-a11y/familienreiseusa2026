@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { API } from "../App";
@@ -6,9 +6,13 @@ import { toast } from "sonner";
 import {
   MapPin, Clock, Check, Plus, Sparkles, ChevronDown, ChevronUp,
   Mountain, TreePine, Flame, CalendarDays, Plane, Beef,
-  Hotel, Tent, Car, Caravan, Ticket, Phone, Mail, Hash
+  Hotel, Tent, Car, Caravan, Ticket, Phone, Mail, Hash,
+  GripVertical, Trash2, RotateCcw
 } from "lucide-react";
 import { Button } from "../components/ui/button";
+import { DndContext, closestCenter, PointerSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
+import { SortableContext, verticalListSortingStrategy, useSortable, arrayMove } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 // ============ DATA ============
 
