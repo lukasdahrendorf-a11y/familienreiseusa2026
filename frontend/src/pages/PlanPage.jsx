@@ -144,6 +144,31 @@ const PlanPage = () => {
     toast.success("Route zuruckgesetzt");
   }, [saveStops]);
 
+  const addTipToRoute = useCallback((sug) => {
+    const exists = stops.some(s => s.place === sug.title);
+    if (exists) { toast.info(`${sug.title} ist bereits in der Route`); return; }
+    const newStop = {
+      id: `tip-${sug.id}`,
+      day: "*",
+      dates: sug.duration,
+      place: sug.title,
+      info: sug.location,
+      color: "#F4A261",
+      isTip: true,
+      lat: sug.latitude,
+      lng: sug.longitude,
+    };
+    // Insert before Seattle (last stop)
+    const newStops = [...stops];
+    newStops.splice(newStops.length - 1, 0, newStop);
+    saveStops(newStops);
+    toast.success(`${sug.title} zur Route hinzugefugt!`);
+  }, [stops, saveStops]);
+
+  const isTipInRoute = useCallback((title) => {
+    return stops.some(s => s.place === title);
+  }, [stops]);
+
   useEffect(() => {
     Promise.all([
       axios.get(`${API}/trips`),
