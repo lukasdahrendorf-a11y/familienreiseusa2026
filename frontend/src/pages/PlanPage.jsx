@@ -155,6 +155,12 @@ const PlanPage = () => {
                           </div>
                           <span className="font-nunito text-[10px] text-[#8D99AE] flex-shrink-0 ml-2">{item.dates}</span>
                         </div>
+                        {item.accom && (
+                          <div className="mt-2 pt-2 border-t border-[#E0E0D0]/60 flex items-start gap-1.5">
+                            <MapPin className="w-3 h-3 text-[#2A9D8F] mt-0.5 flex-shrink-0" />
+                            <span className="font-nunito text-[11px] text-[#2A9D8F] leading-tight">{item.accom}</span>
+                          </div>
+                        )}
                       </div>
                     </motion.div>
                   ))}
