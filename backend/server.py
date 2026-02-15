@@ -37,12 +37,14 @@ class FamilyMember(BaseModel):
     role: str  # "parent" or "child"
     emoji: str = "👤"
     color: str = "#264653"
+    avatar_url: Optional[str] = None
 
 class FamilyMemberCreate(BaseModel):
     name: str
     role: str
     emoji: str = "👤"
     color: str = "#264653"
+    avatar_url: Optional[str] = None
 
 class TripPhoto(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
