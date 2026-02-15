@@ -39,19 +39,18 @@ const transport = [
 ];
 
 const itinerary = [
-  { day: "1-3", dates: "17.-20. Juli", place: "Las Vegas", info: "Ankunft, Strip, Helikopterflug", color: "#E76F51", accom: "Bellagio Las Vegas" },
-  { day: "4-6", dates: "20.-23. Juli", place: "Los Angeles & Disneyland", info: "Disneyland, Hollywood, Santa Monica", color: "#E9C46A", accom: "Marina Escape Townhouse" },
-  { day: "6", dates: "22. Juli", place: "Universal Studios VIP Tour", info: "Ganztagesausflug, 09:30 Uhr", color: "#E9C46A", activity: true },
-  { day: "7-8", dates: "23.-25. Juli", place: "Sequoia NP", info: "General Sherman Tree", color: "#2A9D8F", accom: "Wuksachi Lodge" },
-  { day: "9-10", dates: "25.-27. Juli", place: "Yosemite NP", info: "El Capitan, Half Dome", color: "#2A9D8F", accom: "The Ahwahnee" },
-  { day: "11-12", dates: "27.-29. Juli", place: "San Francisco", info: "Cable Car, Alcatraz, Wohnmobil-Ubernahme", color: "#E9C46A", accom: "Argonaut Hotel" },
-  { day: "13", dates: "29.-30. Juli", place: "Redwood NP - Sud", info: "Avenue of the Giants", color: "#2A9D8F", accom: "Benbow KOA Holiday, Garberville" },
-  { day: "14-15", dates: "30. Jul-1. Aug", place: "Redwood NP - Nord", info: "Redwood Nationalpark", color: "#2A9D8F", accom: "Crescent City/Redwoods KOA" },
-  { day: "16", dates: "2.-3. Aug", place: "Oregon Coast - Sud", info: "Waldport/Newport", color: "#264653", accom: "Waldport/Newport KOA Journey" },
-  { day: "17-18", dates: "3.-4. Aug", place: "Oregon Coast - Nord", info: "Astoria, Cannon Beach", color: "#264653", accom: "Astoria/Seaside KOA Resort" },
-  { day: "19-21", dates: "4.-6. Aug", place: "Olympic NP", info: "Hoh Rainforest", color: "#2A9D8F" },
-  { day: "22-23", dates: "7.-8. Aug", place: "Alex-Tipps", info: "Mt. St. Helens & Leavenworth", color: "#F4A261" },
-  { day: "24-26", dates: "9.-11. Aug", place: "Seattle", info: "Space Needle, Ende & Ruckflug", color: "#E76F51", accom: "Residence Inn Marriott" },
+  { day: "1-3", dates: "17.-20. Juli", place: "Las Vegas", info: "Ankunft, Strip, Helikopterflug", color: "#E76F51", accom: "Bellagio Las Vegas", lat: 36.1699, lng: -115.1398 },
+  { day: "4-6", dates: "20.-23. Juli", place: "Los Angeles & Disneyland", info: "Disneyland, Hollywood, Santa Monica", color: "#E9C46A", accom: "Marina Escape Townhouse", lat: 34.0522, lng: -118.2437 },
+  { day: "6", dates: "22. Juli", place: "Universal Studios VIP Tour", info: "Ganztagesausflug, 09:30 Uhr", color: "#E9C46A", activity: true, lat: 34.1381, lng: -118.3534 },
+  { day: "7-8", dates: "23.-25. Juli", place: "Sequoia NP", info: "General Sherman Tree", color: "#2A9D8F", accom: "Wuksachi Lodge", lat: 36.4864, lng: -118.5658 },
+  { day: "9-10", dates: "25.-27. Juli", place: "Yosemite NP", info: "El Capitan, Half Dome", color: "#2A9D8F", accom: "The Ahwahnee", lat: 37.8651, lng: -119.5383 },
+  { day: "11-12", dates: "27.-29. Juli", place: "San Francisco", info: "Cable Car, Alcatraz, Wohnmobil-Ubernahme", color: "#E9C46A", accom: "Argonaut Hotel", lat: 37.7749, lng: -122.4194 },
+  { day: "13", dates: "29.-30. Juli", place: "Redwood NP - Sud", info: "Avenue of the Giants", color: "#2A9D8F", accom: "Benbow KOA Holiday, Garberville", lat: 40.0688, lng: -123.7893 },
+  { day: "14-15", dates: "30. Jul-1. Aug", place: "Redwood NP - Nord", info: "Redwood Nationalpark", color: "#2A9D8F", accom: "Crescent City/Redwoods KOA", lat: 41.8028, lng: -124.1637 },
+  { day: "16", dates: "2.-3. Aug", place: "Oregon Coast - Sud", info: "Waldport/Newport", color: "#264653", accom: "Waldport/Newport KOA Journey", lat: 44.4268, lng: -124.0695 },
+  { day: "17-18", dates: "3.-4. Aug", place: "Oregon Coast - Nord", info: "Astoria, Cannon Beach", color: "#264653", accom: "Astoria/Seaside KOA Resort", lat: 46.1785, lng: -123.9543 },
+  { day: "19-21", dates: "4.-6. Aug", place: "Olympic NP", info: "Hoh Rainforest", color: "#2A9D8F", lat: 47.8021, lng: -123.6044 },
+  { day: "24-26", dates: "9.-11. Aug", place: "Seattle", info: "Space Needle, Ende & Ruckflug", color: "#E76F51", accom: "Residence Inn Marriott", lat: 47.6062, lng: -122.3321 },
 ];
 
 // ============ SORTABLE ITEM ============
