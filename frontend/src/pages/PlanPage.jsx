@@ -233,39 +233,48 @@ const PlanPage = () => {
           {/* ========== TAGESPLAN ========== */}
           {activeTab === "plan" && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-              <h2 className="font-fraunces text-lg font-bold text-[#264653] mb-4">Tagesplan</h2>
-              <div className="relative">
-                <div className="absolute left-[18px] top-3 bottom-3 w-0.5 bg-[#E0E0D0]" />
-                <div className="space-y-3">
-                  {itinerary.map((item, idx) => (
-                    <motion.div key={idx} className="flex gap-3 items-start relative"
-                      initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: idx * 0.03 }}>
-                      <div className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-[10px] flex-shrink-0 z-[1] border-2 border-white shadow-sm"
-                        style={{ backgroundColor: item.color }}>
-                        {item.day}
-                      </div>
-                      <div className={`flex-1 rounded-xl border p-3 ${item.activity ? "bg-[#E9C46A]/10 border-[#E9C46A]/30" : "bg-white border-[#E0E0D0]"}`}>
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h3 className="font-nunito font-semibold text-sm text-[#264653]">
-                              {item.activity && <Ticket className="w-3.5 h-3.5 inline mr-1 text-[#E9C46A]" />}
-                              {item.place}
-                            </h3>
-                            <p className="font-nunito text-xs text-[#8D99AE] mt-0.5">{item.info}</p>
-                          </div>
-                          <span className="font-nunito text-[10px] text-[#8D99AE] flex-shrink-0 ml-2">{item.dates}</span>
-                        </div>
-                        {item.accom && (
-                          <div className="mt-2 pt-2 border-t border-[#E0E0D0]/60 flex items-start gap-1.5">
-                            <MapPin className="w-3 h-3 text-[#2A9D8F] mt-0.5 flex-shrink-0" />
-                            <span className="font-nunito text-[11px] text-[#2A9D8F] leading-tight">{item.accom}</span>
-                          </div>
-                        )}
-                      </div>
-                    </motion.div>
-                  ))}
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="font-fraunces text-lg font-bold text-[#264653]">Tagesplan</h2>
+                <div className="flex gap-2">
+                  <button onClick={resetStops} className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-nunito font-semibold text-[#8D99AE] hover:text-[#264653] bg-[#F0EFEB] rounded-lg transition-colors" data-testid="reset-stops">
+                    <RotateCcw className="w-3 h-3" /> Reset
+                  </button>
                 </div>
               </div>
+              <p className="font-nunito text-xs text-[#8D99AE] mb-3">Stopps per Drag & Drop verschieben oder loschen</p>
+
+              <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                <SortableContext items={stops.map(s => s.id)} strategy={verticalListSortingStrategy}>
+                  <div className="space-y-2">
+                    {stops.map((item) => (
+                      <SortableStop key={item.id} item={item} onDelete={deleteStop} />
+                    ))}
+                  </div>
+                </SortableContext>
+              </DndContext>
+
+              {stops.length === 0 && (
+                <div className="text-center py-8">
+                  <p className="font-nunito text-sm text-[#8D99AE]">Alle Stopps entfernt.</p>
+                  <button onClick={resetStops} className="mt-2 text-[#2A9D8F] font-semibold text-sm">Route zurucksetzen</button>
+                </div>
+              )}
+
+              {addedCount > 0 && (
+                <div className="mt-5 p-4 bg-[#2A9D8F]/10 rounded-xl border border-[#2A9D8F]/20">
+                  <div className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-[#2A9D8F]" />
+                    <span className="font-nunito font-semibold text-sm text-[#2A9D8F]">
+                      {addedCount} Tipp{addedCount > 1 ? "s" : ""} eingeplant
+                    </span>
+                  </div>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {suggestions.filter(s => s.added_to_trip).map(s => (
+                      <span key={s.id} className="px-2 py-1 bg-white rounded-lg text-xs font-nunito text-[#264653]">{s.title}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </motion.div>
           )}
 
