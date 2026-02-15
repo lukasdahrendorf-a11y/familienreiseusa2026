@@ -19,8 +19,10 @@ const routeStops = [
   { name: "Sequoia NP", state: "Kalifornien", lat: 36.4864, lng: -118.5658, day: "6-7", color: "#2A9D8F", dates: "22.-23. Juli" },
   { name: "Yosemite NP", state: "Kalifornien", lat: 37.8651, lng: -119.5383, day: "8-10", color: "#2A9D8F", dates: "24.-26. Juli" },
   { name: "San Francisco", state: "Kalifornien", lat: 37.7749, lng: -122.4194, day: "11-12", color: "#E9C46A", dates: "27.-28. Juli" },
-  { name: "Redwood NP", state: "Kalifornien", lat: 41.2132, lng: -124.0046, day: "13-15", color: "#2A9D8F", dates: "29.-31. Juli" },
-  { name: "Oregon Coast", state: "Oregon", lat: 45.8918, lng: -123.9615, day: "16-18", color: "#264653", dates: "1.-3. Aug" },
+  { name: "Benbow KOA", state: "Kalifornien", lat: 40.0688, lng: -123.7893, day: "13", color: "#2A9D8F", dates: "29.-30. Juli", accom: "Benbow KOA Holiday, Garberville" },
+  { name: "Crescent City KOA", state: "Kalifornien", lat: 41.8028, lng: -124.1637, day: "14-15", color: "#2A9D8F", dates: "30. Jul-1. Aug", accom: "Crescent City/Redwoods KOA" },
+  { name: "Waldport KOA", state: "Oregon", lat: 44.4268, lng: -124.0695, day: "16", color: "#264653", dates: "2.-3. Aug", accom: "Waldport/Newport KOA Journey" },
+  { name: "Astoria KOA", state: "Oregon", lat: 46.1785, lng: -123.9543, day: "17-18", color: "#264653", dates: "3.-4. Aug", accom: "Astoria/Warrenton/Seaside KOA" },
   { name: "Olympic NP", state: "Washington", lat: 47.8021, lng: -123.6044, day: "19-21", color: "#2A9D8F", dates: "4.-6. Aug" },
   { name: "Seattle", state: "Washington", lat: 47.6062, lng: -122.3321, day: "24-26", color: "#E76F51", dates: "9.-11. Aug" },
 ];
