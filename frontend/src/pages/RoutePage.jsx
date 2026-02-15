@@ -251,6 +251,9 @@ const RoutePage = () => {
                     <Clock className="w-3.5 h-3.5 text-[#2A9D8F]" />
                     <span className="text-[#264653]">{selectedStop.dates || `Tag ${selectedStop.day}`}</span>
                   </div>
+                  {selectedStop.accom && (
+                    <p className="mt-1.5 text-[10px] text-[#2A9D8F] leading-tight">{selectedStop.accom}</p>
+                  )}
                   {selectedStop.optional && (
                     <span className="inline-block mt-1.5 px-2 py-0.5 bg-[#F4A261]/20 text-[#F4A261] text-[10px] rounded-full font-semibold">
                       Alex-Tipp
