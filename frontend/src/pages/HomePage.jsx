@@ -89,7 +89,7 @@ const HomePage = () => {
         <div className="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
             { icon: CalendarDays, label: "26 Tage", sub: "Roadtrip", color: "#264653" },
-            { icon: MapPinned, label: "9 Stopps", sub: "Hauptroute", color: "#2A9D8F" },
+            { icon: MapPinned, label: "11 Stopps", sub: "Hauptroute", color: "#2A9D8F" },
             { icon: Sparkles, label: `${addedTips}/${suggestions.length}`, sub: "Tipps eingeplant", color: "#E76F51" },
             { icon: Users, label: `${family.length}`, sub: "Abenteurer", color: "#E9C46A" },
           ].map((stat, i) => (
