@@ -92,15 +92,11 @@ const FamilyPage = () => {
 
   return (
     <div className="min-h-screen pb-4 bg-[#F9F9F7]" data-testid="family-page">
-      {/* Hero with family photo */}
-      <div className="relative h-48 sm:h-64 overflow-hidden">
-        <img src={FAMILY_PHOTO} alt="Familie Dahrendorf" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#264653]/80 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 text-white text-center">
-          <Heart className="w-6 h-6 mx-auto mb-2 text-[#E9C46A]" />
-          <h1 className="font-fraunces text-2xl sm:text-3xl font-bold">Unsere Familie</h1>
-          <p className="font-nunito text-sm text-white/80 mt-1">Die Abenteurer</p>
-        </div>
+      {/* Header */}
+      <div className="bg-[#264653] text-white px-4 py-5 text-center">
+        <Heart className="w-6 h-6 mx-auto mb-2 text-[#E9C46A]" />
+        <h1 className="font-fraunces text-2xl sm:text-3xl font-bold">Unsere Familie</h1>
+        <p className="font-nunito text-sm text-white/80 mt-1">Die Abenteurer</p>
       </div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
