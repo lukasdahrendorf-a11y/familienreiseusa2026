@@ -295,6 +295,9 @@ const RoutePage = () => {
                 <div className="flex-1 min-w-0">
                   <h3 className="font-nunito font-semibold text-sm text-[#264653]">{stop.name}</h3>
                   <p className="text-[11px] text-[#8D99AE]">{stop.state}</p>
+                  {stop.accom && (
+                    <p className="text-[10px] text-[#2A9D8F] mt-0.5">{stop.accom}</p>
+                  )}
                 </div>
                 <div className="text-right flex-shrink-0">
                   <span className="font-nunito text-xs font-medium text-[#264653]">{stop.dates}</span>
