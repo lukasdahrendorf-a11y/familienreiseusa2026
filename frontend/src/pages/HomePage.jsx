@@ -141,12 +141,18 @@ const HomePage = () => {
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.05 * i, type: "spring" }}
               >
-                <div
-                  className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-2xl sm:text-3xl border-2 border-white shadow-md mx-auto mb-1"
-                  style={{ backgroundColor: m.color }}
-                >
-                  {m.emoji}
-                </div>
+                {m.avatar_url ? (
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-white shadow-md mx-auto mb-1">
+                    <img src={m.avatar_url} alt={m.name} className="w-full h-full object-cover" />
+                  </div>
+                ) : (
+                  <div
+                    className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-2xl sm:text-3xl border-2 border-white shadow-md mx-auto mb-1"
+                    style={{ backgroundColor: m.color }}
+                  >
+                    {m.emoji}
+                  </div>
+                )}
                 <span className="font-nunito text-xs font-semibold text-[#264653]">{m.name}</span>
               </motion.div>
             ))}
