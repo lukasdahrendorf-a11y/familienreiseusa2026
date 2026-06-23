@@ -1,16 +1,10 @@
-import { useEffect, useState, useCallback, useRef } from "react";
-import {
-  GoogleMap,
-  useJsApiLoader,
-  Marker,
-  InfoWindow,
-  DirectionsRenderer,
-} from "@react-google-maps/api";
+import { useEffect, useState, useRef, useMemo } from "react";
+import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 import { motion } from "framer-motion";
 import localApi from "../localApi";
-import { MapPin, Navigation, Loader2, Route, Clock, Calendar, Car, ExternalLink } from "lucide-react";
-
-const mapContainerStyle = { width: "100%", height: "100%" };
+import { MapPin, Navigation, Route, Clock, Calendar, Car, ExternalLink } from "lucide-react";
 
 const routeStops = [
   { name: "Las Vegas", state: "Nevada", lat: 36.1699, lng: -115.1398, day: "1-2", color: "#E76F51", dates: "17.-18. Juli" },
@@ -33,102 +27,124 @@ const optionalStops = [
   { name: "Bar J Chuckwagon", state: "Wyoming", lat: 43.4799, lng: -110.8752, day: "Abend", color: "#F4A261", optional: true, dates: "Bei Yellowstone" },
 ];
 
-const mapOptions = {
-  disableDefaultUI: true,
-  zoomControl: true,
-  mapTypeControl: false,
-  streetViewControl: false,
-  fullscreenControl: true,
-  styles: [
-    { featureType: "water", elementType: "geometry", stylers: [{ color: "#a3ccff" }] },
-    { featureType: "landscape", elementType: "geometry", stylers: [{ color: "#f5f5f2" }] },
-    { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#ffffff" }] },
-    { featureType: "road.highway", elementType: "geometry.stroke", stylers: [{ color: "#c9c9c9" }] },
-    { featureType: "poi", stylers: [{ visibility: "off" }] },
-  ],
-};
+// Create a numbered circle marker icon
+function createCircleIcon(color, label) {
+  const size = 28;
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">
+      <circle cx="${size / 2}" cy="${size / 2}" r="${size / 2 - 1}" fill="${color}" stroke="white" stroke-width="2"/>
+      <text x="50%" y="50%" text-anchor="middle" dy=".35em" fill="white" font-size="11" font-weight="bold" font-family="sans-serif">${label}</text>
+    </svg>`;
+  return L.divIcon({
+    html: svg,
+    className: "",
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2],
+    popupAnchor: [0, -size / 2],
+  });
+}
+
+// Create a smaller diamond/arrow icon for optional stops
+function createOptionalIcon(color) {
+  const size = 22;
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">
+      <polygon points="${size / 2},2 ${size - 2},${size / 2} ${size / 2},${size - 2} 2,${size / 2}" fill="${color}" stroke="white" stroke-width="2"/>
+      <text x="50%" y="50%" text-anchor="middle" dy=".35em" fill="white" font-size="10" font-weight="bold" font-family="sans-serif">*</text>
+    </svg>`;
+  return L.divIcon({
+    html: svg,
+    className: "",
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2],
+    popupAnchor: [0, -size / 2],
+  });
+}
+
+// Create a small circle icon for suggestion markers
+function createSuggestionIcon() {
+  const size = 14;
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">
+      <circle cx="${size / 2}" cy="${size / 2}" r="${size / 2 - 1}" fill="#E9C46A" stroke="white" stroke-width="1.5"/>
+    </svg>`;
+  return L.divIcon({
+    html: svg,
+    className: "",
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2],
+    popupAnchor: [0, -size / 2],
+  });
+}
+
+// Helper component to fit bounds on mount and handle flyTo
+function MapController({ mapRef, flyTarget, onFlyDone }) {
+  const map = useMap();
+
+  useEffect(() => {
+    mapRef.current = map;
+    const bounds = L.latLngBounds(routeStops.map((s) => [s.lat, s.lng]));
+    map.fitBounds(bounds, { padding: [50, 50] });
+  }, [map, mapRef]);
+
+  useEffect(() => {
+    if (flyTarget) {
+      map.flyTo([flyTarget.lat, flyTarget.lng], 8, { duration: 0.8 });
+      onFlyDone();
+    }
+  }, [flyTarget, map, onFlyDone]);
+
+  return null;
+}
 
 const RoutePage = () => {
   const [selectedStop, setSelectedStop] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const [showOptional, setShowOptional] = useState(true);
-  const [directions, setDirections] = useState(null);
-  const [totalDistance, setTotalDistance] = useState("");
-  const [totalDuration, setTotalDuration] = useState("");
+  const [flyTarget, setFlyTarget] = useState(null);
   const mapRef = useRef(null);
-
-  const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-  });
 
   useEffect(() => {
     localApi.getSuggestions().then(r => setSuggestions(r.data)).catch(console.error);
   }, []);
 
-  // Calculate route using Directions API
-  const calculateRoute = useCallback(() => {
-    if (!isLoaded || !window.google) return;
-
-    const directionsService = new window.google.maps.DirectionsService();
-    const origin = { lat: routeStops[0].lat, lng: routeStops[0].lng };
-    const destination = { lat: routeStops[routeStops.length - 1].lat, lng: routeStops[routeStops.length - 1].lng };
-    const waypoints = routeStops.slice(1, -1).map(s => ({
-      location: { lat: s.lat, lng: s.lng },
-      stopover: true,
-    }));
-
-    directionsService.route(
-      {
-        origin,
-        destination,
-        waypoints,
-        travelMode: window.google.maps.TravelMode.DRIVING,
-        optimizeWaypoints: false,
-      },
-      (result, status) => {
-        if (status === "OK") {
-          setDirections(result);
-          // Calculate totals
-          const legs = result.routes[0].legs;
-          const distKm = legs.reduce((sum, l) => sum + l.distance.value, 0);
-          const durSec = legs.reduce((sum, l) => sum + l.duration.value, 0);
-          setTotalDistance(`${Math.round(distKm / 1000).toLocaleString("de-DE")} km`);
-          setTotalDuration(`${Math.round(durSec / 3600)} Std.`);
-        }
-      }
-    );
-  }, [isLoaded]);
-
-  const onLoad = useCallback(
-    (mapInstance) => {
-      mapRef.current = mapInstance;
-      const bounds = new window.google.maps.LatLngBounds();
-      routeStops.forEach((s) => bounds.extend({ lat: s.lat, lng: s.lng }));
-      mapInstance.fitBounds(bounds, { padding: 50 });
-      // trigger route calculation
-      calculateRoute();
-    },
-    [calculateRoute]
+  const polylinePositions = useMemo(
+    () => routeStops.map((s) => [s.lat, s.lng]),
+    []
   );
 
   const scrollToStop = (stop) => {
     setSelectedStop(stop);
-    mapRef.current?.panTo({ lat: stop.lat, lng: stop.lng });
-    mapRef.current?.setZoom(8);
+    setFlyTarget(stop);
   };
 
-  if (loadError) {
-    return (
-      <div className="min-h-screen flex items-center justify-center p-8">
-        <div className="text-center">
-          <MapPin className="w-12 h-12 mx-auto text-[#E76F51] mb-3" />
-          <h2 className="font-fraunces text-lg font-bold text-[#264653]">Karte nicht verfugbar</h2>
-        </div>
-      </div>
-    );
-  }
-
   const addedSuggestions = suggestions.filter((s) => s.added_to_trip);
+
+  // Approximate total distance using haversine
+  const { totalDistance, totalDuration } = useMemo(() => {
+    let totalKm = 0;
+    for (let i = 0; i < routeStops.length - 1; i++) {
+      const a = routeStops[i];
+      const b = routeStops[i + 1];
+      const R = 6371;
+      const dLat = ((b.lat - a.lat) * Math.PI) / 180;
+      const dLng = ((b.lng - a.lng) * Math.PI) / 180;
+      const sinLat = Math.sin(dLat / 2);
+      const sinLng = Math.sin(dLng / 2);
+      const h =
+        sinLat * sinLat +
+        Math.cos((a.lat * Math.PI) / 180) * Math.cos((b.lat * Math.PI) / 180) * sinLng * sinLng;
+      totalKm += R * 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+    }
+    // Rough road factor ~1.3x straight-line distance
+    const roadKm = Math.round(totalKm * 1.3);
+    // Assume ~80 km/h average
+    const hours = Math.round(roadKm / 80);
+    return {
+      totalDistance: `~${roadKm.toLocaleString("de-DE")} km`,
+      totalDuration: `~${hours} Std.`,
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#F9F9F7]" data-testid="route-page">
@@ -149,11 +165,9 @@ const RoutePage = () => {
             <span className="flex items-center gap-1">
               <MapPin className="w-3.5 h-3.5 text-[#E9C46A]" /> {routeStops.length} Stopps
             </span>
-            {totalDistance && (
-              <span className="flex items-center gap-1">
-                <Car className="w-3.5 h-3.5 text-[#E9C46A]" /> {totalDistance} &middot; {totalDuration}
-              </span>
-            )}
+            <span className="flex items-center gap-1">
+              <Car className="w-3.5 h-3.5 text-[#E9C46A]" /> {totalDistance} &middot; {totalDuration}
+            </span>
           </div>
           <button
             onClick={() => {
@@ -188,93 +202,96 @@ const RoutePage = () => {
       </div>
 
       {/* Map */}
-      <div className="h-[45vh] sm:h-[55vh]" data-testid="google-map">
-        {!isLoaded ? (
-          <div className="w-full h-full flex items-center justify-center bg-[#F0EFEB]">
-            <Loader2 className="w-8 h-8 text-[#264653] animate-spin" />
-          </div>
-        ) : (
-          <GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            center={{ lat: 39.5, lng: -119.5 }}
-            zoom={5}
-            onLoad={onLoad}
-            options={mapOptions}
-          >
-            {/* Directions Route */}
-            {directions && (
-              <DirectionsRenderer
-                directions={directions}
-                options={{
-                  suppressMarkers: true,
-                  polylineOptions: {
-                    strokeColor: "#264653",
-                    strokeOpacity: 0.85,
-                    strokeWeight: 4,
-                  },
-                }}
-              />
-            )}
+      <div className="h-[45vh] sm:h-[55vh]" data-testid="leaflet-map">
+        <MapContainer
+          center={[39.5, -119.5]}
+          zoom={5}
+          style={{ width: "100%", height: "100%" }}
+          scrollWheelZoom={true}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
 
-            {/* Main Markers */}
-            {routeStops.map((stop, idx) => (
-              <Marker
-                key={stop.name}
-                position={{ lat: stop.lat, lng: stop.lng }}
-                onClick={() => setSelectedStop(stop)}
-                label={{ text: String(idx + 1), color: "#fff", fontWeight: "bold", fontSize: "11px" }}
-                icon={{
-                  path: window.google.maps.SymbolPath.CIRCLE,
-                  scale: 14,
-                  fillColor: stop.color,
-                  fillOpacity: 1,
-                  strokeColor: "#fff",
-                  strokeWeight: 2,
-                }}
-              />
-            ))}
+          <MapController
+            mapRef={mapRef}
+            flyTarget={flyTarget}
+            onFlyDone={() => setFlyTarget(null)}
+          />
 
-            {/* Optional Markers */}
-            {showOptional &&
-              optionalStops.map((stop) => (
-                <Marker
-                  key={stop.name}
-                  position={{ lat: stop.lat, lng: stop.lng }}
-                  onClick={() => setSelectedStop(stop)}
-                  icon={{
-                    path: window.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-                    scale: 6,
-                    fillColor: stop.color,
-                    fillOpacity: 1,
-                    strokeColor: "#fff",
-                    strokeWeight: 2,
-                  }}
-                />
-              ))}
+          {/* Route polyline */}
+          <Polyline
+            positions={polylinePositions}
+            pathOptions={{ color: "#264653", opacity: 0.85, weight: 4 }}
+          />
 
-            {/* Info Window */}
-            {selectedStop && (
-              <InfoWindow position={{ lat: selectedStop.lat, lng: selectedStop.lng }} onCloseClick={() => setSelectedStop(null)}>
+          {/* Main stop markers */}
+          {routeStops.map((stop, idx) => (
+            <Marker
+              key={stop.name}
+              position={[stop.lat, stop.lng]}
+              icon={createCircleIcon(stop.color, String(idx + 1))}
+              eventHandlers={{ click: () => setSelectedStop(stop) }}
+            >
+              <Popup>
                 <div className="p-1.5 min-w-[140px]">
-                  <h3 className="font-bold text-[#264653] text-base">{selectedStop.name}</h3>
-                  <p className="text-xs text-[#8D99AE]">{selectedStop.state}</p>
+                  <h3 className="font-bold text-[#264653] text-base">{stop.name}</h3>
+                  <p className="text-xs text-[#8D99AE]">{stop.state}</p>
                   <div className="flex items-center gap-1 mt-1.5 text-xs">
                     <Clock className="w-3.5 h-3.5 text-[#2A9D8F]" />
-                    <span className="text-[#264653]">{selectedStop.dates || `Tag ${selectedStop.day}`}</span>
+                    <span className="text-[#264653]">{stop.dates || `Tag ${stop.day}`}</span>
                   </div>
-                  {selectedStop.accom && (
-                    <p className="mt-1.5 text-[10px] text-[#2A9D8F] leading-tight">{selectedStop.accom}</p>
+                  {stop.accom && (
+                    <p className="mt-1.5 text-[10px] text-[#2A9D8F] leading-tight">{stop.accom}</p>
                   )}
-                  {selectedStop.optional && (
+                </div>
+              </Popup>
+            </Marker>
+          ))}
+
+          {/* Optional stop markers */}
+          {showOptional &&
+            optionalStops.map((stop) => (
+              <Marker
+                key={stop.name}
+                position={[stop.lat, stop.lng]}
+                icon={createOptionalIcon(stop.color)}
+                eventHandlers={{ click: () => setSelectedStop(stop) }}
+              >
+                <Popup>
+                  <div className="p-1.5 min-w-[140px]">
+                    <h3 className="font-bold text-[#264653] text-base">{stop.name}</h3>
+                    <p className="text-xs text-[#8D99AE]">{stop.state}</p>
+                    <div className="flex items-center gap-1 mt-1.5 text-xs">
+                      <Clock className="w-3.5 h-3.5 text-[#2A9D8F]" />
+                      <span className="text-[#264653]">{stop.dates || `Tag ${stop.day}`}</span>
+                    </div>
                     <span className="inline-block mt-1.5 px-2 py-0.5 bg-[#F4A261]/20 text-[#F4A261] text-[10px] rounded-full font-semibold">
                       Alex-Tipp
                     </span>
-                  )}
-                </div>
-              </InfoWindow>
-            )}
-          </GoogleMap>
-        )}
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
+
+          {/* Added suggestion markers */}
+          {addedSuggestions.map((s) =>
+            s.lat && s.lng ? (
+              <Marker
+                key={s.id}
+                position={[s.lat, s.lng]}
+                icon={createSuggestionIcon()}
+              >
+                <Popup>
+                  <div className="p-1">
+                    <h3 className="font-bold text-[#264653] text-sm">{s.title || s.name}</h3>
+                  </div>
+                </Popup>
+              </Marker>
+            ) : null
+          )}
+        </MapContainer>
       </div>
 
       {/* Route List */}
