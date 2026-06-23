@@ -1,7 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
-import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
-import { API } from "../App";
+import localApi from "../localApi";
 import { toast } from "sonner";
 import {
   MapPin, Clock, Check, Plus, Sparkles, ChevronDown, ChevronUp,
@@ -171,8 +170,8 @@ const PlanPage = () => {
 
   useEffect(() => {
     Promise.all([
-      axios.get(`${API}/trips`),
-      axios.get(`${API}/suggestions`),
+      localApi.getTrips(),
+      localApi.getSuggestions(),
     ]).then(([t, s]) => {
       setTrips(t.data);
       setSuggestions(s.data);
@@ -181,7 +180,7 @@ const PlanPage = () => {
 
   const toggleSuggestion = async (id) => {
     try {
-      const res = await axios.patch(`${API}/suggestions/${id}/toggle`);
+      const res = await localApi.toggleSuggestion(id);
       setSuggestions(suggestions.map(s =>
         s.id === id ? { ...s, added_to_trip: res.data.added_to_trip } : s
       ));

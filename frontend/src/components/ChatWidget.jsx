@@ -1,7 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
-import { API } from "../App";
 import { MessageCircle, X, Send, Loader2, Bot, User, Sparkles } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
@@ -11,7 +9,6 @@ const ChatWidget = () => {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [sessionId, setSessionId] = useState(null);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -22,7 +19,7 @@ const ChatWidget = () => {
     if (isOpen && messages.length === 0) {
       setMessages([{
         role: "assistant",
-        content: "Hallo! Ich bin euer Reise-Assistent fur die USA Westkuste 2026. Fragt mich alles uber:\n\n- Aktivitaten mit den Jungs\n- Restaurant-Empfehlungen\n- Packlisten-Vorschlage\n- Nationalpark-Infos\n\nWie kann ich helfen?"
+        content: "Hallo! Ich bin euer Reise-Assistent fur die USA Westkuste 2026. Fragt mich alles uber:\n\n- Aktivitaten mit den Jungs\n- Restaurant-Empfehlungen\n- Packlisten-Vorschlage\n- Nationalpark-Infos\n\nDer KI-Chat ist momentan offline. Schaut euch in der Zwischenzeit die Route, Tipps und Packlisten an!"
       }]);
     }
   }, [isOpen, messages.length]);
@@ -33,15 +30,10 @@ const ChatWidget = () => {
     setInputValue("");
     setMessages(prev => [...prev, { role: "user", content: userMsg }]);
     setIsLoading(true);
-    try {
-      const res = await axios.post(`${API}/chat`, { message: userMsg, session_id: sessionId });
-      setSessionId(res.data.session_id);
-      setMessages(prev => [...prev, { role: "assistant", content: res.data.response }]);
-    } catch {
-      setMessages(prev => [...prev, { role: "assistant", content: "Entschuldigung, es gab einen Fehler." }]);
-    } finally {
+    setTimeout(() => {
+      setMessages(prev => [...prev, { role: "assistant", content: "Der KI-Chat ist momentan nicht verfugbar. Nutzt die Route, Tipps und Packlisten fur eure Reiseplanung!" }]);
       setIsLoading(false);
-    }
+    }, 500);
   };
 
   return (

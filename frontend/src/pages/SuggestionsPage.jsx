@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
-import { API } from "../App";
+import localApi from "../localApi";
 import { toast } from "sonner";
 import { 
   MapPin, Clock, Check, Plus, Sparkles, ChevronDown, ChevronUp,
@@ -20,7 +19,7 @@ const SuggestionsPage = () => {
 
   const fetchSuggestions = async () => {
     try {
-      const response = await axios.get(`${API}/suggestions`);
+      const response = await localApi.getSuggestions();
       setSuggestions(response.data);
     } catch (error) {
       console.error("Error fetching suggestions:", error);
@@ -31,7 +30,7 @@ const SuggestionsPage = () => {
 
   const toggleSuggestion = async (id) => {
     try {
-      const response = await axios.patch(`${API}/suggestions/${id}/toggle`);
+      const response = await localApi.toggleSuggestion(id);
       setSuggestions(suggestions.map(s => 
         s.id === id ? { ...s, added_to_trip: response.data.added_to_trip } : s
       ));

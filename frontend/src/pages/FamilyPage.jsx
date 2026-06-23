@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { motion } from "framer-motion";
-import { API } from "../App";
+import localApi from "../localApi";
 import { toast } from "sonner";
 import { Plus, Edit2, Trash2, Users, Heart } from "lucide-react";
 import { Button } from "../components/ui/button";
@@ -53,7 +52,7 @@ const FamilyPage = () => {
   useEffect(() => { fetchFamily(); }, []);
 
   const fetchFamily = async () => {
-    try { const r = await axios.get(`${API}/family`); setFamily(r.data); }
+    try { const r = await localApi.getFamily(); setFamily(r.data); }
     catch { toast.error("Fehler"); }
     finally { setLoading(false); }
   };
@@ -71,10 +70,10 @@ const FamilyPage = () => {
     if (!formData.name.trim()) { toast.error("Bitte Name eingeben"); return; }
     try {
       if (editingMember) {
-        await axios.delete(`${API}/family/${editingMember.id}`);
-        await axios.post(`${API}/family`, formData);
+        await localApi.deleteFamilyMember(editingMember.id);
+        await localApi.createFamilyMember(formData);
       } else {
-        await axios.post(`${API}/family`, formData);
+        await localApi.createFamilyMember(formData);
       }
       setIsDialogOpen(false); resetForm(); fetchFamily();
       toast.success(editingMember ? "Aktualisiert!" : "Hinzugefugt!");
@@ -83,7 +82,7 @@ const FamilyPage = () => {
 
   const handleDelete = async (id) => {
     if (!window.confirm("Wirklich entfernen?")) return;
-    try { await axios.delete(`${API}/family/${id}`); setFamily(family.filter(m => m.id !== id)); toast.success("Entfernt"); }
+    try { await localApi.deleteFamilyMember(id); setFamily(family.filter(m => m.id !== id)); toast.success("Entfernt"); }
     catch { toast.error("Fehler"); }
   };
 

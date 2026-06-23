@@ -6,9 +6,8 @@ import {
   InfoWindow,
   DirectionsRenderer,
 } from "@react-google-maps/api";
-import axios from "axios";
 import { motion } from "framer-motion";
-import { API } from "../App";
+import localApi from "../localApi";
 import { MapPin, Navigation, Loader2, Route, Clock, Calendar, Car, ExternalLink } from "lucide-react";
 
 const mapContainerStyle = { width: "100%", height: "100%" };
@@ -63,7 +62,7 @@ const RoutePage = () => {
   });
 
   useEffect(() => {
-    axios.get(`${API}/suggestions`).then(r => setSuggestions(r.data)).catch(console.error);
+    localApi.getSuggestions().then(r => setSuggestions(r.data)).catch(console.error);
   }, []);
 
   // Calculate route using Directions API

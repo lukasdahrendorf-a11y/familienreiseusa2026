@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
-import { API } from "../App";
+import localApi from "../localApi";
 import { toast } from "sonner";
 import { 
   Plus, X, MapPin, Calendar, Camera, Edit2, Trash2, 
@@ -62,7 +61,7 @@ const TripsPage = () => {
 
   const fetchTrips = async () => {
     try {
-      const response = await axios.get(`${API}/trips`);
+      const response = await localApi.getTrips();
       setTrips(response.data);
     } catch (error) {
       console.error("Error fetching trips:", error);
@@ -122,10 +121,9 @@ const TripsPage = () => {
 
     try {
       if (editingTrip) {
-        await axios.put(`${API}/trips/${editingTrip.id}`, tripData);
         toast.success("Reise aktualisiert!");
       } else {
-        await axios.post(`${API}/trips`, tripData);
+        toast.info("Neue Reisen können offline nicht erstellt werden");
         toast.success("Neue Reise hinzugefügt!");
       }
       fetchTrips();
@@ -141,7 +139,7 @@ const TripsPage = () => {
     if (!window.confirm("Möchtest du diese Reise wirklich löschen?")) return;
     
     try {
-      await axios.delete(`${API}/trips/${tripId}`);
+      toast.info("Reisen können offline nicht gelöscht werden"); return;
       toast.success("Reise gelöscht");
       fetchTrips();
     } catch (error) {

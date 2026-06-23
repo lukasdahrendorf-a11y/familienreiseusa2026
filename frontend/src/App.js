@@ -1,7 +1,5 @@
-import { useEffect } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route, NavLink, useLocation } from "react-router-dom";
-import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { Toaster } from "./components/ui/sonner";
 import { Home, MapPinned, CalendarDays, CheckSquare, Users } from "lucide-react";
@@ -12,9 +10,6 @@ import PlanPage from "./pages/PlanPage";
 import PackingPage from "./pages/PackingPage";
 import FamilyPage from "./pages/FamilyPage";
 import ChatWidget from "./components/ChatWidget";
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-export const API = `${BACKEND_URL}/api`;
 
 const navItems = [
   { to: "/", icon: Home, label: "Start" },
@@ -71,10 +66,6 @@ const AnimatedRoutes = () => {
 };
 
 function App() {
-  useEffect(() => {
-    axios.post(`${API}/init-family`).catch(() => {});
-  }, []);
-
   return (
     <div className="app-container paper-texture">
       <BrowserRouter>

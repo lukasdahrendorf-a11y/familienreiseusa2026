@@ -1,8 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from "@react-google-maps/api";
-import axios from "axios";
 import { motion } from "framer-motion";
-import { API } from "../App";
+import localApi from "../localApi";
 import { MapPin, Calendar, Camera, Navigation, Loader2 } from "lucide-react";
 
 const mapContainerStyle = {
@@ -56,7 +55,7 @@ const MapPage = () => {
   useEffect(() => {
     const fetchTrips = async () => {
       try {
-        const response = await axios.get(`${API}/trips`);
+        const response = await localApi.getTrips();
         setTrips(response.data);
       } catch (error) {
         console.error("Error fetching trips:", error);

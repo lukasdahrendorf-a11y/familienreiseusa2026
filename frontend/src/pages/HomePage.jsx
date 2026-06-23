@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { motion } from "framer-motion";
-import { API } from "../App";
+import localApi from "../localApi";
 import { MapPinned, CalendarDays, CheckSquare, Users, Plane, ArrowRight, Sparkles } from "lucide-react";
 
 const HomePage = () => {
@@ -12,9 +11,9 @@ const HomePage = () => {
 
   useEffect(() => {
     Promise.all([
-      axios.get(`${API}/family`),
-      axios.get(`${API}/trips`),
-      axios.get(`${API}/suggestions`),
+      localApi.getFamily(),
+      localApi.getTrips(),
+      localApi.getSuggestions(),
     ]).then(([f, t, s]) => {
       setFamily(f.data);
       setTrips(t.data);

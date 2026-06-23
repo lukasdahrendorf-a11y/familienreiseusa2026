@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
-import { API } from "../App";
+import localApi from "../localApi";
 import { toast } from "sonner";
 import { 
   Plus, X, Check, CheckSquare, Square, Trash2, Edit2,
@@ -56,8 +55,8 @@ const PackingPage = () => {
   const fetchData = async () => {
     try {
       const [listsRes, tripsRes] = await Promise.all([
-        axios.get(`${API}/packing-lists`),
-        axios.get(`${API}/trips`)
+        localApi.getPackingLists(),
+        localApi.getTrips()
       ]);
       setPackingLists(listsRes.data);
       setTrips(tripsRes.data);
@@ -76,7 +75,7 @@ const PackingPage = () => {
     }
 
     try {
-      const response = await axios.post(`${API}/packing-lists`, {
+      const response = await localApi.createPackingList({
         title: newListTitle,
         trip_id: newListTripId || null,
         items: []
@@ -96,7 +95,7 @@ const PackingPage = () => {
     if (!window.confirm("Möchtest du diese Packliste wirklich löschen?")) return;
 
     try {
-      await axios.delete(`${API}/packing-lists/${listId}`);
+      await localApi.deletePackingList(listId);
       setPackingLists(packingLists.filter(l => l.id !== listId));
       if (selectedList?.id === listId) setSelectedList(null);
       toast.success("Packliste gelöscht");
@@ -119,11 +118,11 @@ const PackingPage = () => {
     const updatedItems = [...selectedList.items, newItem];
     
     try {
-      await axios.put(`${API}/packing-lists/${selectedList.id}`, {
+      await localApi.updatePackingList(selectedList.id, {
         ...selectedList,
         items: updatedItems
       });
-      
+
       const updatedList = { ...selectedList, items: updatedItems };
       setSelectedList(updatedList);
       setPackingLists(packingLists.map(l => l.id === selectedList.id ? updatedList : l));
@@ -139,8 +138,8 @@ const PackingPage = () => {
     if (!selectedList) return;
 
     try {
-      await axios.patch(`${API}/packing-lists/${selectedList.id}/items/${itemId}/toggle`);
-      
+      await localApi.togglePackingItem(selectedList.id, itemId);
+
       const updatedItems = selectedList.items.map(item =>
         item.id === itemId ? { ...item, checked: !item.checked } : item
       );
@@ -158,11 +157,11 @@ const PackingPage = () => {
     const updatedItems = selectedList.items.filter(item => item.id !== itemId);
     
     try {
-      await axios.put(`${API}/packing-lists/${selectedList.id}`, {
+      await localApi.updatePackingList(selectedList.id, {
         ...selectedList,
         items: updatedItems
       });
-      
+
       const updatedList = { ...selectedList, items: updatedItems };
       setSelectedList(updatedList);
       setPackingLists(packingLists.map(l => l.id === selectedList.id ? updatedList : l));
