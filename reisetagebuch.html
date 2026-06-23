@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Reisetagebuch - Familie Dahrendorf</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fraunces:wght@400;700;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+@page { size: A4 landscape; margin: 0; }
+
+body { font-family: 'Nunito', sans-serif; color: #264653; background: white; }
+
+.page {
+  width: 297mm; height: 210mm;
+  padding: 12mm;
+  page-break-after: always;
+  position: relative;
+  overflow: hidden;
+}
+
+/* === COVER === */
+.cover {
+  background: linear-gradient(135deg, #264653 0%, #2A9D8F 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; color: white;
+}
+.cover h1 { font-family: 'Fraunces', serif; font-size: 42pt; margin-bottom: 8mm; }
+.cover h2 { font-family: 'Fraunces', serif; font-size: 24pt; font-weight: 400; color: #E9C46A; margin-bottom: 15mm; }
+.cover .child-name { font-family: 'Fraunces', serif; font-size: 56pt; font-weight: 900; color: #E9C46A; margin: 10mm 0; }
+.cover .subtitle { font-size: 14pt; color: rgba(255,255,255,0.8); margin-bottom: 5mm; }
+.cover .dates { font-size: 16pt; font-weight: 700; color: white; background: rgba(255,255,255,0.15); padding: 4mm 8mm; border-radius: 20px; display: inline-block; }
+.cover .plane { font-size: 60pt; margin-bottom: 10mm; }
+.cover .deco { position: absolute; font-size: 80pt; opacity: 0.1; }
+.cover .deco-tl { top: 10mm; left: 15mm; }
+.cover .deco-br { bottom: 10mm; right: 15mm; }
+
+/* === ROUTE PAGE === */
+.route-page { padding: 10mm; }
+.route-page h2 { font-family: 'Fraunces', serif; font-size: 22pt; text-align: center; margin-bottom: 6mm; color: #264653; }
+.route-page .route-subtitle { text-align: center; font-size: 11pt; color: #8D99AE; margin-bottom: 8mm; }
+.route-list { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 8mm; }
+.route-item { display: flex; align-items: center; gap: 3mm; padding: 2.5mm 4mm; border-radius: 8px; background: #f5f5f2; }
+.route-dot { width: 8mm; height: 8mm; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 7pt; font-weight: 800; flex-shrink: 0; }
+.route-item .info { flex: 1; }
+.route-item .place { font-weight: 700; font-size: 10pt; }
+.route-item .dates { font-size: 8pt; color: #8D99AE; }
+.route-item .checkbox { width: 6mm; height: 6mm; border: 2px solid #2A9D8F; border-radius: 3px; flex-shrink: 0; }
+.route-legend { text-align: center; margin-top: 6mm; font-size: 9pt; color: #8D99AE; }
+
+/* === DAY SPREAD (double page) === */
+.day-spread {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  height: 100%; padding: 8mm;
+}
+.day-left, .day-right { padding: 4mm; }
+
+/* Left page */
+.day-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4mm; }
+.day-number { font-family: 'Fraunces', serif; font-size: 36pt; font-weight: 900; line-height: 1; }
+.day-meta { text-align: right; }
+.day-date { font-weight: 700; font-size: 12pt; }
+.day-location { font-family: 'Fraunces', serif; font-size: 16pt; font-weight: 700; color: #2A9D8F; }
+
+.fun-fact { background: #E9C46A20; border-left: 3px solid #E9C46A; padding: 3mm 4mm; border-radius: 0 8px 8px 0; margin: 4mm 0; font-size: 9pt; }
+.fun-fact strong { color: #E9C46A; }
+
+.section-title { font-weight: 800; font-size: 9pt; text-transform: uppercase; letter-spacing: 0.5px; margin: 4mm 0 2mm 0; }
+
+.weather-row { display: flex; gap: 3mm; flex-wrap: wrap; margin-bottom: 3mm; }
+.weather-option { display: flex; align-items: center; gap: 1.5mm; font-size: 9pt; }
+.weather-circle { width: 5mm; height: 5mm; border: 1.5px solid #8D99AE; border-radius: 50%; }
+
+.smiley-row { display: flex; gap: 4mm; margin: 3mm 0; }
+.smiley-item { text-align: center; font-size: 8pt; }
+.smiley-item .emoji { font-size: 18pt; display: block; margin-bottom: 1mm; }
+.smiley-circle { width: 6mm; height: 6mm; border: 1.5px solid #8D99AE; border-radius: 50%; margin: 0 auto; }
+
+.food-section { margin: 3mm 0; }
+.food-line { border-bottom: 1px dashed #c0c0c0; height: 7mm; font-size: 9pt; color: #8D99AE; padding-top: 1.5mm; }
+
+/* Right page */
+.photo-box { width: 100%; height: 50mm; border: 2px dashed #c0c0c0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #8D99AE; font-size: 10pt; margin-bottom: 4mm; background: #fafafa; }
+
+.diary-lines { margin-top: 2mm; }
+.diary-line { border-bottom: 1px solid #e0e0e0; height: 8mm; }
+.diary-prompt { font-size: 9pt; color: #8D99AE; font-style: italic; padding-top: 1mm; }
+
+.joke-box { background: #E76F5115; border-radius: 8px; padding: 3mm 4mm; margin-top: 3mm; }
+.joke-box .joke-title { font-weight: 800; font-size: 8pt; color: #E76F51; text-transform: uppercase; }
+.joke-box .joke-text { font-size: 9pt; margin-top: 1mm; }
+.joke-box .joke-answer { font-size: 8pt; color: #8D99AE; margin-top: 1mm; }
+
+.puzzle-box { background: #2A9D8F10; border-radius: 8px; padding: 3mm 4mm; margin-top: 3mm; }
+.puzzle-box .puzzle-title { font-weight: 800; font-size: 8pt; color: #2A9D8F; text-transform: uppercase; }
+.puzzle-box .puzzle-text { font-size: 9pt; margin-top: 1mm; }
+
+.divider { width: 1px; background: #e0e0e0; margin: 0 2mm; }
+
+/* === LAST PAGE === */
+.last-page { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.last-page h2 { font-family: 'Fraunces', serif; font-size: 28pt; color: #264653; margin-bottom: 8mm; }
+.last-page .fav-section { width: 80%; margin: 3mm 0; }
+.last-page .fav-line { border-bottom: 1px dashed #c0c0c0; height: 9mm; text-align: left; }
+.last-page .fav-label { font-size: 10pt; color: #8D99AE; padding-top: 2mm; }
+.last-page .big-draw { width: 80%; height: 70mm; border: 2px dashed #c0c0c0; border-radius: 12px; margin-top: 5mm; display: flex; align-items: center; justify-content: center; color: #8D99AE; font-size: 11pt; }
+
+@media print {
+  .page { page-break-after: always; }
+  .no-print { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="no-print" style="background:#264653;color:white;padding:20px;text-align:center;font-family:'Nunito',sans-serif;">
+  <h2>Reisetagebuch drucken</h2>
+  <p style="margin:10px 0;color:#E9C46A;">Drucke diese Seite als PDF: Datei &rarr; Drucken &rarr; "Als PDF sichern"</p>
+  <p style="font-size:13px;color:rgba(255,255,255,0.7);">Einstellung: Querformat (Landscape), A4, Ränder: Keine</p>
+  <p style="margin-top:10px;">
+    <button onclick="window.print()" style="background:#2A9D8F;color:white;border:none;padding:12px 30px;border-radius:25px;font-size:16px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;">Als PDF drucken</button>
+  </p>
+</div>
+
+<script>
+const CHILD_NAME = new URLSearchParams(window.location.search).get('name') || 'Louie';
+
+const days = [
+  { day: 1, date: "17. Juli", place: "Las Vegas", color: "#E76F51", info: "Las Vegas liegt mitten in der Wüste Mojave! Hier regnet es fast nie und es kann über 40°C heiß werden.", weather: "sonnig, sehr heiß", joke: { q: "Was macht ein Kaktus in Las Vegas?", a: "Er spielt Stachel-Poker!" }, puzzle: "Wie viele Lichter kannst du am Strip zählen? Schätze mal!", food: "Was hast du im Hotel-Restaurant gegessen?" },
+  { day: 2, date: "18. Juli", place: "Las Vegas", color: "#E76F51", info: "Der Hoover-Staudamm ist 221 Meter hoch - so hoch wie ein 60-stöckiges Hochhaus!", weather: "sonnig, sehr heiß", joke: { q: "Warum tragen Kamele keine Sonnenbrillen?", a: "Weil sie schon Wüsten-Augen haben!" }, puzzle: "Male ein Bild vom verrücktesten Gebäude, das du heute gesehen hast!", food: "Gab es heute amerikanisches Frühstück?" },
+  { day: 3, date: "19. Juli", place: "Las Vegas → Los Angeles", color: "#E9C46A", info: "Die Fahrt nach LA dauert ca. 4 Stunden. Los Angeles heißt 'Die Stadt der Engel' auf Spanisch.", weather: "sonnig, warm", joke: { q: "Was sagt ein Auto in der Wüste?", a: "Ich hab so einen trockenen Humor!" }, puzzle: "Zähle die verschiedenen Autokennzeichen auf der Fahrt! Wie viele Bundesstaaten findest du?", food: "Wo habt ihr unterwegs Pause gemacht?" },
+  { day: 4, date: "20. Juli", place: "Los Angeles - Disneyland", color: "#E9C46A", info: "Disneyland wurde 1955 eröffnet! Walt Disney hat es selbst geplant. Der Park hat über 50 Attraktionen.", weather: "sonnig, warm", joke: { q: "Was ist Mickys Lieblingssport?", a: "Maus-athlon!" }, puzzle: "Welche Disney-Figur hast du heute getroffen? Male sie!", food: "Hast du einen amerikanischen Hotdog oder Burger probiert?" },
+  { day: 5, date: "21. Juli", place: "Los Angeles - Hollywood & Santa Monica", color: "#E9C46A", info: "Der Hollywood-Schriftzug ist 137 Meter lang! Jeder Buchstabe ist 14 Meter hoch.", weather: "sonnig, warm", joke: { q: "Warum wurde der Strand verhaftet?", a: "Weil er so viele Wellen geschlagen hat!" }, puzzle: "Findest du einen Star auf dem Walk of Fame, den du kennst? Welcher?", food: "Hast du Tacos am Santa Monica Pier probiert?" },
+  { day: 6, date: "22. Juli", place: "Universal Studios VIP Tour", color: "#E9C46A", info: "Bei der VIP Tour seht ihr echte Film-Sets! Hier wurden Filme wie Jurassic Park und Harry Potter gedreht.", weather: "sonnig, warm", joke: { q: "Was macht ein Dino im Filmstudio?", a: "Er dreht einen Brüller!" }, puzzle: "Welcher Film-Ride war am coolsten? Bewerte von 1-10!", food: "Was gab es zum Essen in den Universal Studios?" },
+  { day: 7, date: "23. Juli", place: "Los Angeles → Sequoia NP", color: "#2A9D8F", info: "Der General Sherman Tree ist der größte Baum der Welt! Er ist 84 Meter hoch und über 2.000 Jahre alt.", weather: "warm tagsüber, kühl abends", joke: { q: "Warum können Bäume nicht ins Internet?", a: "Weil sie ständig in ihren Ringen hängen!" }, puzzle: "Wie viele Kinder müssten sich an den Händen fassen, um den General Sherman Tree zu umfassen? (Tipp: der Umfang ist 31 Meter!)", food: "Gab es Lagerfeuer-Essen?" },
+  { day: 8, date: "24. Juli", place: "Sequoia NP", color: "#2A9D8F", info: "Mammutbäume haben eine feuerfeste Rinde! Sie kann bis zu 60 cm dick sein.", weather: "sonnig, angenehm", joke: { q: "Was sagt ein Mammutbaum zum anderen?", a: "Hey, du bist ja riesig! - Du aber auch!" }, puzzle: "Sammle 3 verschiedene Blätter oder Zapfen und klebe sie ein!", food: "Was war das leckerste Essen heute?" },
+  { day: 9, date: "25. Juli", place: "Sequoia → Yosemite NP", color: "#2A9D8F", info: "El Capitan in Yosemite ist die größte freistehende Granitwand der Welt - 900 Meter hoch!", weather: "sonnig", joke: { q: "Warum klettern Bergsteiger auf Berge?", a: "Weil sie nicht durch sie durchgehen können!" }, puzzle: "Schau dir El Capitan an - siehst du Kletterer? Wie klein sehen sie aus?", food: "Habt ihr ein Picknick im Park gemacht?" },
+  { day: 10, date: "26. Juli", place: "Yosemite NP", color: "#2A9D8F", info: "Die Yosemite Falls sind 739 Meter hoch - der höchste Wasserfall in Nordamerika!", weather: "sonnig, warm", joke: { q: "Was sagt der Wasserfall zum Fluss?", a: "Lass dich fallen, das macht Spaß!" }, puzzle: "Male den Yosemite Wasserfall! Wie hoch schätzt du ihn?", food: "Was gab es zum Abendessen im Ahwahnee Hotel?" },
+  { day: 11, date: "27. Juli", place: "Yosemite → San Francisco", color: "#E9C46A", info: "Die Golden Gate Bridge ist 2.737 Meter lang und in einem speziellen Orangerot gestrichen!", weather: "kühl, oft neblig", joke: { q: "Warum ist die Golden Gate Bridge nie einsam?", a: "Weil immer so viele Autos über sie fahren!" }, puzzle: "Zähle, wie viele Kabel du an der Golden Gate Bridge sehen kannst!", food: "Habt ihr Clam Chowder (Muschelsuppe) in der Brotschüssel probiert?" },
+  { day: 12, date: "28. Juli", place: "San Francisco", color: "#E9C46A", info: "Die Cable Cars in San Francisco sind die einzigen mobilen historischen Wahrzeichen der USA!", weather: "kühl, neblig", joke: { q: "Warum fährt man gern Cable Car?", a: "Weil man sich an den Seilen nicht festfahren kann!" }, puzzle: "Alcatraz: Niemand ist je erfolgreich von dort geflohen - oder doch? Was denkst du?", food: "Gab es heute Fish & Chips am Fisherman's Wharf?" },
+  { day: 13, date: "29. Juli", place: "SF → Benbow KOA (Redwoods Süd)", color: "#2A9D8F", info: "Heute übernehmt ihr das Wohnmobil! Die Redwood-Bäume sind die höchsten Bäume der Welt - bis 116 Meter!", weather: "angenehm, warm", joke: { q: "Was sagt das Wohnmobil zum Zelt?", a: "Ich hab vier Räder und du nur Heringe!" }, puzzle: "Wie fühlt sich der erste Abend im Wohnmobil an? Bewerte: ⭐⭐⭐⭐⭐", food: "Was habt ihr im Wohnmobil als erstes gekocht?" },
+  { day: 14, date: "30. Juli", place: "Avenue of the Giants → Crescent City", color: "#2A9D8F", info: "Die Avenue of the Giants ist eine 50 km lange Straße durch uralte Mammutbäume. Manche sind 1.500 Jahre alt!", weather: "angenehm", joke: { q: "Welcher Baum kann am besten schwimmen?", a: "Die Strand-Kiefer!" }, puzzle: "Gibt es einen Baum, durch den man mit dem Auto durchfahren kann? Finde ihn!", food: "Was gab es auf dem Campingplatz zum Abendessen?" },
+  { day: 15, date: "31. Juli", place: "Redwood National Park", color: "#2A9D8F", info: "In den Redwoods leben Bananenschnecken - die sind knallgelb und können 25 cm lang werden!", weather: "kühl, neblig", joke: { q: "Warum haben Schnecken keine Angst im Wald?", a: "Sie tragen ihr Haus immer dabei!" }, puzzle: "Finde eine Bananenschnecke! Wie lang ist sie? Miss mit deinem Finger!", food: "Habt ihr etwas auf dem Campingkocher gemacht?" },
+  { day: 16, date: "1. August", place: "Crescent City → Waldport/Newport (Oregon Coast)", color: "#264653", info: "Oregon hat über 580 km Küste und ALLE Strände gehören allen Menschen - kein einziger Privatstrand!", weather: "kühl, windig", joke: { q: "Was macht eine Krabbe am Strand?", a: "Sie geht seitwärts shoppen!" }, puzzle: "Wie viele Seesterne/Muscheln kannst du am Strand finden?", food: "Gab es frischen Fisch?" },
+  { day: 17, date: "2. August", place: "Oregon Coast - Waldport/Newport", color: "#264653", info: "Am Yaquina Head kannst du oft Wale beobachten! Grauwale schwimmen hier vorbei auf ihrer Wanderung.", weather: "kühl, bewölkt", joke: { q: "Was singt der Wal unter der Dusche?", a: "Waaal-zer von Strauss!" }, puzzle: "Hast du einen Wal gesehen? Male, was du im Meer beobachtet hast!", food: "Was war das Abendessen heute?" },
+  { day: 18, date: "3. August", place: "Oregon Coast → Astoria/Cannon Beach", color: "#264653", info: "Der Haystack Rock am Cannon Beach ist 72 Meter hoch! Bei Ebbe kannst du in den Gezeitenpools Seesterne und Anemonen finden.", weather: "kühl, neblig", joke: { q: "Warum können Fische nicht Klavier spielen?", a: "Weil sie Angst vor den Schuppen haben!" }, puzzle: "Cannon Beach: Zähle die Seesterne in den Tide Pools!", food: "Habt ihr Marshmallows am Lagerfeuer gemacht?" },
+  { day: 19, date: "4. August", place: "Astoria → Olympic NP", color: "#2A9D8F", info: "Im Hoh Rainforest regnet es bis zu 4 Meter pro Jahr! Die Bäume sind mit Moos bedeckt wie in einem Märchenwald.", weather: "feucht, kühl", joke: { q: "Was sagt der Regen zum Wald?", a: "Kopf hoch, ich mach dich grün!" }, puzzle: "Der Hoh Rainforest sieht aus wie in einem Fantasy-Film. Welcher Film fällt dir ein?", food: "Was habt ihr heute auf dem Campingplatz gegessen?" },
+  { day: 20, date: "5. August", place: "Olympic NP - Hoh Rainforest", color: "#2A9D8F", info: "Olympic NP hat Regenwald, Berge UND Strände - alles in einem Park! Es gibt hier sogar Roosevelt-Elche.", weather: "feucht, kühl", joke: { q: "Warum tragen Elche kein GPS?", a: "Sie finden den Wald auch so!" }, puzzle: "Hast du einen Elch oder ein Reh gesehen? Male das coolste Tier des Tages!", food: "Gab es heute etwas Besonderes zu essen?" },
+  { day: 21, date: "6. August", place: "Olympic NP", color: "#2A9D8F", info: "Am Ruby Beach kannst du Treibholz-Skulpturen finden! Die Wellen formen das Holz zu verrückten Formen.", weather: "kühl, windig", joke: { q: "Warum schwimmen Fische im Meer?", a: "Weil sie nicht fliegen können - naja, Fliegende Fische schon!" }, puzzle: "Baue eine Skulptur aus Treibholz am Strand! Wofür hält sie jemand anderes?", food: "Was gab es zum Mittagessen?" },
+  { day: 22, date: "7. August", place: "Reisetag / Optional: Mt. St. Helens", color: "#F4A261", info: "Der Mt. St. Helens explodierte 1980 - die Eruption war 500-mal stärker als die Hiroshima-Bombe!", weather: "wechselhaft", joke: { q: "Was sagt der Vulkan wenn er wütend ist?", a: "Ich könnte EXPLODIEREN!" }, puzzle: "Wenn ihr am Mt. St. Helens wart: Wie sieht der Krater aus? Male ihn!", food: "Was gab es unterwegs zu essen?" },
+  { day: 23, date: "8. August", place: "Reisetag / Optional: Leavenworth", color: "#F4A261", info: "Leavenworth sieht aus wie ein bayerisches Dorf - mitten in Amerika! Mit Fachwerkhäusern und Brezeln.", weather: "warm, sonnig", joke: { q: "Was sagt die Brezel zum Weißwurst?", a: "Ohne mich bist du nackig!" }, puzzle: "Wenn ihr in Leavenworth seid: Findest du 5 Unterschiede zu einem echten deutschen Dorf?", food: "Gab es Brezeln in Leavenworth?" },
+  { day: 24, date: "9. August", place: "Ankunft Seattle", color: "#E76F51", info: "Seattle hat den Spitznamen 'Emerald City' wegen der vielen grünen Bäume! Hier wurde auch Starbucks gegründet.", weather: "mild, bewölkt", joke: { q: "Warum regnet es so oft in Seattle?", a: "Damit die Kaffeebohnen besser wachsen!" }, puzzle: "Findest du den allerersten Starbucks? Wo ist er?", food: "Habt ihr Seattle-Seafood probiert?" },
+  { day: 25, date: "10. August", place: "Seattle - Space Needle", color: "#E76F51", info: "Die Space Needle ist 184 Meter hoch und wurde für die Weltausstellung 1962 gebaut. Sie dreht sich oben!", weather: "mild", joke: { q: "Was sieht man von der Space Needle?", a: "Alles - außer die Space Needle!" }, puzzle: "Von der Space Needle: Zähle, wie viele Seen und Berge du sehen kannst!", food: "Was war das letzte Abendessen in Amerika?" },
+  { day: 26, date: "11. August", place: "Seattle → Heimreise", color: "#E76F51", info: "Ihr fliegt ca. 9.500 km zurück nach Deutschland! Der Flug dauert etwa 10 Stunden.", weather: "???", joke: { q: "Was sagt das Flugzeug beim Abschied?", a: "Ich heb dann mal ab!" }, puzzle: "Was war dein absolutes Highlight der ganzen Reise? Male oder schreibe es auf!", food: "Was vermisst du am meisten vom amerikanischen Essen?" },
+];
+
+function generateBook() {
+  const container = document.getElementById('book');
+  container.innerHTML = '';
+
+  // === COVER ===
+  container.innerHTML += `
+    <div class="page cover">
+      <div class="deco deco-tl">🌎</div>
+      <div class="deco deco-br">✈️</div>
+      <div class="plane">✈️</div>
+      <h1>Reisetagebuch</h1>
+      <h2>USA Westküste 2026</h2>
+      <div class="child-name">${CHILD_NAME}</div>
+      <div class="subtitle">Familie Dahrendorf</div>
+      <div class="dates">17. Juli - 11. August 2026</div>
+    </div>
+  `;
+
+  // === ROUTE OVERVIEW ===
+  const stops = [
+    { day: "1-2", place: "Las Vegas", dates: "17.-18. Juli", color: "#E76F51" },
+    { day: "3-6", place: "Los Angeles & Disneyland", dates: "19.-22. Juli", color: "#E9C46A" },
+    { day: "7-8", place: "Sequoia NP", dates: "23.-24. Juli", color: "#2A9D8F" },
+    { day: "9-10", place: "Yosemite NP", dates: "25.-26. Juli", color: "#2A9D8F" },
+    { day: "11-12", place: "San Francisco", dates: "27.-28. Juli", color: "#E9C46A" },
+    { day: "13", place: "Benbow KOA (Redwoods)", dates: "29. Juli", color: "#2A9D8F" },
+    { day: "14-15", place: "Crescent City (Redwoods)", dates: "30.-31. Juli", color: "#2A9D8F" },
+    { day: "16-17", place: "Oregon Coast", dates: "1.-2. Aug", color: "#264653" },
+    { day: "18", place: "Cannon Beach / Astoria", dates: "3. Aug", color: "#264653" },
+    { day: "19-21", place: "Olympic NP", dates: "4.-6. Aug", color: "#2A9D8F" },
+    { day: "22-23", place: "Reisetage / Optionale Stops", dates: "7.-8. Aug", color: "#F4A261" },
+    { day: "24-26", place: "Seattle", dates: "9.-11. Aug", color: "#E76F51" },
+  ];
+
+  container.innerHTML += `
+    <div class="page route-page">
+      <h2>🗺️ Unsere Route</h2>
+      <p class="route-subtitle">Kreuze jeden Stopp an, wenn ihr dort wart!</p>
+      <div class="route-list">
+        ${stops.map(s => `
+          <div class="route-item">
+            <div class="route-dot" style="background:${s.color}">${s.day}</div>
+            <div class="info">
+              <div class="place">${s.place}</div>
+              <div class="dates">${s.dates}</div>
+            </div>
+            <div class="checkbox"></div>
+          </div>
+        `).join('')}
+      </div>
+      <p class="route-legend">✏️ Kreuze die Kästchen an, wenn ihr dort angekommen seid!</p>
+    </div>
+  `;
+
+  // === DAY PAGES ===
+  days.forEach(d => {
+    container.innerHTML += `
+      <div class="page">
+        <div class="day-spread">
+          <div class="day-left">
+            <div class="day-header">
+              <div class="day-number" style="color:${d.color}">Tag ${d.day}</div>
+              <div class="day-meta">
+                <div class="day-date">${d.date} 2026</div>
+                <div class="day-location">${d.place}</div>
+              </div>
+            </div>
+
+            <div class="fun-fact">
+              <strong>🤓 Wusstest du?</strong> ${d.info}
+            </div>
+
+            <div class="section-title">☀️ Wie war das Wetter?</div>
+            <div class="weather-row">
+              ${['☀️ sonnig', '⛅ bewölkt', '🌧️ Regen', '🌬️ windig', '🥵 heiß', '🥶 kalt'].map(w => `
+                <div class="weather-option"><div class="weather-circle"></div> ${w}</div>
+              `).join('')}
+            </div>
+
+            <div class="section-title">😊 Wie war dein Tag?</div>
+            <div class="smiley-row">
+              ${[
+                { emoji: '🤩', label: 'mega cool' },
+                { emoji: '😊', label: 'schön' },
+                { emoji: '😐', label: 'okay' },
+                { emoji: '😴', label: 'müde' },
+                { emoji: '😤', label: 'anstrengend' },
+              ].map(s => `
+                <div class="smiley-item">
+                  <span class="emoji">${s.emoji}</span>
+                  <div class="smiley-circle"></div>
+                  <div style="font-size:7pt;margin-top:1mm">${s.label}</div>
+                </div>
+              `).join('')}
+            </div>
+
+            <div class="section-title">🍔 ${d.food}</div>
+            <div class="food-section">
+              <div class="food-line"></div>
+              <div class="food-line"></div>
+            </div>
+
+            <div class="section-title">⭐ Das war heute am coolsten:</div>
+            <div class="food-section">
+              <div class="food-line"></div>
+              <div class="food-line"></div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="day-right">
+            <div class="section-title">📸 Mein Foto des Tages</div>
+            <div class="photo-box">Hier Foto einkleben oder malen!</div>
+
+            <div class="section-title">📝 Was hab ich heute erlebt?</div>
+            <div class="diary-lines">
+              <div class="diary-line"><span class="diary-prompt">Heute haben wir...</span></div>
+              <div class="diary-line"></div>
+              <div class="diary-line"></div>
+              <div class="diary-line"></div>
+              <div class="diary-line"></div>
+            </div>
+
+            <div class="joke-box">
+              <div class="joke-title">😂 Witz des Tages</div>
+              <div class="joke-text">${d.joke.q}</div>
+              <div class="joke-answer">Antwort: <span style="color:transparent;background:#f0f0f0;border-radius:4px;padding:0 3mm;cursor:pointer" onclick="this.style.color='#264653'">${d.joke.a}</span></div>
+            </div>
+
+            <div class="puzzle-box">
+              <div class="puzzle-title">🧩 Aufgabe des Tages</div>
+              <div class="puzzle-text">${d.puzzle}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  // === LAST PAGE ===
+  container.innerHTML += `
+    <div class="page last-page">
+      <h2>🏆 Meine Reise-Highlights</h2>
+      <div class="fav-section">
+        <div class="fav-line"><span class="fav-label">🥇 Mein absoluter Lieblingsort:</span></div>
+        <div class="fav-line"><span class="fav-label">🍔 Das leckerste Essen:</span></div>
+        <div class="fav-line"><span class="fav-label">🎢 Die coolste Aktivität:</span></div>
+        <div class="fav-line"><span class="fav-label">🏕️ Der schönste Campingplatz:</span></div>
+        <div class="fav-line"><span class="fav-label">🦌 Das tollste Tier, das ich gesehen habe:</span></div>
+        <div class="fav-line"><span class="fav-label">😂 Der lustigste Moment:</span></div>
+        <div class="fav-line"><span class="fav-label">💪 Das Mutigste, was ich gemacht habe:</span></div>
+        <div class="fav-line"><span class="fav-label">🤝 Mein bester Reise-Kumpel:</span></div>
+      </div>
+      <div class="big-draw">✏️ Male hier dein schönstes Reise-Erlebnis!</div>
+    </div>
+  `;
+}
+
+generateBook();
+</script>
+
+<div id="book"></div>
+
+</body>
+</html>
