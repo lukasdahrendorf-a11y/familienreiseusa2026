@@ -1,0 +1,6 @@
+frontend/
+node_modules/
+test-results/
+package.json
+package-lock.json
+e2e-test.spec.js
