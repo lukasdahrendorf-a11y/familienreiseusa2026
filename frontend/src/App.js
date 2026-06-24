@@ -2,13 +2,14 @@ import "@/App.css";
 import { BrowserRouter, Routes, Route, NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Toaster } from "./components/ui/sonner";
-import { Home, MapPinned, CalendarDays, CheckSquare, Users } from "lucide-react";
+import { Home, MapPinned, CalendarDays, CheckSquare, Users, BookOpen } from "lucide-react";
 
 import HomePage from "./pages/HomePage";
 import RoutePage from "./pages/RoutePage";
 import PlanPage from "./pages/PlanPage";
 import PackingPage from "./pages/PackingPage";
 import FamilyPage from "./pages/FamilyPage";
+import DiaryPage from "./pages/DiaryPage";
 import ChatWidget from "./components/ChatWidget";
 
 const navItems = [
@@ -17,6 +18,7 @@ const navItems = [
   { to: "/planen", icon: CalendarDays, label: "Planen" },
   { to: "/packen", icon: CheckSquare, label: "Packen" },
   { to: "/familie", icon: Users, label: "Familie" },
+  { to: "/tagebuch", icon: BookOpen, label: "Tagebuch" },
 ];
 
 const Navigation = () => {
@@ -60,6 +62,7 @@ const AnimatedRoutes = () => {
         <Route path="/planen" element={<PageWrapper><PlanPage /></PageWrapper>} />
         <Route path="/packen" element={<PageWrapper><PackingPage /></PageWrapper>} />
         <Route path="/familie" element={<PageWrapper><FamilyPage /></PageWrapper>} />
+        <Route path="/tagebuch" element={<PageWrapper><DiaryPage /></PageWrapper>} />
       </Routes>
     </AnimatePresence>
   );
