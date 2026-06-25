@@ -13,7 +13,7 @@ import FamilyPage from "./pages/FamilyPage";
 import DiaryPage from "./pages/DiaryPage";
 import ChatWidget from "./components/ChatWidget";
 
-const VALID_USER = "Daahrendorf";
+const VALID_USER = "Dahrendorf";
 const VALID_HASH = "a3f1c2d8e9b4"; // simple hash check
 
 function simpleHash(str) {
