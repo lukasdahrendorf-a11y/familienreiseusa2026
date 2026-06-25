@@ -17,7 +17,7 @@ const DEFAULT_TRIPS = [
   {
     id: "t1",
     title: "USA Westküste 2026 - Family Road Trip",
-    description: "26-tägiger Familien-Roadtrip für Lukas, Laura, Louie, Levi & Noah.\n\n\u{1F5D3}️ 17. Juli - 11. August 2026\n\n\u{1F4CD} ROUTE:\n• Tag 1-2: Las Vegas - Ankunft, Strip, Helikopterflug\n• Tag 3-5: Los Angeles - Disneyland, Hollywood, Santa Monica\n• Tag 6-7: Sequoia NP - General Sherman Tree\n• Tag 8-10: Yosemite NP - El Capitan, Half Dome\n• Tag 11-12: San Francisco - Cable Car, Alcatraz\n• Tag 13-15: Redwood NP - Avenue of the Giants\n• Tag 16-18: Oregon Coast - Cannon Beach\n• Tag 19-21: Olympic NP - Hoh Rainforest\n• Tag 24-26: Seattle - Space Needle",
+    description: "26-tägiger Familien-Roadtrip für Lukas, Laura, Louie, Levi & Noah.\n\n\u{1F5D3}️ 17. Juli - 11. August 2026\n\n\u{1F4CD} ROUTE:\n• Tag 1-3: Las Vegas (Bellagio) - Strip, Grand Canyon Helikopter\n• Tag 4-6: Los Angeles (Marina del Rey) - Universal Studios VIP, Hollywood\n• Tag 7-8: Sequoia NP (Wuksachi Lodge) - General Sherman Tree\n• Tag 9-10: Yosemite NP (The Ahwahnee) - El Capitan, Half Dome\n• Tag 11-12: San Francisco (Argonaut Hotel) - Alcatraz, Golden Gate\n• Tag 13-18: Wohnmobil - Redwoods, Benbow KOA\n• Tag 19: La Push (Quileute Resort) - Olympic Coast\n• Tag 20-21: Port Angeles (Crescent Beach) - Olympic NP\n• Tag 22-24: Seattle / Leavenworth\n• Tag 25-26: Seattle (Hotel 1000) - Space Needle, Heimreise",
     location: "Las Vegas → Seattle (USA Westküste)",
     latitude: 39.5,
     longitude: -119.5,

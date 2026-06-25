@@ -7,24 +7,20 @@ import localApi from "../localApi";
 import { MapPin, Navigation, Route, Clock, Calendar, Car, ExternalLink } from "lucide-react";
 
 const routeStops = [
-  { name: "Las Vegas", state: "Nevada", lat: 36.1699, lng: -115.1398, day: "1-2", color: "#E76F51", dates: "17.-18. Juli" },
-  { name: "Los Angeles", state: "Kalifornien", lat: 34.0522, lng: -118.2437, day: "3-5", color: "#E9C46A", dates: "19.-21. Juli" },
-  { name: "Sequoia NP", state: "Kalifornien", lat: 36.4864, lng: -118.5658, day: "6-7", color: "#2A9D8F", dates: "22.-23. Juli" },
-  { name: "Yosemite NP", state: "Kalifornien", lat: 37.8651, lng: -119.5383, day: "8-10", color: "#2A9D8F", dates: "24.-26. Juli" },
-  { name: "San Francisco", state: "Kalifornien", lat: 37.7749, lng: -122.4194, day: "11-12", color: "#E9C46A", dates: "27.-28. Juli" },
-  { name: "Benbow KOA", state: "Kalifornien", lat: 40.0688, lng: -123.7893, day: "13", color: "#2A9D8F", dates: "29.-30. Juli", accom: "Benbow KOA Holiday, Garberville" },
-  { name: "Crescent City KOA", state: "Kalifornien", lat: 41.8028, lng: -124.1637, day: "14-15", color: "#2A9D8F", dates: "30. Jul-1. Aug", accom: "Crescent City/Redwoods KOA" },
-  { name: "Waldport KOA", state: "Oregon", lat: 44.4268, lng: -124.0695, day: "16", color: "#264653", dates: "2.-3. Aug", accom: "Waldport/Newport KOA Journey" },
-  { name: "Astoria KOA", state: "Oregon", lat: 46.1785, lng: -123.9543, day: "17-18", color: "#264653", dates: "3.-4. Aug", accom: "Astoria/Warrenton/Seaside KOA" },
-  { name: "Olympic NP", state: "Washington", lat: 47.8021, lng: -123.6044, day: "19-21", color: "#2A9D8F", dates: "4.-6. Aug" },
-  { name: "Seattle", state: "Washington", lat: 47.6062, lng: -122.3321, day: "24-26", color: "#E76F51", dates: "9.-11. Aug" },
+  { name: "Las Vegas – Bellagio", state: "Nevada", lat: 36.1126, lng: -115.1767, day: "1-3", color: "#E76F51", dates: "17.-20. Juli", address: "Bellagio Hotel, 3600 S Las Vegas Blvd, Las Vegas, NV 89109", phone: "888-987-6667", checkin: "15:00", booking: "77L0ZCMSRS" },
+  { name: "Los Angeles – Marina Escape", state: "Kalifornien", lat: 33.9802, lng: -118.4517, day: "4-6", color: "#E9C46A", dates: "20.-23. Juli", address: "Marina del Rey, Los Angeles, CA 90292", phone: "+1 818-388-2847", checkin: "15:00", booking: "6920124976" },
+  { name: "Sequoia NP – Wuksachi Lodge", state: "Kalifornien", lat: 36.4864, lng: -118.5658, day: "7-8", color: "#2A9D8F", dates: "23.-25. Juli", address: "Wuksachi Lodge, 64740 Wuksachi Way, Sequoia NP, CA 93262", booking: "404SF358498" },
+  { name: "Yosemite NP – The Ahwahnee", state: "Kalifornien", lat: 37.7468, lng: -119.5748, day: "9-10", color: "#2A9D8F", dates: "25.-27. Juli", address: "The Ahwahnee, 1 Ahwahnee Dr, Yosemite National Park, CA", checkin: "16:00", booking: "16K3CM" },
+  { name: "San Francisco – Argonaut Hotel", state: "Kalifornien", lat: 37.8080, lng: -122.4177, day: "11-12", color: "#E9C46A", dates: "27.-29. Juli", address: "Argonaut Hotel, 495 Jefferson St, San Francisco, CA 94109", booking: "5018972355" },
+  { name: "Benbow KOA", state: "Kalifornien", lat: 40.0688, lng: -123.7893, day: "13-17", color: "#2A9D8F", dates: "29. Jul-3. Aug", accom: "Benbow KOA Holiday (Wohnmobil)", address: "7000 Benbow Drive, Garberville, CA 95542", booking: "21208357" },
+  { name: "Quileute – La Push", state: "Washington", lat: 47.9076, lng: -124.6353, day: "19", color: "#264653", dates: "4.-5. Aug", accom: "Quileute Oceanside Resort", address: "330 Ocean Front Drive, La Push, WA 98350", booking: "2026018118" },
+  { name: "Port Angeles – Crescent Beach", state: "Washington", lat: 48.1614, lng: -123.7211, day: "20-21", color: "#2A9D8F", dates: "5.-7. Aug", accom: "Crescent Beach & RV Park", address: "2860 Crescent Beach Road, Port Angeles, WA 98363", phone: "360-928-3344", checkin: "15:00", booking: "269599" },
+  { name: "Seattle – Sound Hotel", state: "Washington", lat: 47.6133, lng: -122.3467, day: "22", color: "#E76F51", dates: "7.-8. Aug", accom: "The Sound Hotel Belltown", address: "2120 4th Avenue, Seattle, WA 98121", phone: "+1 206-441-7456", checkin: "16:00", booking: "6917243789" },
+  { name: "Seattle – Hotel 1000", state: "Washington", lat: 47.6050, lng: -122.3380, day: "25", color: "#E76F51", dates: "10.-11. Aug", accom: "Hotel 1000, Hyatt Unbound", address: "1000 1st Avenue, Seattle, WA 98104", phone: "+1 206-957-1000", checkin: "16:00", booking: "6369914287" },
 ];
 
 const optionalStops = [
-  { name: "Mt. St. Helens", state: "Washington", lat: 46.1914, lng: -122.1956, day: "22", color: "#F4A261", optional: true, dates: "7. Aug" },
-  { name: "Leavenworth", state: "Washington", lat: 47.5962, lng: -120.6615, day: "22-23", color: "#F4A261", optional: true, dates: "7.-8. Aug" },
-  { name: "Yellowstone NP", state: "Wyoming", lat: 44.428, lng: -110.5885, day: "+4-5", color: "#E76F51", optional: true, extension: true, dates: "Optional" },
-  { name: "Bar J Chuckwagon", state: "Wyoming", lat: 43.4799, lng: -110.8752, day: "Abend", color: "#F4A261", optional: true, dates: "Bei Yellowstone" },
+  { name: "Leavenworth – Berg Haus", state: "Washington", lat: 47.5962, lng: -120.6615, day: "23-24", color: "#F4A261", optional: true, dates: "8.-9. Aug", address: "18800 Beaver Valley Rd, Leavenworth, WA 98826", phone: "509-763-0180" },
 ];
 
 // Create a numbered circle marker icon
@@ -301,37 +297,61 @@ const RoutePage = () => {
 
           <div className="space-y-1.5">
             {routeStops.map((stop, idx) => (
-              <motion.button
+              <motion.div
                 key={stop.name}
-                className={`w-full flex items-center gap-3 p-3 rounded-xl border text-left transition-colors ${
+                className={`w-full flex items-center gap-3 p-3 rounded-xl border transition-colors ${
                   selectedStop?.name === stop.name
                     ? "bg-[#264653]/5 border-[#264653]/30"
                     : "bg-white border-[#E0E0D0] hover:bg-[#F0EFEB]"
                 }`}
-                onClick={() => scrollToStop(stop)}
                 initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: idx * 0.04 }}
                 data-testid={`route-stop-${idx}`}
               >
-                <div
+                <button
                   className="w-7 h-7 rounded-full flex items-center justify-center text-white font-bold text-xs flex-shrink-0"
                   style={{ backgroundColor: stop.color }}
+                  onClick={() => scrollToStop(stop)}
                 >
                   {idx + 1}
-                </div>
-                <div className="flex-1 min-w-0">
+                </button>
+                <button className="flex-1 min-w-0 text-left" onClick={() => scrollToStop(stop)}>
                   <h3 className="font-nunito font-semibold text-sm text-[#264653]">{stop.name}</h3>
                   <p className="text-[11px] text-[#8D99AE]">{stop.state}</p>
                   {stop.accom && (
                     <p className="text-[10px] text-[#2A9D8F] mt-0.5">{stop.accom}</p>
                   )}
-                </div>
-                <div className="text-right flex-shrink-0">
+                  {stop.phone && (
+                    <p className="text-[10px] text-[#8D99AE] mt-0.5">Check-in: {stop.checkin} Uhr</p>
+                  )}
+                </button>
+                <div className="text-right flex-shrink-0 flex flex-col items-end gap-1.5">
                   <span className="font-nunito text-xs font-medium text-[#264653]">{stop.dates}</span>
                   <div className="text-[10px] text-[#8D99AE]">Tag {stop.day}</div>
+                  <div className="flex gap-1.5">
+                    {stop.phone && (
+                      <a
+                        href={`tel:${stop.phone}`}
+                        className="flex items-center gap-1 px-2 py-1 bg-[#264653]/10 hover:bg-[#264653]/20 rounded-full text-[10px] font-semibold text-[#264653] transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <span>Anrufen</span>
+                      </a>
+                    )}
+                    <a
+                      href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(stop.address)}&travelmode=driving`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 px-2 py-1 bg-[#2A9D8F] hover:bg-[#238577] rounded-full text-[10px] font-semibold text-white transition-colors"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <Navigation className="w-3 h-3" />
+                      <span>Navi</span>
+                    </a>
+                  </div>
                 </div>
-              </motion.button>
+              </motion.div>
             ))}
 
             {/* Optional Section */}
