@@ -371,9 +371,11 @@ const PackingPage = () => {
                       value={newItemText}
                       onChange={(e) => setNewItemText(e.target.value)}
                       placeholder="Neuen Artikel hinzufügen..."
-                      className="form-input flex-1"
+                      className="form-input flex-1 !h-12 !text-base !px-4"
+                      style={{ fontSize: "16px" }}
                       onKeyPress={(e) => e.key === "Enter" && addItem()}
                       data-testid="add-item-input"
+                      autoComplete="off"
                     />
                     <Select value={newItemCategory} onValueChange={setNewItemCategory}>
                       <SelectTrigger className="w-full sm:w-[180px] form-input" data-testid="item-category-select">
