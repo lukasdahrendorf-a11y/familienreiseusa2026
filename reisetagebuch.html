@@ -84,10 +84,6 @@ body { font-family: 'Nunito', sans-serif; color: #264653; background: white; }
 .joke-box .joke-text { font-size: 11pt; margin-top: 2mm; }
 .joke-box .joke-answer { font-size: 9pt; color: #8D99AE; margin-top: 2mm; }
 
-.puzzle-box { background: #2A9D8F10; border-radius: 10px; padding: 4mm 5mm; margin-top: 5mm; }
-.puzzle-box .puzzle-title { font-weight: 800; font-size: 10pt; color: #2A9D8F; text-transform: uppercase; }
-.puzzle-box .puzzle-text { font-size: 11pt; margin-top: 2mm; }
-
 /* Right page - photo + diary */
 .photo-box { width: 100%; height: 90mm; border: 2px dashed #c0c0c0; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #8D99AE; font-size: 13pt; margin-bottom: 5mm; background: #fafafa; }
 
@@ -280,10 +276,6 @@ function generateBook() {
           <div class="joke-answer">Antwort: <span style="color:transparent;background:#f0f0f0;border-radius:4px;padding:0 3mm;cursor:pointer" onclick="this.style.color='#264653'">${d.joke.a}</span></div>
         </div>
 
-        <div class="puzzle-box">
-          <div class="puzzle-title">🧩 Aufgabe des Tages</div>
-          <div class="puzzle-text">${d.puzzle}</div>
-        </div>
       </div>
     `;
 
@@ -295,7 +287,7 @@ function generateBook() {
           <div class="day-date">${d.date} 2026</div>
         </div>
 
-        <div class="section-title">📸 Mein Foto des Tages</div>
+        <div class="section-title">🎨 Mein Bild des Tages</div>
         <div class="photo-box"></div>
 
         <div class="section-title">📝 Was hab ich heute erlebt?</div>
