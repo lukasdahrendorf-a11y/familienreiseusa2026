@@ -14,7 +14,7 @@ body { font-family: 'Nunito', sans-serif; color: #264653; background: white; }
 
 .page {
   width: 297mm; height: 210mm;
-  padding: 12mm;
+  padding: 10mm 12mm;
   page-break-after: always;
   position: relative;
   overflow: hidden;
@@ -22,95 +22,98 @@ body { font-family: 'Nunito', sans-serif; color: #264653; background: white; }
 
 /* === COVER === */
 .cover {
-  background: linear-gradient(135deg, #264653 0%, #2A9D8F 100%);
+  background: linear-gradient(135deg, #264653 0%, #2A9D8F 50%, #264653 100%);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; color: white;
+  text-align: center; color: white; position: relative;
 }
-.cover h1 { font-family: 'Fraunces', serif; font-size: 42pt; margin-bottom: 8mm; }
-.cover h2 { font-family: 'Fraunces', serif; font-size: 24pt; font-weight: 400; color: #E9C46A; margin-bottom: 15mm; }
-.cover .child-name { font-family: 'Fraunces', serif; font-size: 56pt; font-weight: 900; color: #E9C46A; margin: 10mm 0; }
-.cover .subtitle { font-size: 14pt; color: rgba(255,255,255,0.8); margin-bottom: 5mm; }
+.cover h1 { font-family: 'Fraunces', serif; font-size: 42pt; margin-bottom: 6mm; }
+.cover h2 { font-family: 'Fraunces', serif; font-size: 24pt; font-weight: 400; color: #E9C46A; margin-bottom: 12mm; }
+.cover .child-name { font-family: 'Fraunces', serif; font-size: 56pt; font-weight: 900; color: #E9C46A; margin: 8mm 0; }
+.cover .subtitle { font-size: 14pt; color: rgba(255,255,255,0.8); margin-bottom: 4mm; }
 .cover .dates { font-size: 16pt; font-weight: 700; color: white; background: rgba(255,255,255,0.15); padding: 4mm 8mm; border-radius: 20px; display: inline-block; }
-.cover .plane { font-size: 60pt; margin-bottom: 10mm; }
+.cover .plane { font-size: 60pt; margin-bottom: 8mm; }
 .cover .deco { position: absolute; font-size: 80pt; opacity: 0.1; }
 .cover .deco-tl { top: 10mm; left: 15mm; }
 .cover .deco-br { bottom: 10mm; right: 15mm; }
 
 /* === ROUTE PAGE === */
 .route-page { padding: 10mm; }
-.route-page h2 { font-family: 'Fraunces', serif; font-size: 22pt; text-align: center; margin-bottom: 6mm; color: #264653; }
-.route-page .route-subtitle { text-align: center; font-size: 11pt; color: #8D99AE; margin-bottom: 8mm; }
-.route-list { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 8mm; }
-.route-item { display: flex; align-items: center; gap: 3mm; padding: 2.5mm 4mm; border-radius: 8px; background: #f5f5f2; }
+.route-page h2 { font-family: 'Fraunces', serif; font-size: 22pt; text-align: center; margin-bottom: 5mm; color: #264653; }
+.route-page .route-subtitle { text-align: center; font-size: 11pt; color: #8D99AE; margin-bottom: 6mm; }
+.route-list { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm 8mm; }
+.route-item { display: flex; align-items: center; gap: 3mm; padding: 2mm 4mm; border-radius: 8px; background: #f5f5f2; }
 .route-dot { width: 8mm; height: 8mm; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 7pt; font-weight: 800; flex-shrink: 0; }
 .route-item .info { flex: 1; }
 .route-item .place { font-weight: 700; font-size: 10pt; }
 .route-item .dates { font-size: 8pt; color: #8D99AE; }
 .route-item .checkbox { width: 6mm; height: 6mm; border: 2px solid #2A9D8F; border-radius: 3px; flex-shrink: 0; }
-.route-legend { text-align: center; margin-top: 6mm; font-size: 9pt; color: #8D99AE; }
+.route-legend { text-align: center; margin-top: 4mm; font-size: 9pt; color: #8D99AE; }
 
-/* === DAY PAGES (separate left + right pages) === */
-.day-left-page, .day-right-page { padding: 12mm; }
+/* === DAY PAGES === */
+.day-left-page, .day-right-page { padding: 10mm 12mm; }
 
-/* Left page */
-.day-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6mm; }
-.day-number { font-family: 'Fraunces', serif; font-size: 48pt; font-weight: 900; line-height: 1; }
+.day-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4mm; }
+.day-number { font-family: 'Fraunces', serif; font-size: 42pt; font-weight: 900; line-height: 1; }
 .day-meta { text-align: right; }
-.day-date { font-weight: 700; font-size: 14pt; }
-.day-location { font-family: 'Fraunces', serif; font-size: 20pt; font-weight: 700; color: #2A9D8F; }
+.day-date { font-weight: 700; font-size: 13pt; }
+.day-location { font-family: 'Fraunces', serif; font-size: 17pt; font-weight: 700; color: #2A9D8F; }
 
-.fun-fact { background: #E9C46A20; border-left: 4px solid #E9C46A; padding: 4mm 5mm; border-radius: 0 8px 8px 0; margin: 5mm 0; font-size: 11pt; }
+.program-box { background: linear-gradient(135deg, #264653 0%, #2A9D8F 100%); border-radius: 10px; padding: 4mm 5mm; margin-bottom: 4mm; color: white; }
+.program-title { font-weight: 800; font-size: 10pt; text-transform: uppercase; letter-spacing: 0.5px; color: #E9C46A; margin-bottom: 2mm; }
+.program-text { font-size: 9.5pt; line-height: 1.45; }
+.program-drive { display: inline-block; background: rgba(255,255,255,0.15); border-radius: 6px; padding: 1mm 3mm; margin-top: 2mm; font-size: 9pt; font-weight: 700; }
+
+.fun-fact { background: #E9C46A20; border-left: 4px solid #E9C46A; padding: 3mm 4mm; border-radius: 0 8px 8px 0; margin-bottom: 4mm; font-size: 10pt; }
 .fun-fact strong { color: #E9C46A; }
 
-.section-title { font-weight: 800; font-size: 10pt; text-transform: uppercase; letter-spacing: 0.5px; margin: 5mm 0 3mm 0; }
+.section-title { font-weight: 800; font-size: 9pt; text-transform: uppercase; letter-spacing: 0.5px; margin: 3mm 0 2mm 0; }
 
-.weather-row { display: flex; gap: 5mm; flex-wrap: wrap; margin-bottom: 4mm; }
-.weather-option { display: flex; align-items: center; gap: 2mm; font-size: 11pt; }
-.weather-circle { width: 6mm; height: 6mm; border: 2px solid #8D99AE; border-radius: 50%; }
+.weather-row { display: flex; gap: 4mm; flex-wrap: wrap; margin-bottom: 3mm; }
+.weather-option { display: flex; align-items: center; gap: 1.5mm; font-size: 10pt; }
+.weather-circle { width: 5mm; height: 5mm; border: 2px solid #8D99AE; border-radius: 50%; }
 
-.smiley-row { display: flex; gap: 8mm; margin: 4mm 0; }
-.smiley-item { text-align: center; font-size: 10pt; }
-.smiley-item .emoji { font-size: 24pt; display: block; margin-bottom: 2mm; }
-.smiley-circle { width: 7mm; height: 7mm; border: 2px solid #8D99AE; border-radius: 50%; margin: 0 auto; }
+.smiley-row { display: flex; gap: 6mm; margin: 3mm 0; }
+.smiley-item { text-align: center; font-size: 9pt; }
+.smiley-item .emoji { font-size: 20pt; display: block; margin-bottom: 1mm; }
+.smiley-circle { width: 6mm; height: 6mm; border: 2px solid #8D99AE; border-radius: 50%; margin: 0 auto; }
 
-.food-section { margin: 4mm 0; }
-.food-line { border-bottom: 1px dashed #c0c0c0; height: 9mm; font-size: 11pt; color: #8D99AE; padding-top: 2mm; }
+.coolest-section { margin: 2mm 0; }
+.coolest-line { border-bottom: 1px dashed #c0c0c0; height: 8mm; }
 
-.coolest-section { margin: 4mm 0; }
-.coolest-line { border-bottom: 1px dashed #c0c0c0; height: 9mm; }
+.joke-box { background: #E76F5115; border-radius: 10px; padding: 3mm 4mm; margin-top: 3mm; }
+.joke-box .joke-title { font-weight: 800; font-size: 9pt; color: #E76F51; text-transform: uppercase; }
+.joke-box .joke-text { font-size: 10pt; margin-top: 1mm; }
+.joke-box .joke-answer { font-size: 8pt; color: #8D99AE; margin-top: 1mm; }
 
-.joke-box { background: #E76F5115; border-radius: 10px; padding: 4mm 5mm; margin-top: 5mm; }
-.joke-box .joke-title { font-weight: 800; font-size: 10pt; color: #E76F51; text-transform: uppercase; }
-.joke-box .joke-text { font-size: 11pt; margin-top: 2mm; }
-.joke-box .joke-answer { font-size: 9pt; color: #8D99AE; margin-top: 2mm; }
+/* Right page */
+.photo-box { width: 150mm; height: 100mm; border: 2px dashed #c0c0c0; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #c0c0c0; font-size: 10pt; margin: 0 auto 4mm auto; background: #fafafa; position: relative; }
+.photo-box .photo-hint { text-align: center; line-height: 1.5; }
+.photo-box .photo-size { font-size: 8pt; color: #d0d0d0; position: absolute; bottom: 2mm; right: 3mm; }
 
-/* Right page - photo + diary */
-.photo-box { width: 100%; height: 90mm; border: 2px dashed #c0c0c0; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #8D99AE; font-size: 13pt; margin-bottom: 5mm; background: #fafafa; }
+.diary-lines { margin-top: 2mm; }
+.diary-line { border-bottom: 1px solid #e0e0e0; height: 9mm; }
+.diary-prompt { font-size: 10pt; color: #8D99AE; font-style: italic; padding-top: 2mm; }
 
-.diary-lines { margin-top: 3mm; }
-.diary-line { border-bottom: 1px solid #e0e0e0; height: 10mm; }
-.diary-prompt { font-size: 11pt; color: #8D99AE; font-style: italic; padding-top: 2mm; }
-
-.right-page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5mm; padding-bottom: 3mm; border-bottom: 2px solid #e0e0e0; }
-.right-page-tag { font-family: 'Fraunces', serif; font-size: 14pt; font-weight: 700; color: #8D99AE; }
+.right-page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4mm; padding-bottom: 2mm; border-bottom: 2px solid #e0e0e0; }
+.right-page-tag { font-family: 'Fraunces', serif; font-size: 13pt; font-weight: 700; color: #8D99AE; }
 
 /* === LAST PAGE === */
 .last-page { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-.last-page h2 { font-family: 'Fraunces', serif; font-size: 28pt; color: #264653; margin-bottom: 8mm; }
+.last-page h2 { font-family: 'Fraunces', serif; font-size: 28pt; color: #264653; margin-bottom: 6mm; }
 .last-page .fav-section { width: 80%; margin: 3mm 0; }
 .last-page .fav-line { border-bottom: 1px dashed #c0c0c0; height: 9mm; text-align: left; }
 .last-page .fav-label { font-size: 10pt; color: #8D99AE; padding-top: 2mm; }
-.last-page .big-draw { width: 80%; height: 70mm; border: 2px dashed #c0c0c0; border-radius: 12px; margin-top: 5mm; display: flex; align-items: center; justify-content: center; color: #8D99AE; font-size: 11pt; }
+.last-page .big-draw { width: 80%; height: 65mm; border: 2px dashed #c0c0c0; border-radius: 12px; margin-top: 4mm; display: flex; align-items: center; justify-content: center; color: #8D99AE; font-size: 11pt; }
 
 /* === JOKE SOLUTIONS PAGE === */
-.solutions-page { padding: 12mm; }
-.solutions-page h2 { font-family: 'Fraunces', serif; font-size: 22pt; text-align: center; color: #264653; margin-bottom: 6mm; }
-.solutions-page .solutions-subtitle { text-align: center; font-size: 11pt; color: #8D99AE; margin-bottom: 6mm; }
-.solutions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 6mm; }
-.solution-item { padding: 2.5mm 4mm; border-radius: 8px; background: #E76F5108; border-left: 3px solid #E76F51; }
+.solutions-page { padding: 10mm; }
+.solutions-page h2 { font-family: 'Fraunces', serif; font-size: 22pt; text-align: center; color: #264653; margin-bottom: 5mm; }
+.solutions-page .solutions-subtitle { text-align: center; font-size: 11pt; color: #8D99AE; margin-bottom: 5mm; }
+.solutions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm 6mm; }
+.solution-item { padding: 2mm 4mm; border-radius: 8px; background: #E76F5108; border-left: 3px solid #E76F51; }
 .solution-item .sol-day { font-weight: 800; font-size: 8pt; color: #E76F51; text-transform: uppercase; }
-.solution-item .sol-q { font-size: 8.5pt; font-weight: 700; margin-top: 1mm; }
-.solution-item .sol-a { font-size: 8.5pt; color: #2A9D8F; font-style: italic; margin-top: 0.5mm; }
+.solution-item .sol-q { font-size: 8pt; font-weight: 700; margin-top: 0.5mm; }
+.solution-item .sol-a { font-size: 8pt; color: #2A9D8F; font-style: italic; margin-top: 0.5mm; }
 
 @media print {
   .page { page-break-after: always; }
@@ -127,38 +130,156 @@ body { font-family: 'Nunito', sans-serif; color: #264653; background: white; }
   <p style="margin-top:10px;">
     <button onclick="window.print()" style="background:#2A9D8F;color:white;border:none;padding:12px 30px;border-radius:25px;font-size:16px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;">Als PDF drucken</button>
   </p>
+  <p style="margin-top:8px;font-size:12px;color:rgba(255,255,255,0.5);">Name anpassen: ?name=Levi oder ?name=Noah</p>
 </div>
 
 <script>
 const CHILD_NAME = new URLSearchParams(window.location.search).get('name') || 'Louie';
 
 const days = [
-  { day: 1, date: "17. Juli", place: "Las Vegas (Bellagio)", color: "#E76F51", info: "Las Vegas liegt mitten in der Wüste Mojave! Hier regnet es fast nie und es kann über 40°C heiß werden. Euer Hotel Bellagio hat die berühmten Wasserfontänen!", weather: "sonnig, sehr heiß", joke: { q: "Was macht ein Kaktus in Las Vegas?", a: "Er spielt Stachel-Poker!" }, puzzle: "Wie viele Lichter kannst du am Strip zählen? Schätze mal!" },
-  { day: 2, date: "18. Juli", place: "Las Vegas – The Sphere!", color: "#E76F51", info: "Heute geht's in die Sphere! Der Wizard of Oz um 11 Uhr - Türen öffnen um 10:15. Die Sphere ist die größte Kugel der Welt mit 160m Durchmesser und hat den größten LED-Bildschirm der Welt!", weather: "sonnig, sehr heiß", joke: { q: "Warum tragen Kamele keine Sonnenbrillen?", a: "Weil sie schon Wüsten-Augen haben!" }, puzzle: "Die Sphere hat innen 16K-Auflösung! Wie viele Pixel schätzt du auf dem Riesenbildschirm?" },
-  { day: 3, date: "19. Juli", place: "Las Vegas / Grand Canyon Helikopter!", color: "#E76F51", info: "Heute fliegt ihr mit dem Helikopter über den Grand Canyon! Der Canyon ist 1.800 Meter tief und 450 km lang. Abflug: 7 Uhr morgens!", weather: "sonnig, sehr heiß", joke: { q: "Was sagt der Helikopter zum Grand Canyon?", a: "Du bist echt tiefgründig!" }, puzzle: "Wie tief schätzt du den Grand Canyon von oben? Male, was du aus dem Helikopter siehst!" },
-  { day: 4, date: "20. Juli", place: "Las Vegas → Los Angeles", color: "#E9C46A", info: "Die Fahrt nach LA dauert ca. 4 Stunden. Los Angeles heißt 'Die Stadt der Engel' auf Spanisch. Ihr wohnt in Marina del Rey am Meer!", weather: "sonnig, warm", joke: { q: "Was sagt ein Auto in der Wüste?", a: "Ich hab so einen trockenen Humor!" }, puzzle: "Zähle die verschiedenen Autokennzeichen auf der Fahrt! Wie viele Bundesstaaten findest du?" },
-  { day: 5, date: "21. Juli", place: "Los Angeles – Universal Studios VIP!", color: "#E9C46A", info: "Bei der VIP Tour seht ihr echte Film-Sets! Hier wurden Filme wie Jurassic Park und Harry Potter gedreht.", weather: "sonnig, warm", joke: { q: "Was macht ein Dino im Filmstudio?", a: "Er dreht einen Brüller!" }, puzzle: "Welcher Film-Ride war am coolsten? Bewerte von 1-10!" },
-  { day: 6, date: "22. Juli", place: "Los Angeles – Hollywood & Santa Monica", color: "#E9C46A", info: "Der Hollywood-Schriftzug ist 137 Meter lang! Jeder Buchstabe ist 14 Meter hoch.", weather: "sonnig, warm", joke: { q: "Warum wurde der Strand verhaftet?", a: "Weil er so viele Wellen geschlagen hat!" }, puzzle: "Findest du einen Star auf dem Walk of Fame, den du kennst? Welcher?" },
-  { day: 7, date: "23. Juli", place: "LA → Sequoia NP (Wuksachi Lodge)", color: "#2A9D8F", info: "Der General Sherman Tree ist der größte Baum der Welt! Er ist 84 Meter hoch und über 2.000 Jahre alt.", weather: "warm tagsüber, kühl abends", joke: { q: "Warum können Bäume nicht ins Internet?", a: "Weil sie ständig in ihren Ringen hängen!" }, puzzle: "Wie viele Kinder müssten sich an den Händen fassen, um den General Sherman Tree zu umfassen? (Tipp: der Umfang ist 31 Meter!)" },
-  { day: 8, date: "24. Juli", place: "Sequoia NP", color: "#2A9D8F", info: "Mammutbäume haben eine feuerfeste Rinde! Sie kann bis zu 60 cm dick sein.", weather: "sonnig, angenehm", joke: { q: "Was sagt ein Mammutbaum zum anderen?", a: "Hey, du bist ja riesig! - Du aber auch!" }, puzzle: "Sammle 3 verschiedene Blätter oder Zapfen und klebe sie ein!" },
-  { day: 9, date: "25. Juli", place: "Sequoia → Yosemite (The Ahwahnee)", color: "#2A9D8F", info: "El Capitan in Yosemite ist die größte freistehende Granitwand der Welt - 900 Meter hoch! Ihr schlaft im legendären Ahwahnee Hotel!", weather: "sonnig", joke: { q: "Warum klettern Bergsteiger auf Berge?", a: "Weil sie nicht durch sie durchgehen können!" }, puzzle: "Schau dir El Capitan an - siehst du Kletterer? Wie klein sehen sie aus?" },
-  { day: 10, date: "26. Juli", place: "Yosemite NP", color: "#2A9D8F", info: "Die Yosemite Falls sind 739 Meter hoch - der höchste Wasserfall in Nordamerika!", weather: "sonnig, warm", joke: { q: "Was sagt der Wasserfall zum Fluss?", a: "Lass dich fallen, das macht Spaß!" }, puzzle: "Male den Yosemite Wasserfall! Wie hoch schätzt du ihn?" },
-  { day: 11, date: "27. Juli", place: "Yosemite → San Francisco (Argonaut Hotel)", color: "#E9C46A", info: "Die Golden Gate Bridge ist 2.737 Meter lang und in einem speziellen Orangerot gestrichen! Euer Hotel liegt direkt am Fisherman's Wharf!", weather: "kühl, oft neblig", joke: { q: "Warum ist die Golden Gate Bridge nie einsam?", a: "Weil immer so viele Autos über sie fahren!" }, puzzle: "Zähle, wie viele Kabel du an der Golden Gate Bridge sehen kannst!" },
-  { day: 12, date: "28. Juli", place: "San Francisco – Alcatraz!", color: "#E9C46A", info: "Heute geht's nach Alcatraz! Abfahrt 10:35 Uhr von Pier 33. Seid um 10:05 Uhr da! Niemand ist je erfolgreich von dort geflohen - oder doch?", weather: "kühl, neblig", joke: { q: "Warum fährt man gern Cable Car?", a: "Weil man sich an den Seilen nicht festfahren kann!" }, puzzle: "Alcatraz: Wie dick sind die Gitterstäbe? Schätze und miss mit deinem Finger!" },
-  { day: 13, date: "29. Juli", place: "SF → Benbow KOA Holiday", color: "#2A9D8F", info: "Heute übernehmt ihr das Wohnmobil! Ab jetzt seid ihr auf Roadtrip. Benbow liegt in den Redwoods - die höchsten Bäume der Welt, bis 116 Meter!", weather: "angenehm, warm", joke: { q: "Was sagt das Wohnmobil zum Zelt?", a: "Ich hab vier Räder und du nur Heringe!" }, puzzle: "Wie fühlt sich der erste Abend im Wohnmobil an? Bewerte: ⭐⭐⭐⭐⭐" },
-  { day: 14, date: "30. Juli", place: "Benbow → Crescent City KOA", color: "#2A9D8F", info: "Die Avenue of the Giants ist eine 50 km lange Straße durch uralte Mammutbäume. Manche sind 1.500 Jahre alt! Crescent City liegt direkt am Redwood National Park.", weather: "angenehm", joke: { q: "Welcher Baum kann am besten schwimmen?", a: "Die Strand-Kiefer!" }, puzzle: "Gibt es einen Baum, durch den man mit dem Auto durchfahren kann? Finde ihn!" },
-  { day: 15, date: "31. Juli", place: "Crescent City / Redwoods", color: "#2A9D8F", info: "In den Redwoods leben Bananenschnecken - die sind knallgelb und können 25 cm lang werden! Am Battery Point Lighthouse könnt ihr bei Ebbe hinlaufen.", weather: "kühl, neblig", joke: { q: "Warum haben Schnecken keine Angst im Wald?", a: "Sie tragen ihr Haus immer dabei!" }, puzzle: "Finde eine Bananenschnecke! Wie lang ist sie? Miss mit deinem Finger!" },
-  { day: 16, date: "1. August", place: "Crescent City → Bullards Beach SP", color: "#2A9D8F", info: "Fahrt die Oregon-Küste hoch! Bullards Beach State Park liegt bei Bandon an der wilden Pazifikküste. Der Leuchtturm Coquille River ist ein tolles Fotomotiv!", weather: "kühl, windig", joke: { q: "Was macht eine Krabbe am Strand?", a: "Sie geht seitwärts shoppen!" }, puzzle: "Wie viele verschiedene Tiere kannst du heute am Strand entdecken?" },
-  { day: 17, date: "2. August", place: "Bullards Beach → Waldport KOA", color: "#2A9D8F", info: "Die Oregon-Küste ist berühmt für ihre Felsformationen und Gezeitenpools! In Waldport bei Newport gibt es das Oregon Coast Aquarium.", weather: "kühl, bewölkt", joke: { q: "Was singt der Wal unter der Dusche?", a: "Waaal-zer von Strauss!" }, puzzle: "Wie viele Seesterne findest du in einem Gezeitenpool?" },
-  { day: 18, date: "3. August", place: "Waldport → Astoria KOA Resort", color: "#2A9D8F", info: "Astoria ist die älteste Stadt westlich der Rocky Mountains! Hier wurde der Film 'Die Goonies' gedreht. Die Astoria Column hat 164 Stufen - traut ihr euch?", weather: "kühl, bewölkt", joke: { q: "Warum können Fische nicht Klavier spielen?", a: "Weil sie Angst vor den Schuppen haben!" }, puzzle: "Zähle, wie viele Brücken ihr heute überquert!" },
-  { day: 19, date: "4. August", place: "La Push – Quileute Resort", color: "#264653", info: "La Push liegt im Quileute-Reservat an der Küste des Olympic NP. Hier wurden Teile von Twilight gedreht! Der Strand hat riesige Felsen im Meer.", weather: "kühl, neblig", joke: { q: "Was sagt der Regen zum Wald?", a: "Kopf hoch, ich mach dich grün!" }, puzzle: "Der Strand von La Push sieht aus wie in einem Film. Welcher Film fällt dir ein?" },
-  { day: 20, date: "5. August", place: "La Push → Port Angeles", color: "#2A9D8F", info: "Im Hoh Rainforest regnet es bis zu 4 Meter pro Jahr! Die Bäume sind mit Moos bedeckt wie in einem Märchenwald.", weather: "feucht, kühl", joke: { q: "Warum tragen Elche kein GPS?", a: "Sie finden den Wald auch so!" }, puzzle: "Hast du einen Elch oder ein Reh gesehen? Male das coolste Tier des Tages!" },
-  { day: 21, date: "6. August", place: "Olympic NP / Port Angeles", color: "#2A9D8F", info: "Olympic NP hat Regenwald, Berge UND Strände - alles in einem Park! Am Ruby Beach gibt es Treibholz-Skulpturen.", weather: "kühl, windig", joke: { q: "Warum schwimmen Fische im Meer?", a: "Weil sie nicht fliegen können - naja, Fliegende Fische schon!" }, puzzle: "Baue eine Skulptur aus Treibholz am Strand! Wofür hält sie jemand anderes?" },
-  { day: 22, date: "7. August", place: "Port Angeles → Seattle (Sound Hotel)", color: "#E76F51", info: "Seattle hat den Spitznamen 'Emerald City' wegen der vielen grünen Bäume! Heute gebt ihr das Wohnmobil ab (El Monte RV, 1541 S 96th St, Seattle).", weather: "mild, bewölkt", joke: { q: "Was sagt der Vulkan wenn er wütend ist?", a: "Ich könnte EXPLODIEREN!" }, puzzle: "Findest du den allerersten Starbucks in Seattle? Wo ist er?" },
-  { day: 23, date: "8. August", place: "Seattle → Leavenworth (Berg Haus)", color: "#F4A261", info: "Leavenworth sieht aus wie ein bayerisches Dorf - mitten in Amerika! Mit Fachwerkhäusern und Brezeln.", weather: "warm, sonnig", joke: { q: "Was sagt die Brezel zum Weißwurst?", a: "Ohne mich bist du nackig!" }, puzzle: "Wenn ihr in Leavenworth seid: Findest du 5 Unterschiede zu einem echten deutschen Dorf?" },
-  { day: 24, date: "9. August", place: "Leavenworth (Berg Haus)", color: "#F4A261", info: "Das Berg Haus in Leavenworth hat eine Feuerstelle und einen Grill! Die Cascade Mountains sind hier ganz nah.", weather: "warm, sonnig", joke: { q: "Warum regnet es so oft in Seattle?", a: "Damit die Kaffeebohnen besser wachsen!" }, puzzle: "Wie viele Berggipfel kannst du von Leavenworth aus zählen?" },
-  { day: 25, date: "10. August", place: "Seattle – Space Needle (Hotel 1000)", color: "#E76F51", info: "Die Space Needle ist 184 Meter hoch und wurde für die Weltausstellung 1962 gebaut!", weather: "mild", joke: { q: "Was sieht man von der Space Needle?", a: "Alles - außer die Space Needle!" }, puzzle: "Von der Space Needle: Zähle, wie viele Seen und Berge du sehen kannst!" },
-  { day: 26, date: "11. August", place: "Seattle → Heimreise", color: "#E76F51", info: "Ihr fliegt ca. 9.500 km zurück nach Deutschland! Der Flug dauert etwa 10 Stunden.", weather: "???", joke: { q: "Was sagt das Flugzeug beim Abschied?", a: "Ich heb dann mal ab!" }, puzzle: "Was war dein absolutes Highlight der ganzen Reise? Male oder schreibe es auf!" },
+  { day: 1, date: "17. Juli", place: "Las Vegas (Bellagio)", color: "#E76F51",
+    program: "Ankunft in Las Vegas! Euer Flieger landet um 18:35 Uhr. Mietwagen abholen (GMC Yukon!) und ab ins Bellagio Hotel. Abends den Las Vegas Strip erkunden — die Bellagio-Fontänen starten alle 15 Minuten!",
+    info: "Las Vegas liegt mitten in der Wüste Mojave! Hier regnet es fast nie und es kann über 40°C heiß werden. Das Bellagio hat 3.950 Zimmer und die Fontänen schießen bis zu 140 Meter hoch!", weather: "sonnig, sehr heiß",
+    joke: { q: "Was macht ein Kaktus in Las Vegas?", a: "Er spielt Stachel-Poker!" } },
+
+  { day: 2, date: "18. Juli", place: "Las Vegas – The Sphere!", color: "#E76F51",
+    program: "Heute geht's in die SPHERE! 🎬 Wizard of Oz um 11:00 Uhr (Türen 10:15). Nachmittags: Fremont Street Experience mit der Zipline über den Köpfen, oder den High Roller — das höchste Riesenrad der Welt (167m)!",
+    info: "Die Sphere ist die größte Kugel der Welt: 160m Durchmesser, 580.000 LED-Panels außen und der größte LED-Bildschirm der Welt innen mit 16K-Auflösung!", weather: "sonnig, sehr heiß",
+    joke: { q: "Warum tragen Kamele keine Sonnenbrillen?", a: "Weil sie schon Wüsten-Augen haben!" } },
+
+  { day: 3, date: "19. Juli", place: "Grand Canyon Helikopter!", color: "#E76F51",
+    program: "HELIKOPTER über den Grand Canyon! 🚁 Abflug 07:00 Uhr morgens. Ihr fliegt über die Wüste und dann über den riesigen Canyon — 1.800m tief! Nachmittags Pool im Bellagio oder nochmal den Strip erkunden.",
+    info: "Der Grand Canyon ist 450 km lang, bis zu 29 km breit und 1.800 Meter tief. Der Colorado River hat über 5 Millionen Jahre gebraucht, um ihn auszuwaschen!", weather: "sonnig, sehr heiß",
+    joke: { q: "Was sagt der Helikopter zum Grand Canyon?", a: "Du bist echt tiefgründig!" } },
+
+  { day: 4, date: "20. Juli", place: "Las Vegas → Los Angeles", color: "#E9C46A",
+    program: "Roadtrip nach LA! 🚗 Ca. 4,5 Stunden Fahrt durch die Mojave-Wüste. Unterwegs: Ausguck nach Joshua Trees (die sehen aus wie Alien-Bäume!). Ankunft in Marina del Rey am Meer — euer Townhouse hat 2 Schlafzimmer!",
+    drive: "🚗 ~430 km, ca. 4,5 Std. über die I-15 durch die Mojave-Wüste",
+    info: "Los Angeles heißt 'Die Stadt der Engel'. Die Stadt hat über 300 Sonnentage im Jahr! Marina del Rey ist der größte von Menschenhand geschaffene Yachthafen der Welt.", weather: "sonnig, warm",
+    joke: { q: "Was sagt ein Auto in der Wüste?", a: "Ich hab so einen trockenen Humor!" } },
+
+  { day: 5, date: "21. Juli", place: "Universal Studios VIP Tour!", color: "#E9C46A",
+    program: "UNIVERSAL STUDIOS VIP TOUR! 🎬 Ab 09:30 Uhr den ganzen Tag exklusiv hinter die Kulissen von Hollywood. Ihr seht echte Film-Sets von Jurassic Park, Harry Potter, Fast & Furious und mehr. Gratis Parken in der Frankenstein Valet Garage!",
+    info: "Universal Studios Hollywood wurde 1912 gegründet. Bei der VIP Tour kommt ihr in Bereiche, die normale Besucher nie sehen! Echte Film-Sets, Spezialeffekte und alle Rides ohne Anstehen!", weather: "sonnig, warm",
+    joke: { q: "Was macht ein Dino im Filmstudio?", a: "Er dreht einen Brüller!" } },
+
+  { day: 6, date: "22. Juli", place: "Los Angeles – Hollywood & Beach", color: "#E9C46A",
+    program: "Hollywood Walk of Fame ⭐ und den berühmten Hollywood-Schriftzug sehen! Nachmittags an den Santa Monica Beach — der Santa Monica Pier hat einen kleinen Freizeitpark direkt am Meer. Venice Beach Boardwalk mit Straßenkünstlern!",
+    info: "Der Hollywood-Schriftzug ist 137 Meter lang! Jeder Buchstabe ist 14 Meter hoch. Er wurde 1923 als Werbung für Immobilien aufgestellt — und blieb einfach stehen!", weather: "sonnig, warm",
+    joke: { q: "Warum wurde der Strand verhaftet?", a: "Weil er so viele Wellen geschlagen hat!" } },
+
+  { day: 7, date: "23. Juli", place: "LA → Sequoia National Park", color: "#2A9D8F",
+    program: "Auf in die Berge! 🏔️ Fahrt von LA in die Sierra Nevada. Unterwegs durch das San Joaquin Valley — riesige Felder und Obstplantagen. Ankunft in der Wuksachi Lodge mitten im Sequoia NP!",
+    drive: "🚗 ~420 km, ca. 4,5 Std. über die CA-99 durch das Central Valley",
+    info: "Der General Sherman Tree ist der größte lebende Baum der Welt! 84 Meter hoch, 31 Meter Umfang und über 2.000 Jahre alt. Sein Gewicht: ca. 1.900 Tonnen!", weather: "warm tagsüber, kühl abends",
+    joke: { q: "Warum können Bäume nicht ins Internet?", a: "Weil sie ständig in ihren Ringen hängen!" } },
+
+  { day: 8, date: "24. Juli", place: "Sequoia National Park", color: "#2A9D8F",
+    program: "Ganzer Tag im Sequoia NP! 🌲 Wanderung zum General Sherman Tree, durch den Tunnel Log (ein umgefallener Mammutbaum, durch den man durchlaufen kann!), Moro Rock besteigen (350 Stufen für eine krasse Aussicht!). Augen auf: Schwarzbären, Maultierhirsche und Kojoten!",
+    info: "Mammutbäume haben eine feuerfeste Rinde — bis zu 60 cm dick! Feuer hilft ihnen sogar: Es öffnet ihre Zapfen, damit die Samen rauskommen.", weather: "sonnig, angenehm",
+    joke: { q: "Was sagt ein Mammutbaum zum anderen?", a: "Hey, du bist ja riesig! — Du aber auch!" } },
+
+  { day: 9, date: "25. Juli", place: "Sequoia → Yosemite NP", color: "#2A9D8F",
+    program: "Weiter nach Yosemite! 🏞️ Fahrt durch die Sierra Nevada mit mega Bergpanoramen. Ankunft im legendären Ahwahnee Hotel (dort haben schon Könige und Präsidenten geschlafen!). Abends: Blick auf El Capitan im Sonnenuntergang!",
+    drive: "🚗 ~300 km, ca. 4 Std. über Fresno und die CA-41",
+    info: "El Capitan ist die größte freistehende Granitwand der Welt — 900 Meter senkrecht! Profi-Kletterer brauchen mehrere Tage, um da hochzukommen.", weather: "sonnig",
+    joke: { q: "Warum klettern Bergsteiger auf Berge?", a: "Weil sie nicht durch sie durchgehen können!" } },
+
+  { day: 10, date: "26. Juli", place: "Yosemite National Park", color: "#2A9D8F",
+    program: "Abenteuer-Tag in Yosemite! 💧 Yosemite Falls sehen (739m hoch!), Mirror Lake wandern, und den Blick auf Half Dome genießen. Augen auf: Kojoten, Schwarzbären, Waschbären und Stellersche Blauhäher (knallblau!).",
+    info: "Die Yosemite Falls sind 739 Meter hoch — der höchste Wasserfall in Nordamerika! Das Wasser fällt in drei Stufen. Im Sommer kann der Wasserfall fast austrocknen.", weather: "sonnig, warm",
+    joke: { q: "Was sagt der Wasserfall zum Fluss?", a: "Lass dich fallen, das macht Spaß!" } },
+
+  { day: 11, date: "27. Juli", place: "Yosemite → San Francisco", color: "#E9C46A",
+    program: "Ab nach San Francisco! 🌉 Fahrt durch die Gold-Rush-Country und über die Bay Bridge nach SF. Euer Argonaut Hotel liegt direkt am Fisherman's Wharf! Nachmittags: Cable Car fahren, Pier 39 mit den Seelöwen checken!",
+    drive: "🚗 ~310 km, ca. 4 Std. über die CA-120 und I-580",
+    info: "Die Golden Gate Bridge ist 2.737 Meter lang und in 'International Orange' gestrichen. Bei Nebel heulen die Foghorns — das klingt wie ein riesiges Schiff!", weather: "kühl, oft neblig",
+    joke: { q: "Warum ist die Golden Gate Bridge nie einsam?", a: "Weil immer so viele Autos über sie fahren!" } },
+
+  { day: 12, date: "28. Juli", place: "San Francisco – Alcatraz!", color: "#E9C46A",
+    program: "ALCATRAZ! 🏴‍☠️ Fähre um 10:35 Uhr ab Pier 33 (um 10:05 da sein!). Audio-Tour durch das berühmteste Gefängnis der Welt. Nachmittags: Chinatown (das älteste in den USA!), Lombard Street (die krummste Straße der Welt) und Golden Gate Bridge!",
+    info: "Alcatraz war 29 Jahre lang ein Hochsicherheitsgefängnis. 36 Häftlinge versuchten zu fliehen — offiziell hat es keiner geschafft. Aber 3 wurden nie gefunden... 🤔", weather: "kühl, neblig",
+    joke: { q: "Warum fährt man gern Cable Car?", a: "Weil man sich an den Seilen nicht festfahren kann!" } },
+
+  { day: 13, date: "29. Juli", place: "SF → Benbow KOA (Wohnmobil!)", color: "#2A9D8F",
+    program: "WOHNMOBIL-TAG! 🚐 Morgens den Mietwagen abgeben und das Wohnmobil übernehmen. Dann auf die legendäre US-101 Richtung Norden! Durch die ersten Redwood-Wälder. Abends: Erstes Lagerfeuer auf dem KOA Campingplatz!",
+    drive: "🚐 ~400 km, ca. 5 Std. über die US-101 an der Küste entlang, dann durch die Redwoods",
+    info: "Ab heute seid ihr Wohnmobil-Abenteurer! Die Redwoods sind die höchsten Bäume der Welt — bis zu 116 Meter! Das ist so hoch wie ein 35-stöckiges Haus.", weather: "angenehm, warm",
+    joke: { q: "Was sagt das Wohnmobil zum Zelt?", a: "Ich hab vier Räder und du nur Heringe!" } },
+
+  { day: 14, date: "30. Juli", place: "Benbow → Crescent City KOA", color: "#2A9D8F",
+    program: "Avenue of the Giants! 🌲 50 km lange Straße durch uralte Mammutbäume. Stopps: Shrine Drive-Thru Tree (mit dem Auto durch einen Baum fahren!), Founders Grove mit dem Dyerville Giant (107m lang!). Weiter zur Küste nach Crescent City.",
+    drive: "🚐 ~310 km, ca. 4,5 Std. über die Avenue of the Giants und US-101",
+    info: "Die Avenue of the Giants hat Bäume, die 1.500 Jahre alt sind! Als die Wikinger in Amerika landeten, waren diese Bäume schon 500 Jahre alt.", weather: "angenehm",
+    joke: { q: "Welcher Baum kann am besten schwimmen?", a: "Die Strand-Kiefer!" } },
+
+  { day: 15, date: "31. Juli", place: "Crescent City / Redwoods", color: "#2A9D8F",
+    program: "Redwood National Park erkunden! 🦎 Fern Canyon wandern (eine Schlucht mit Farnwänden — hier wurde Jurassic Park 2 gedreht!). Battery Point Lighthouse bei Ebbe zu Fuß erreichen! Augen auf: Bananenschnecken (knallgelb, 25 cm lang!), Elche, Seelöwen!",
+    info: "In den Redwoods leben Bananenschnecken — sie sind knallgelb und können 25 cm lang werden! Das Battery Point Lighthouse kann man nur bei Ebbe erreichen — sonst steht es im Wasser.", weather: "kühl, neblig",
+    joke: { q: "Warum haben Schnecken keine Angst im Wald?", a: "Sie tragen ihr Haus immer dabei!" } },
+
+  { day: 16, date: "1. August", place: "Crescent City → Bullards Beach", color: "#2A9D8F",
+    program: "Willkommen in Oregon! 🌊 Die Küste wird wilder und dramatischer. Stopp an den Samuel H. Boardman Scenic Corridors (krasse Felsen im Meer!). Bullards Beach State Park bei Bandon — Leuchtturm Coquille River bei Sonnenuntergang!",
+    drive: "🚐 ~320 km, ca. 4,5 Std. die Oregon-Küste hoch über die US-101",
+    info: "Oregon hat 584 km Küste und JEDER Strand ist öffentlich! Die Felsformationen an der Küste wurden über Jahrtausende vom Pazifik geformt. Haltet Ausschau nach Walen! 🐋", weather: "kühl, windig",
+    joke: { q: "Was macht eine Krabbe am Strand?", a: "Sie geht seitwärts shoppen!" } },
+
+  { day: 17, date: "2. August", place: "Bullards Beach → Waldport", color: "#2A9D8F",
+    program: "Oregon-Küste pur! 🦀 Stopp an den Oregon Dunes (riesige Sanddünen am Meer!). In Newport: Oregon Coast Aquarium besuchen — Haie, Seeotter und ein Unterwasser-Tunnel! Gezeitenpools am Strand: Seesterne, Anemonen, Krebse suchen!",
+    drive: "🚐 ~220 km, ca. 3 Std. über die US-101 an der Küste",
+    info: "Die Oregon-Küste ist berühmt für ihre Gezeitenpools — kleine Wasserbecken in den Felsen, in denen Seesterne, Seeigel und Anemonen leben. Das Oregon Coast Aquarium hat einen gläsernen Unterwasser-Tunnel!", weather: "kühl, bewölkt",
+    joke: { q: "Was singt der Wal unter der Dusche?", a: "Waaal-zer von Strauss!" } },
+
+  { day: 18, date: "3. August", place: "Waldport → Astoria KOA", color: "#2A9D8F",
+    program: "Weiter die Küste hoch! 🏖️ Stopp in Tillamook (Käse- und Eisfabrik!). Cannon Beach sehen — der Haystack Rock ist 72m hoch und steht direkt im Meer. Astoria ist die älteste Stadt an der US-Westküste! Astoria Column: 164 Stufen für mega Aussicht!",
+    drive: "🚐 ~300 km, ca. 4 Std. über die US-101 an der Küste",
+    info: "In Astoria wurde der Film 'Die Goonies' gedreht! Die Astoria Column hat eine 190m lange Spirale mit Bildern der Geschichte Oregons. Der Haystack Rock bei Cannon Beach ist einer der meistfotografierten Felsen der Welt.", weather: "kühl, bewölkt",
+    joke: { q: "Warum können Fische nicht Klavier spielen?", a: "Weil sie Angst vor den Schuppen haben!" } },
+
+  { day: 19, date: "4. August", place: "Astoria → La Push", color: "#264653",
+    program: "Über die Grenze nach Washington! 🌧️ Fahrt über die Astoria-Megler Bridge (6,5 km lang!). Weiter zum Quileute-Reservat in La Push — hier wurden Teile von Twilight gedreht! Rialto Beach mit riesigen Sea Stacks (Felsen im Meer). Treibholz-Skulpturen!",
+    drive: "🚐 ~350 km, ca. 5 Std. über die US-101 durch den Olympic NP",
+    info: "La Push liegt im Quileute-Reservat. Die Quileute sind ein Stamm der Ureinwohner Amerikas. In Twilight sind sie die Werwölfe! Der Strand hat dramatische Felsen und riesige Treibholzstämme.", weather: "kühl, neblig",
+    joke: { q: "Was sagt der Regen zum Wald?", a: "Kopf hoch, ich mach dich grün!" } },
+
+  { day: 20, date: "5. August", place: "La Push → Port Angeles", color: "#2A9D8F",
+    program: "Hoh Rainforest! 🌿 Der einzige gemäßigte Regenwald in den USA. Die Bäume sind komplett mit Moos bedeckt — wie in einem Märchen oder auf Dagobah (Star Wars)! Augen auf: Roosevelt-Elche (riesig!), Schwarzbären, Weißkopfseeadler!",
+    drive: "🚐 ~160 km, ca. 3 Std. durch den Olympic NP",
+    info: "Im Hoh Rainforest regnet es bis zu 4 Meter pro Jahr! Die Bäume sind mit Moos bedeckt wie in einem Märchenwald. Roosevelt-Elche können 500 kg schwer werden — so schwer wie ein kleines Auto!", weather: "feucht, kühl",
+    joke: { q: "Warum tragen Elche kein GPS?", a: "Sie finden den Wald auch so!" } },
+
+  { day: 21, date: "6. August", place: "Olympic NP / Port Angeles", color: "#2A9D8F",
+    program: "Olympic NP Abenteuer! ⛰️ Hurricane Ridge (1.600m hoch — Blick auf Berge, Gletscher und bis nach Kanada!). Ruby Beach oder Second Beach wandern — Treibholz-Skulpturen bauen! Augen auf: Murmeltiere, Bergziegen, Adler, Wale!",
+    info: "Olympic NP hat alles: Regenwald, Berge mit Gletschern UND wilde Strände — alles in einem Park! Von Hurricane Ridge kann man bei klarem Wetter bis nach Kanada und den Mount Rainier sehen.", weather: "kühl, windig",
+    joke: { q: "Warum schwimmen Fische im Meer?", a: "Weil sie nicht fliegen können — naja, Fliegende Fische schon!" } },
+
+  { day: 22, date: "7. August", place: "Port Angeles → Seattle", color: "#E76F51",
+    program: "Tschüss Wohnmobil, hallo Seattle! 🏙️ Fahrt mit der Fähre von Port Angeles über die Puget Sound (mega Aussicht auf die Olympic Mountains!). Wohnmobil abgeben, Mietwagen (Chevrolet Suburban!) holen. Sound Hotel einchecken, Pike Place Market!",
+    drive: "🚐 ~230 km, ca. 3,5 Std. inkl. Fähre über Bainbridge Island",
+    info: "Seattle hat den Spitznamen 'Emerald City' wegen der vielen Bäume. Am Pike Place Market fliegen die Fische — die Verkäufer werfen sie sich zu! Der allererste Starbucks der Welt ist hier (seit 1971).", weather: "mild, bewölkt",
+    joke: { q: "Was sagt der Vulkan wenn er wütend ist?", a: "Ich könnte EXPLODIEREN!" } },
+
+  { day: 23, date: "8. August", place: "Seattle → Leavenworth", color: "#F4A261",
+    program: "Bayerisches Dorf in Amerika! 🥨 Fahrt über den Stevens Pass in die Cascade Mountains. Leavenworth sieht aus wie in Bayern — Fachwerkhäuser, Brezeln, Schnitzel! Berg Haus Leavenworth hat Feuerstelle und Grill. Abends: Marshmallows rösten!",
+    drive: "🚗 ~210 km, ca. 2,5 Std. über den Stevens Pass durch die Cascades",
+    info: "Leavenworth war in den 1960ern eine sterbende Holzfällerstadt. Die Bewohner haben ALLE Häuser im bayerischen Stil umgebaut — und jetzt kommen über 2 Millionen Besucher pro Jahr!", weather: "warm, sonnig",
+    joke: { q: "Was sagt die Brezel zum Weißwurst?", a: "Ohne mich bist du nackig!" } },
+
+  { day: 24, date: "9. August", place: "Leavenworth (Berg Haus)", color: "#F4A261",
+    program: "Chilltag in Leavenworth! 🏔️ Wandern am Icicle Creek, Tubing auf dem Wenatchee River (mit Schläuchen den Fluss runtertreiben!), Minigolf, oder einfach am Berg Haus relaxen mit Grillen und Feuerstelle. Letzte Nacht in den Bergen!",
+    info: "Die Cascade Mountains haben über 300 Gletscher! Der nahegelegene Mount Stuart ist 2.871m hoch. Im Sommer gibt es hier die besten Sterne, weil es so wenig Licht gibt.", weather: "warm, sonnig",
+    joke: { q: "Warum regnet es so oft in Seattle?", a: "Damit die Kaffeebohnen besser wachsen!" } },
+
+  { day: 25, date: "10. August", place: "Seattle – Space Needle!", color: "#E76F51",
+    program: "Seattle Sightseeing! 🚀 Space Needle (184m hoch, gläserner Boden!), Museum of Pop Culture (MoPOP — Gitarren, Sci-Fi, Gaming!), Chihuly Garden (verrückte Glasskulpturen). Abends: Abschiedsdinner im Hotel 1000!",
+    drive: "🚗 ~210 km, ca. 2,5 Std. zurück über den Stevens Pass",
+    info: "Die Space Needle ist 184 Meter hoch und wurde für die Weltausstellung 1962 gebaut. Sie hat einen gläsernen Boden — traut ihr euch draufzustellen? Das MoPOP hat echte Gitarren von Jimi Hendrix!", weather: "mild",
+    joke: { q: "Was sieht man von der Space Needle?", a: "Alles — außer die Space Needle!" } },
+
+  { day: 26, date: "11. August", place: "Seattle → Heimreise ✈️", color: "#E76F51",
+    program: "Letzter Tag! 😢 Morgens noch durch Seattle schlendern, letzte Souvenirs kaufen. Mietwagen abgeben am SEA Airport. Flug um 13:30 Uhr mit Air France über Paris nach Berlin. Ca. 9.500 km Luftlinie — in 12 Stunden seid ihr zuhause!",
+    info: "Ihr fliegt ca. 9.500 km zurück nach Deutschland! Die Erde dreht sich unter euch weg — deshalb 'gewinnt' ihr auf dem Rückflug Zeit. Seattle → Paris → Berlin!", weather: "???",
+    joke: { q: "Was sagt das Flugzeug beim Abschied?", a: "Ich heb dann mal ab!" } },
 ];
 
 function generateBook() {
@@ -175,7 +296,7 @@ function generateBook() {
       <h2>USA Westküste 2026</h2>
       <div class="child-name">${CHILD_NAME}</div>
       <div class="subtitle">Familie Dahrendorf</div>
-      <div class="dates">17. Juli - 11. August 2026</div>
+      <div class="dates">17. Juli — 11. August 2026</div>
     </div>
   `;
 
@@ -185,12 +306,9 @@ function generateBook() {
       <h2 style="font-family:'Fraunces',serif;font-size:22pt;color:#264653;margin-bottom:4mm;text-align:center;">🗺️ Unsere Reiseroute</h2>
       <p style="font-size:11pt;color:#8D99AE;margin-bottom:4mm;text-align:center;">Las Vegas → Los Angeles → San Francisco → Oregon Coast → Olympic NP → Seattle</p>
       <svg viewBox="0 0 700 480" style="width:260mm;height:170mm;" xmlns="http://www.w3.org/2000/svg">
-        <!-- Background -->
         <rect width="700" height="480" fill="#f0f4f8" rx="12"/>
-        <!-- Pacific Ocean -->
         <path d="M0 0 L180 0 L140 80 L100 160 L80 240 L60 300 L50 340 L40 380 L80 430 L120 480 L0 480 Z" fill="#d4e8f0" opacity="0.5"/>
         <text x="40" y="200" font-size="14" fill="#8bafc4" font-family="Nunito" font-weight="600" transform="rotate(-90,40,200)">PACIFIC OCEAN</text>
-        <!-- State borders (simplified) -->
         <path d="M100 310 L680 310" stroke="#ccc" stroke-width="1" stroke-dasharray="6,4" opacity="0.6"/>
         <text x="640" y="303" font-size="10" fill="#aaa" font-family="Nunito" text-anchor="end">California / Oregon</text>
         <path d="M60 170 L680 170" stroke="#ccc" stroke-width="1" stroke-dasharray="6,4" opacity="0.6"/>
@@ -199,65 +317,46 @@ function generateBook() {
         <text x="660" y="240" font-size="12" fill="#bbb" font-family="Nunito" font-weight="600">OREGON</text>
         <text x="660" y="100" font-size="12" fill="#bbb" font-family="Nunito" font-weight="600">WASHINGTON</text>
         <text x="400" y="460" font-size="11" fill="#bbb" font-family="Nunito">NEVADA</text>
-        <!-- Route line -->
         <path d="M580 440 L260 415 L300 370 L250 355 L170 345 L120 310 L100 275 L85 240 L80 210 L75 185 L110 145 L130 100 L200 65 L260 55 L310 55"
               fill="none" stroke="#2A9D8F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
-        <!-- Dashed return to Seattle -->
         <path d="M310 55 L260 55" fill="none" stroke="#E76F51" stroke-width="2" stroke-dasharray="6,3" opacity="0.5"/>
-        <!-- Stops -->
-        <!-- 1. Las Vegas -->
         <circle cx="580" cy="440" r="8" fill="#E76F51"/>
         <text x="595" y="435" font-size="11" fill="#264653" font-family="Nunito" font-weight="700">Las Vegas</text>
         <text x="595" y="449" font-size="9" fill="#8D99AE" font-family="Nunito">Tag 1-3</text>
-        <!-- 2. Los Angeles -->
         <circle cx="260" cy="415" r="8" fill="#E9C46A"/>
         <text x="275" y="410" font-size="11" fill="#264653" font-family="Nunito" font-weight="700">Los Angeles</text>
         <text x="275" y="424" font-size="9" fill="#8D99AE" font-family="Nunito">Tag 4-6</text>
-        <!-- 3. Sequoia -->
         <circle cx="300" cy="370" r="6" fill="#2A9D8F"/>
         <text x="315" y="367" font-size="10" fill="#264653" font-family="Nunito" font-weight="700">Sequoia NP</text>
         <text x="315" y="379" font-size="8" fill="#8D99AE" font-family="Nunito">Tag 7-8</text>
-        <!-- 4. Yosemite -->
         <circle cx="250" cy="355" r="6" fill="#2A9D8F"/>
         <text x="265" y="352" font-size="10" fill="#264653" font-family="Nunito" font-weight="700">Yosemite NP</text>
         <text x="265" y="364" font-size="8" fill="#8D99AE" font-family="Nunito">Tag 9-10</text>
-        <!-- 5. San Francisco -->
         <circle cx="170" cy="345" r="8" fill="#E9C46A"/>
         <text x="185" y="340" font-size="11" fill="#264653" font-family="Nunito" font-weight="700">San Francisco</text>
         <text x="185" y="354" font-size="9" fill="#8D99AE" font-family="Nunito">Tag 11-12</text>
-        <!-- 6. Benbow / Redwoods South -->
         <circle cx="120" cy="310" r="5" fill="#2A9D8F"/>
         <text x="135" y="313" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Benbow KOA</text>
-        <!-- 7. Crescent City -->
         <circle cx="100" cy="275" r="5" fill="#2A9D8F"/>
         <text x="115" y="278" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Crescent City</text>
-        <!-- 8. Bullards Beach -->
         <circle cx="85" cy="240" r="5" fill="#264653"/>
         <text x="100" y="243" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Bullards Beach</text>
-        <!-- 9. Waldport -->
         <circle cx="80" cy="210" r="5" fill="#264653"/>
         <text x="95" y="213" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Waldport</text>
-        <!-- 10. Astoria -->
         <circle cx="75" cy="185" r="5" fill="#264653"/>
         <text x="90" y="188" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Astoria</text>
-        <!-- 11. La Push -->
         <circle cx="110" cy="145" r="5" fill="#2A9D8F"/>
         <text x="125" y="148" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">La Push</text>
-        <!-- 12. Port Angeles -->
         <circle cx="130" cy="100" r="5" fill="#2A9D8F"/>
         <text x="145" y="103" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Port Angeles</text>
-        <!-- 13. Seattle -->
         <circle cx="200" cy="65" r="8" fill="#E76F51"/>
         <text x="215" y="60" font-size="11" fill="#264653" font-family="Nunito" font-weight="700">Seattle</text>
         <text x="215" y="74" font-size="9" fill="#8D99AE" font-family="Nunito">Tag 22, 25-26</text>
-        <!-- 14. Leavenworth -->
         <circle cx="310" cy="55" r="6" fill="#F4A261"/>
         <text x="325" y="52" font-size="10" fill="#264653" font-family="Nunito" font-weight="700">Leavenworth</text>
         <text x="325" y="64" font-size="8" fill="#8D99AE" font-family="Nunito">Tag 23-24</text>
-        <!-- Start/End markers -->
-        <text x="555" y="460" font-size="9" fill="#E76F51" font-family="Nunito" font-weight="800">✈️ START</text>
-        <text x="175" y="88" font-size="9" fill="#E76F51" font-family="Nunito" font-weight="800">✈️ ENDE</text>
-        <!-- Legend -->
+        <text x="555" y="460" font-size="9" fill="#E76F51" font-family="Nunito" font-weight="800">START</text>
+        <text x="175" y="88" font-size="9" fill="#E76F51" font-family="Nunito" font-weight="800">ENDE</text>
         <rect x="430" y="15" width="255" height="70" rx="8" fill="white" opacity="0.8"/>
         <circle cx="450" cy="33" r="5" fill="#E76F51"/><text x="462" y="37" font-size="9" fill="#264653" font-family="Nunito">Hotels in Städten</text>
         <circle cx="450" cy="53" r="5" fill="#2A9D8F"/><text x="462" y="57" font-size="9" fill="#264653" font-family="Nunito">Natur & Camping</text>
@@ -281,14 +380,14 @@ function generateBook() {
     { day: "18", place: "Astoria KOA Resort", dates: "3.-4. Aug", color: "#2A9D8F" },
     { day: "19", place: "La Push (Quileute Resort)", dates: "4.-5. Aug", color: "#264653" },
     { day: "20-21", place: "Port Angeles / Olympic NP", dates: "5.-7. Aug", color: "#2A9D8F" },
-    { day: "22", place: "Seattle (Sound Hotel) – RV-Rückgabe", dates: "7.-8. Aug", color: "#E76F51" },
+    { day: "22", place: "Seattle (Sound Hotel)", dates: "7.-8. Aug", color: "#E76F51" },
     { day: "23-24", place: "Leavenworth (Berg Haus)", dates: "8.-10. Aug", color: "#F4A261" },
     { day: "25-26", place: "Seattle (Hotel 1000) → Heimreise", dates: "10.-11. Aug", color: "#E76F51" },
   ];
 
   container.innerHTML += `
     <div class="page route-page">
-      <h2>🗺️ Unsere Route</h2>
+      <h2>🗺️ Unsere Route — 15 Stopps!</h2>
       <p class="route-subtitle">Kreuze jeden Stopp an, wenn ihr dort wart!</p>
       <div class="route-list">
         ${stops.map(s => `
@@ -306,9 +405,9 @@ function generateBook() {
     </div>
   `;
 
-  // === DAY PAGES (2 separate pages per day) ===
+  // === DAY PAGES (2 pages per day) ===
   days.forEach(d => {
-    // PAGE 1: Left page - info, weather, smileys, food, joke, puzzle
+    // PAGE 1: Left page — program, fun fact, weather, smileys, coolest, snack, joke
     container.innerHTML += `
       <div class="page day-left-page">
         <div class="day-header">
@@ -319,43 +418,53 @@ function generateBook() {
           </div>
         </div>
 
+        <div class="program-box">
+          <div class="program-title">📋 Was steht heute auf dem Programm?</div>
+          <div class="program-text">${d.program}</div>
+          ${d.drive ? `<div class="program-drive">${d.drive}</div>` : ''}
+        </div>
+
         <div class="fun-fact">
           <strong>🤓 Wusstest du?</strong> ${d.info}
         </div>
 
-        <div class="section-title">☀️ Wie war das Wetter?</div>
-        <div class="weather-row">
-          ${['☀️ sonnig', '⛅ bewölkt', '🌧️ Regen', '🌬️ windig', '🥵 heiß', '🥶 kalt'].map(w => `
-            <div class="weather-option"><div class="weather-circle"></div> ${w}</div>
-          `).join('')}
-        </div>
-
-        <div class="section-title">😊 Wie war dein Tag?</div>
-        <div class="smiley-row">
-          ${[
-            { emoji: '🤩', label: 'mega cool' },
-            { emoji: '😊', label: 'schön' },
-            { emoji: '😐', label: 'okay' },
-            { emoji: '😴', label: 'müde' },
-            { emoji: '😤', label: 'anstrengend' },
-          ].map(s => `
-            <div class="smiley-item">
-              <span class="emoji">${s.emoji}</span>
-              <div class="smiley-circle"></div>
-              <div style="font-size:8pt;margin-top:1mm">${s.label}</div>
+        <div style="display:flex;gap:8mm;">
+          <div style="flex:1;">
+            <div class="section-title">☀️ Wetter heute</div>
+            <div class="weather-row">
+              ${['☀️', '⛅', '🌧️', '🌬️', '🥵', '🥶'].map(w => `
+                <div class="weather-option"><div class="weather-circle"></div> ${w}</div>
+              `).join('')}
             </div>
-          `).join('')}
+          </div>
+          <div style="flex:1;">
+            <div class="section-title">😊 Mein Tag war...</div>
+            <div class="smiley-row">
+              ${[
+                { emoji: '🤩', label: 'mega' },
+                { emoji: '😊', label: 'schön' },
+                { emoji: '😐', label: 'okay' },
+                { emoji: '😴', label: 'müde' },
+                { emoji: '😤', label: 'krass' },
+              ].map(s => `
+                <div class="smiley-item">
+                  <span class="emoji">${s.emoji}</span>
+                  <div class="smiley-circle"></div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
         </div>
 
-        <div class="section-title">⭐ Was war heute am coolsten?</div>
-        <div class="coolest-section">
-          <div class="coolest-line"></div>
-          <div class="coolest-line"></div>
-        </div>
-
-        <div class="section-title">🥤 Mein Lieblings-Snack / Drink heute:</div>
-        <div class="coolest-section">
-          <div class="coolest-line"></div>
+        <div style="display:flex;gap:8mm;">
+          <div style="flex:1;">
+            <div class="section-title">⭐ Am coolsten war...</div>
+            <div class="coolest-section"><div class="coolest-line"></div></div>
+          </div>
+          <div style="flex:1;">
+            <div class="section-title">🍕 Bester Snack / Drink</div>
+            <div class="coolest-section"><div class="coolest-line"></div></div>
+          </div>
         </div>
 
         <div class="joke-box">
@@ -363,11 +472,10 @@ function generateBook() {
           <div class="joke-text">${d.joke.q}</div>
           <div class="joke-answer">Antwort: <span style="color:transparent;background:#f0f0f0;border-radius:4px;padding:0 3mm;cursor:pointer" onclick="this.style.color='#264653'">${d.joke.a}</span></div>
         </div>
-
       </div>
     `;
 
-    // PAGE 2: Right page - photo + diary
+    // PAGE 2: Right page — photo (10x15cm) + diary
     container.innerHTML += `
       <div class="page day-right-page">
         <div class="right-page-header">
@@ -375,13 +483,15 @@ function generateBook() {
           <div class="day-date">${d.date} 2026</div>
         </div>
 
-        <div class="section-title">🎨 Mein Bild des Tages</div>
-        <div class="photo-box"></div>
+        <div class="section-title">📸 Mein Bild des Tages <span style="font-weight:400;font-size:8pt;text-transform:none;color:#8D99AE;">(Foto einkleben 10×15 cm oder reinmalen!)</span></div>
+        <div class="photo-box">
+          <div class="photo-hint" style="opacity:0.4;">✂️ Foto hier einkleben<br>oder reinmalen!</div>
+          <div class="photo-size">10 × 15 cm</div>
+        </div>
 
         <div class="section-title">📝 Was hab ich heute erlebt?</div>
         <div class="diary-lines">
           <div class="diary-line"><span class="diary-prompt">Heute haben wir...</span></div>
-          <div class="diary-line"></div>
           <div class="diary-line"></div>
           <div class="diary-line"></div>
           <div class="diary-line"></div>
