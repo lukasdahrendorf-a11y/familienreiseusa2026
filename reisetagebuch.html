@@ -5,11 +5,8 @@
 <title>Reisetagebuch - Familie Dahrendorf</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fraunces:wght@400;700;900&display=swap');
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 @page { size: A4 landscape; margin: 0; }
-
 body { font-family: 'Nunito', sans-serif; color: #264653; background: white; }
 
 .page {
@@ -19,27 +16,28 @@ body { font-family: 'Nunito', sans-serif; color: #264653; background: white; }
   position: relative;
   overflow: hidden;
 }
+.page-deco-tl, .page-deco-br { position: absolute; opacity: 0.06; font-size: 90pt; pointer-events: none; }
+.page-deco-tl { top: -5mm; left: -5mm; }
+.page-deco-br { bottom: -5mm; right: -5mm; }
+.page-stripe { position: absolute; top: 0; left: 0; width: 6mm; height: 100%; }
 
-/* === COVER === */
+/* COVER */
 .cover {
   background: linear-gradient(135deg, #264653 0%, #2A9D8F 50%, #264653 100%);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center; color: white; position: relative;
 }
-.cover h1 { font-family: 'Fraunces', serif; font-size: 42pt; margin-bottom: 6mm; }
-.cover h2 { font-family: 'Fraunces', serif; font-size: 24pt; font-weight: 400; color: #E9C46A; margin-bottom: 12mm; }
-.cover .child-name { font-family: 'Fraunces', serif; font-size: 56pt; font-weight: 900; color: #E9C46A; margin: 8mm 0; }
-.cover .subtitle { font-size: 14pt; color: rgba(255,255,255,0.8); margin-bottom: 4mm; }
-.cover .dates { font-size: 16pt; font-weight: 700; color: white; background: rgba(255,255,255,0.15); padding: 4mm 8mm; border-radius: 20px; display: inline-block; }
-.cover .plane { font-size: 60pt; margin-bottom: 8mm; }
-.cover .deco { position: absolute; font-size: 80pt; opacity: 0.1; }
-.cover .deco-tl { top: 10mm; left: 15mm; }
-.cover .deco-br { bottom: 10mm; right: 15mm; }
+.cover h1 { font-family: 'Fraunces', serif; font-size: 44pt; margin-bottom: 4mm; text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+.cover h2 { font-family: 'Fraunces', serif; font-size: 22pt; font-weight: 400; color: #E9C46A; margin-bottom: 8mm; }
+.cover .child-name { font-family: 'Fraunces', serif; font-size: 58pt; font-weight: 900; color: #E9C46A; margin: 6mm 0; text-shadow: 0 3px 12px rgba(0,0,0,0.2); }
+.cover .subtitle { font-size: 14pt; color: rgba(255,255,255,0.8); margin-bottom: 3mm; }
+.cover .dates { font-size: 16pt; font-weight: 700; background: rgba(255,255,255,0.15); padding: 3mm 8mm; border-radius: 20px; display: inline-block; }
+.cover .deco { position: absolute; font-size: 80pt; opacity: 0.08; }
 
-/* === ROUTE PAGE === */
+/* ROUTE PAGE */
 .route-page { padding: 10mm; }
-.route-page h2 { font-family: 'Fraunces', serif; font-size: 22pt; text-align: center; margin-bottom: 5mm; color: #264653; }
-.route-page .route-subtitle { text-align: center; font-size: 11pt; color: #8D99AE; margin-bottom: 6mm; }
+.route-page h2 { font-family: 'Fraunces', serif; font-size: 22pt; text-align: center; margin-bottom: 4mm; color: #264653; }
+.route-page .route-subtitle { text-align: center; font-size: 11pt; color: #8D99AE; margin-bottom: 5mm; }
 .route-list { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm 8mm; }
 .route-item { display: flex; align-items: center; gap: 3mm; padding: 2mm 4mm; border-radius: 8px; background: #f5f5f2; }
 .route-dot { width: 8mm; height: 8mm; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 7pt; font-weight: 800; flex-shrink: 0; }
@@ -47,73 +45,89 @@ body { font-family: 'Nunito', sans-serif; color: #264653; background: white; }
 .route-item .place { font-weight: 700; font-size: 10pt; }
 .route-item .dates { font-size: 8pt; color: #8D99AE; }
 .route-item .checkbox { width: 6mm; height: 6mm; border: 2px solid #2A9D8F; border-radius: 3px; flex-shrink: 0; }
-.route-legend { text-align: center; margin-top: 4mm; font-size: 9pt; color: #8D99AE; }
 
-/* === DAY PAGES === */
-.day-left-page, .day-right-page { padding: 10mm 12mm; }
+/* DAY PAGES */
+.day-left-page, .day-right-page { padding: 10mm 12mm; position: relative; }
+.day-header { display: flex; align-items: flex-start; gap: 4mm; margin-bottom: 3mm; }
+.day-badge { width: 22mm; height: 22mm; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.day-badge .badge-num { font-family: 'Fraunces', serif; font-size: 22pt; font-weight: 900; line-height: 1; }
+.day-badge .badge-label { font-size: 7pt; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+.day-info { flex: 1; }
+.day-date { font-weight: 700; font-size: 12pt; color: #8D99AE; }
+.day-location { font-family: 'Fraunces', serif; font-size: 18pt; font-weight: 700; line-height: 1.2; }
+.day-icon { flex-shrink: 0; }
 
-.day-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4mm; }
-.day-number { font-family: 'Fraunces', serif; font-size: 42pt; font-weight: 900; line-height: 1; }
-.day-meta { text-align: right; }
-.day-date { font-weight: 700; font-size: 13pt; }
-.day-location { font-family: 'Fraunces', serif; font-size: 17pt; font-weight: 700; color: #2A9D8F; }
+.program-box { background: linear-gradient(135deg, #264653 0%, #2A9D8F 100%); border-radius: 10px; padding: 3.5mm 5mm; margin-bottom: 3mm; color: white; position: relative; overflow: hidden; }
+.program-box::after { content: ''; position: absolute; top: -10mm; right: -10mm; width: 30mm; height: 30mm; background: rgba(255,255,255,0.05); border-radius: 50%; }
+.program-title { font-weight: 800; font-size: 9pt; text-transform: uppercase; letter-spacing: 0.5px; color: #E9C46A; margin-bottom: 1.5mm; }
+.program-text { font-size: 9pt; line-height: 1.4; }
+.program-drive { display: inline-block; background: rgba(255,255,255,0.15); border-radius: 6px; padding: 1mm 3mm; margin-top: 1.5mm; font-size: 8.5pt; font-weight: 700; }
 
-.program-box { background: linear-gradient(135deg, #264653 0%, #2A9D8F 100%); border-radius: 10px; padding: 4mm 5mm; margin-bottom: 4mm; color: white; }
-.program-title { font-weight: 800; font-size: 10pt; text-transform: uppercase; letter-spacing: 0.5px; color: #E9C46A; margin-bottom: 2mm; }
-.program-text { font-size: 9.5pt; line-height: 1.45; }
-.program-drive { display: inline-block; background: rgba(255,255,255,0.15); border-radius: 6px; padding: 1mm 3mm; margin-top: 2mm; font-size: 9pt; font-weight: 700; }
-
-.fun-fact { background: #E9C46A20; border-left: 4px solid #E9C46A; padding: 3mm 4mm; border-radius: 0 8px 8px 0; margin-bottom: 4mm; font-size: 10pt; }
+.fun-fact { background: #E9C46A15; border-left: 4px solid #E9C46A; padding: 2.5mm 4mm; border-radius: 0 8px 8px 0; margin-bottom: 3mm; font-size: 9pt; line-height: 1.4; }
 .fun-fact strong { color: #E9C46A; }
 
-.section-title { font-weight: 800; font-size: 9pt; text-transform: uppercase; letter-spacing: 0.5px; margin: 3mm 0 2mm 0; }
-
-.weather-row { display: flex; gap: 4mm; flex-wrap: wrap; margin-bottom: 3mm; }
-.weather-option { display: flex; align-items: center; gap: 1.5mm; font-size: 10pt; }
+.section-title { font-weight: 800; font-size: 8pt; text-transform: uppercase; letter-spacing: 0.5px; margin: 2mm 0 1.5mm 0; color: #264653; }
+.weather-row { display: flex; gap: 3.5mm; flex-wrap: wrap; }
+.weather-option { display: flex; align-items: center; gap: 1.5mm; font-size: 9pt; }
 .weather-circle { width: 5mm; height: 5mm; border: 2px solid #8D99AE; border-radius: 50%; }
+.smiley-row { display: flex; gap: 5mm; }
+.smiley-item { text-align: center; }
+.smiley-item .emoji { font-size: 18pt; display: block; }
+.smiley-circle { width: 5mm; height: 5mm; border: 2px solid #8D99AE; border-radius: 50%; margin: 1mm auto 0; }
+.coolest-line { border-bottom: 1.5px dashed #d0d0d0; height: 7mm; }
 
-.smiley-row { display: flex; gap: 6mm; margin: 3mm 0; }
-.smiley-item { text-align: center; font-size: 9pt; }
-.smiley-item .emoji { font-size: 20pt; display: block; margin-bottom: 1mm; }
-.smiley-circle { width: 6mm; height: 6mm; border: 2px solid #8D99AE; border-radius: 50%; margin: 0 auto; }
-
-.coolest-section { margin: 2mm 0; }
-.coolest-line { border-bottom: 1px dashed #c0c0c0; height: 8mm; }
-
-.joke-box { background: #E76F5115; border-radius: 10px; padding: 3mm 4mm; margin-top: 3mm; }
-.joke-box .joke-title { font-weight: 800; font-size: 9pt; color: #E76F51; text-transform: uppercase; }
-.joke-box .joke-text { font-size: 10pt; margin-top: 1mm; }
+.joke-box { background: #E76F5110; border-radius: 10px; padding: 2.5mm 4mm; margin-top: 2mm; border: 1px solid #E76F5130; }
+.joke-box .joke-title { font-weight: 800; font-size: 8pt; color: #E76F51; text-transform: uppercase; }
+.joke-box .joke-text { font-size: 9.5pt; margin-top: 1mm; }
 .joke-box .joke-answer { font-size: 8pt; color: #8D99AE; margin-top: 1mm; }
 
-/* Right page */
-.photo-box { width: 150mm; height: 100mm; border: 2px dashed #c0c0c0; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #c0c0c0; font-size: 10pt; margin: 0 auto 4mm auto; background: #fafafa; position: relative; }
-.photo-box .photo-hint { text-align: center; line-height: 1.5; }
-.photo-box .photo-size { font-size: 8pt; color: #d0d0d0; position: absolute; bottom: 2mm; right: 3mm; }
+/* RIGHT PAGE */
+.right-page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3mm; padding-bottom: 2mm; border-bottom: 2px solid #e0e0e0; }
+.right-page-tag { font-family: 'Fraunces', serif; font-size: 12pt; font-weight: 700; color: #8D99AE; }
 
-.diary-lines { margin-top: 2mm; }
-.diary-line { border-bottom: 1px solid #e0e0e0; height: 9mm; }
-.diary-prompt { font-size: 10pt; color: #8D99AE; font-style: italic; padding-top: 2mm; }
+.photo-box { width: 150mm; height: 100mm; border: 2.5px dashed #c0c0c0; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 3mm auto; background: #fafafa; position: relative; }
+.photo-box .photo-hint { text-align: center; line-height: 1.5; color: #d0d0d0; font-size: 10pt; }
+.photo-box .photo-size { font-size: 7pt; color: #d0d0d0; position: absolute; bottom: 2mm; right: 3mm; }
 
-.right-page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4mm; padding-bottom: 2mm; border-bottom: 2px solid #e0e0e0; }
-.right-page-tag { font-family: 'Fraunces', serif; font-size: 13pt; font-weight: 700; color: #8D99AE; }
+.coloring-area { display: flex; align-items: center; justify-content: center; margin: 2mm auto; }
 
-/* === LAST PAGE === */
+.diary-lines { margin-top: 1.5mm; }
+.diary-line { border-bottom: 1px solid #e8e8e8; height: 8mm; }
+.diary-prompt { font-size: 9pt; color: #8D99AE; font-style: italic; padding-top: 1.5mm; }
+
+/* ACTIVITY PAGES */
+.activity-page { padding: 10mm 12mm; position: relative; }
+.activity-page h2 { font-family: 'Fraunces', serif; font-size: 24pt; text-align: center; margin-bottom: 4mm; }
+.activity-page .activity-subtitle { text-align: center; font-size: 11pt; color: #8D99AE; margin-bottom: 5mm; }
+.checklist-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4mm; }
+.checklist-item { display: flex; align-items: center; gap: 3mm; padding: 2.5mm 4mm; border-radius: 8px; background: #f8f8f5; border: 1px solid #e8e8e0; }
+.checklist-item .check { width: 6mm; height: 6mm; border: 2px solid #2A9D8F; border-radius: 3px; flex-shrink: 0; }
+.checklist-item .animal-icon { font-size: 18pt; flex-shrink: 0; }
+.checklist-item .animal-info { flex: 1; }
+.checklist-item .animal-name { font-weight: 700; font-size: 10pt; }
+.checklist-item .animal-where { font-size: 7pt; color: #8D99AE; }
+
+.stamp-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4mm; }
+.stamp-box { aspect-ratio: 1; border: 2.5px dashed #c0c0c0; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #fafafa; padding: 2mm; text-align: center; }
+.stamp-box .stamp-label { font-size: 8pt; font-weight: 700; color: #8D99AE; margin-top: 1mm; }
+.stamp-box .stamp-icon { font-size: 20pt; }
+
+/* LAST / SOLUTIONS */
 .last-page { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-.last-page h2 { font-family: 'Fraunces', serif; font-size: 28pt; color: #264653; margin-bottom: 6mm; }
-.last-page .fav-section { width: 80%; margin: 3mm 0; }
+.last-page h2 { font-family: 'Fraunces', serif; font-size: 28pt; color: #264653; margin-bottom: 5mm; }
+.last-page .fav-section { width: 80%; margin: 2mm 0; }
 .last-page .fav-line { border-bottom: 1px dashed #c0c0c0; height: 9mm; text-align: left; }
 .last-page .fav-label { font-size: 10pt; color: #8D99AE; padding-top: 2mm; }
-.last-page .big-draw { width: 80%; height: 65mm; border: 2px dashed #c0c0c0; border-radius: 12px; margin-top: 4mm; display: flex; align-items: center; justify-content: center; color: #8D99AE; font-size: 11pt; }
+.last-page .big-draw { width: 80%; height: 60mm; border: 2px dashed #c0c0c0; border-radius: 12px; margin-top: 3mm; display: flex; align-items: center; justify-content: center; color: #8D99AE; font-size: 11pt; }
 
-/* === JOKE SOLUTIONS PAGE === */
 .solutions-page { padding: 10mm; }
-.solutions-page h2 { font-family: 'Fraunces', serif; font-size: 22pt; text-align: center; color: #264653; margin-bottom: 5mm; }
-.solutions-page .solutions-subtitle { text-align: center; font-size: 11pt; color: #8D99AE; margin-bottom: 5mm; }
-.solutions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm 6mm; }
+.solutions-page h2 { font-family: 'Fraunces', serif; font-size: 22pt; text-align: center; color: #264653; margin-bottom: 4mm; }
+.solutions-page .solutions-subtitle { text-align: center; font-size: 11pt; color: #8D99AE; margin-bottom: 4mm; }
+.solutions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 6mm; }
 .solution-item { padding: 2mm 4mm; border-radius: 8px; background: #E76F5108; border-left: 3px solid #E76F51; }
-.solution-item .sol-day { font-weight: 800; font-size: 8pt; color: #E76F51; text-transform: uppercase; }
-.solution-item .sol-q { font-size: 8pt; font-weight: 700; margin-top: 0.5mm; }
-.solution-item .sol-a { font-size: 8pt; color: #2A9D8F; font-style: italic; margin-top: 0.5mm; }
+.solution-item .sol-day { font-weight: 800; font-size: 7pt; color: #E76F51; text-transform: uppercase; }
+.solution-item .sol-q { font-size: 7.5pt; font-weight: 700; margin-top: 0.5mm; }
+.solution-item .sol-a { font-size: 7.5pt; color: #2A9D8F; font-style: italic; }
 
 @media print {
   .page { page-break-after: always; }
@@ -136,149 +150,156 @@ body { font-family: 'Nunito', sans-serif; color: #264653; background: white; }
 <script>
 const CHILD_NAME = new URLSearchParams(window.location.search).get('name') || 'Louie';
 
+function icon(name, size=60) {
+  const s = size;
+  const icons = {
+    dice: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#264653" stroke-width="2" stroke-linecap="round"><rect x="5" y="5" width="50" height="50" rx="8"/><circle cx="20" cy="20" r="4" fill="#E76F51" stroke="none"/><circle cx="40" cy="20" r="4" fill="#E76F51" stroke="none"/><circle cx="30" cy="30" r="4" fill="#E76F51" stroke="none"/><circle cx="20" cy="40" r="4" fill="#E76F51" stroke="none"/><circle cx="40" cy="40" r="4" fill="#E76F51" stroke="none"/></svg>`,
+    sphere: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#264653" stroke-width="2"><circle cx="30" cy="30" r="25"/><ellipse cx="30" cy="30" rx="10" ry="25"/><path d="M8 22h44M8 38h44"/><path d="M12 14l36 32M48 14L12 46" stroke="#E9C46A" stroke-width="1" opacity="0.4"/></svg>`,
+    heli: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#264653" stroke-width="2" stroke-linecap="round"><ellipse cx="25" cy="32" rx="16" ry="10"/><path d="M41 32h12l-4 12H37"/><line x1="10" y1="22" x2="40" y2="22"/><line x1="25" y1="22" x2="25" y2="26"/><path d="M33 42v6h-16v-6" stroke-dasharray="3,2"/></svg>`,
+    car: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#264653" stroke-width="2" stroke-linecap="round"><path d="M8 38h44v-8l-6-10H16l-8 10v8z"/><circle cx="18" cy="40" r="5" fill="#E9C46A" stroke="#264653"/><circle cx="42" cy="40" r="5" fill="#E9C46A" stroke="#264653"/><path d="M20 20h20" stroke="#2A9D8F"/><path d="M3 48h54" stroke-dasharray="4,3" opacity="0.3"/></svg>`,
+    clapper: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#264653" stroke-width="2"><rect x="5" y="20" width="50" height="35" rx="3"/><path d="M5 20l10-12h35l5 12" fill="#264653"/><path d="M15 8l5 12M25 8l5 12M35 8l5 12" stroke="white" stroke-width="2"/><circle cx="30" cy="38" r="8" stroke="#E9C46A"/><path d="M27 34l8 4-8 4z" fill="#E9C46A" stroke="none"/></svg>`,
+    palm: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#2A9D8F" stroke-width="2" stroke-linecap="round"><path d="M30 55V25"/><path d="M30 25c-8-12-22-8-22-8s10 6 14 14"/><path d="M30 25c8-12 22-8 22-8s-10 6-14 14"/><path d="M30 25c-2-14-14-16-14-16s6 8 8 16"/><path d="M30 25c2-14 14-16 14-16s-6 8-8 16"/><path d="M5 55h50" stroke="#E9C46A" stroke-dasharray="3,3"/></svg>`,
+    mountain: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#2A9D8F" stroke-width="2" stroke-linecap="round"><path d="M5 50L22 15l8 12 8-12L55 50z"/><path d="M22 15l4 6" stroke="#E9C46A"/><path d="M10 50l12-18 6 8" opacity="0.3"/><circle cx="48" cy="12" r="5" fill="#E9C46A" stroke="none" opacity="0.5"/></svg>`,
+    tree: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#2A9D8F" stroke-width="2.5" stroke-linecap="round"><path d="M30 55V10"/><path d="M22 45c-8-2-12-8-12-8l12-2"/><path d="M38 45c8-2 12-8 12-8l-12-2"/><path d="M24 35c-6-2-10-7-10-7l10-2"/><path d="M36 35c6-2 10-7 10-7l-10-2"/><path d="M26 25c-4-2-7-6-7-6l7-1"/><path d="M34 25c4-2 7-6 7-6l-7-1"/><circle cx="30" cy="8" r="3" fill="#2A9D8F"/></svg>`,
+    waterfall: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#264653" stroke-width="2" stroke-linecap="round"><path d="M10 10h15v50" stroke="#2A9D8F"/><path d="M50 10h-15v50" stroke="#2A9D8F"/><path d="M28 15c0 10-3 15 0 25s-2 10 0 15" stroke="#4FC3F7" stroke-width="2"/><path d="M32 12c0 12 3 15 0 28s2 8 0 12" stroke="#4FC3F7" stroke-width="2"/><path d="M20 55c5-3 15-3 20 0" stroke="#4FC3F7"/></svg>`,
+    bridge: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#E76F51" stroke-width="2" stroke-linecap="round"><rect x="12" y="8" width="4" height="44"/><rect x="44" y="8" width="4" height="44"/><path d="M2 30h56"/><path d="M14 8c0 0 8 10 16 10s16-10 16-10" stroke-width="2.5"/><path d="M22 18v12M30 18v12M38 18v12" stroke-width="1.5" opacity="0.5"/><path d="M2 52h56" stroke="#8D99AE" stroke-dasharray="3,3"/></svg>`,
+    prison: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#264653" stroke-width="2" stroke-linecap="round"><rect x="10" y="15" width="40" height="35" rx="2"/><path d="M10 25h40"/><line x1="22" y1="25" x2="22" y2="50"/><line x1="30" y1="25" x2="30" y2="50"/><line x1="38" y1="25" x2="38" y2="50"/><path d="M25 15v-5h10v5" fill="#8D99AE" stroke="#264653"/><path d="M2 50c3-3 8-8 8-30" stroke="#4FC3F7" stroke-width="1" opacity="0.4"/><path d="M58 50c-3-3-8-8-8-30" stroke="#4FC3F7" stroke-width="1" opacity="0.4"/></svg>`,
+    rv: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#264653" stroke-width="2" stroke-linecap="round"><rect x="5" y="18" width="45" height="22" rx="3"/><path d="M50 24h5l3 8v8H50"/><rect x="10" y="22" width="10" height="8" rx="2" stroke="#2A9D8F"/><rect x="24" y="22" width="10" height="8" rx="2" stroke="#2A9D8F"/><circle cx="16" cy="42" r="5" fill="#E9C46A" stroke="#264653"/><circle cx="48" cy="42" r="5" fill="#E9C46A" stroke="#264653"/><path d="M2 48h56" stroke-dasharray="4,3" opacity="0.3"/></svg>`,
+    lighthouse: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#264653" stroke-width="2" stroke-linecap="round"><path d="M22 50l4-35h8l4 35z"/><rect x="24" y="10" width="12" height="6" rx="1"/><path d="M27 16v5h6v-5"/><circle cx="30" cy="12" r="2" fill="#E9C46A"/><path d="M18 10h-8M42 10h8M15 5l-5-3M45 5l5-3" stroke="#E9C46A" stroke-width="1.5"/><path d="M10 50h40" stroke="#2A9D8F"/><path d="M5 55c10-3 20 0 30-2s15 2 20 0" stroke="#4FC3F7" stroke-width="1.5"/></svg>`,
+    whale: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#264653" stroke-width="2" stroke-linecap="round"><path d="M8 30c0-10 10-18 22-18s20 8 20 16c0 6-5 12-12 14l-8 6-4-4c-10-1-18-7-18-14z"/><circle cx="18" cy="28" r="2" fill="#264653"/><path d="M50 28c4-8 6-12 8-10s-2 8-4 12"/><path d="M28 48l-2 4 4 2"/><path d="M3 42c6-1 12 1 18 0" stroke="#4FC3F7" stroke-width="1" opacity="0.5"/></svg>`,
+    starfish: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#E76F51" stroke-width="2"><path d="M30 5l6 18h18l-14 10 5 18-15-11-15 11 5-18L6 23h18z"/><circle cx="30" cy="28" r="3" fill="#E9C46A" stroke="none"/></svg>`,
+    rock: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#264653" stroke-width="2" stroke-linecap="round"><path d="M25 50V15c0-5 5-10 5-10s5 5 5 10v35"/><path d="M20 50c-8 0-15 2-15 2" stroke="#4FC3F7"/><path d="M40 50c8 0 15 2 15 2" stroke="#4FC3F7"/><path d="M5 55c10-2 20 0 30-1s15 1 20 0" stroke="#4FC3F7" stroke-width="1.5"/><circle cx="42" cy="20" r="8" fill="none" stroke="#8D99AE" stroke-width="1" stroke-dasharray="2,2"/></svg>`,
+    elk: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#264653" stroke-width="2" stroke-linecap="round"><ellipse cx="28" cy="32" rx="14" ry="10"/><circle cx="16" cy="22" r="6"/><circle cx="13" cy="20" r="1.5" fill="#264653"/><path d="M10 8l-4-6M10 8l2-7M10 8l-1 3"/><path d="M20 8l4-6M20 8l-2-7M20 8l1 3"/><path d="M18 42v10M24 42v10M32 42v10M38 42v10" stroke-width="2.5"/></svg>`,
+    eagle: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#264653" stroke-width="2" stroke-linecap="round"><path d="M30 20c-12 4-25 0-25 0s8 8 15 10"/><path d="M30 20c12 4 25 0 25 0s-8 8-15 10"/><ellipse cx="30" cy="28" rx="8" ry="6"/><circle cx="30" cy="22" r="5" fill="white" stroke="#264653"/><circle cx="30" cy="22" r="2" fill="#264653"/><path d="M30 27l-1 4 2 0z" fill="#E9C46A" stroke="#E9C46A"/><path d="M22 34l-3 12M30 34v14M38 34l3 12" stroke-width="1.5"/></svg>`,
+    ferry: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#264653" stroke-width="2" stroke-linecap="round"><path d="M8 35h44l-4 10H12z"/><rect x="18" y="22" width="24" height="13" rx="2"/><rect x="22" y="25" width="6" height="6" rx="1" stroke="#2A9D8F"/><rect x="32" y="25" width="6" height="6" rx="1" stroke="#2A9D8F"/><path d="M30 22v-10"/><path d="M30 12l8 4h-16z" fill="#E76F51" stroke="#E76F51"/><path d="M3 50c6-3 12 0 18-2s12 2 18 0 9-2 15 0" stroke="#4FC3F7" stroke-width="1.5"/></svg>`,
+    pretzel: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#F4A261" stroke-width="3" stroke-linecap="round"><path d="M20 50c-8 0-14-8-14-16 0-10 10-18 24-28 14 10 24 18 24 28 0 8-6 16-14 16"/><path d="M20 50c4-6 12-10 20 0" stroke-width="2"/><circle cx="22" cy="42" r="1.5" fill="#264653" stroke="none"/><circle cx="30" cy="38" r="1.5" fill="#264653" stroke="none"/><circle cx="38" cy="42" r="1.5" fill="#264653" stroke="none"/></svg>`,
+    fire: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke-linecap="round"><path d="M15 50h30" stroke="#8B4513" stroke-width="4"/><path d="M20 50h20" stroke="#654321" stroke-width="3"/><path d="M30 48c-4-6-10-10-8-20 1-5 4-8 8-12 4 4 7 7 8 12 2 10-4 14-8 20z" stroke="#E76F51" stroke-width="2" fill="#E76F5140"/><path d="M30 48c-2-4-5-6-4-12s4-8 4-8 3 4 4 8-2 8-4 12z" stroke="#E9C46A" stroke-width="1.5" fill="#E9C46A40"/></svg>`,
+    needle: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#264653" stroke-width="2" stroke-linecap="round"><path d="M28 8h4v30h-4z"/><path d="M18 38l12-6 12 6v6l-12 4-12-4z" fill="#E9C46A30" stroke="#264653"/><path d="M18 44l12 4 12-4v3l-12 4-12-4z"/><path d="M30 52v4"/><circle cx="30" cy="12" r="3" fill="#E76F51" stroke="none"/></svg>`,
+    plane: `<svg width="${s}" height="${s}" viewBox="0 0 60 60" fill="none" stroke="#264653" stroke-width="2" stroke-linecap="round"><path d="M30 8l4 0 4 18h14l-2 4H36l-2 20h-8l-2-20H10l-2-4h14l4-18z" fill="#2A9D8F20"/><path d="M26 46l4 8 4-8"/><circle cx="30" cy="18" r="3" fill="#E9C46A" stroke="none"/></svg>`,
+  };
+  return icons[name] || '';
+}
+
+const dayIcons = ['dice','sphere','heli','car','clapper','palm','mountain','tree','waterfall','waterfall','bridge','prison','rv','tree','lighthouse','whale','starfish','rock','rock','elk','eagle','ferry','pretzel','fire','needle','plane'];
+
 const days = [
   { day: 1, date: "17. Juli", place: "Las Vegas (Bellagio)", color: "#E76F51",
-    program: "Ankunft in Las Vegas! Euer Flieger landet um 18:35 Uhr. Mietwagen abholen (GMC Yukon!) und ab ins Bellagio Hotel. Abends den Las Vegas Strip erkunden — die Bellagio-Fontänen starten alle 15 Minuten!",
-    info: "Las Vegas liegt mitten in der Wüste Mojave! Hier regnet es fast nie und es kann über 40°C heiß werden. Das Bellagio hat 3.950 Zimmer und die Fontänen schießen bis zu 140 Meter hoch!", weather: "sonnig, sehr heiß",
+    program: "Ankunft in Las Vegas! Euer Flieger landet um 18:35 Uhr. Mietwagen abholen (GMC Yukon!) und ab ins Bellagio Hotel. Abends den Las Vegas Strip erkunden — die Bellagio-Fontänen starten alle 15 Min!",
+    info: "Las Vegas liegt mitten in der Wüste Mojave! Es kann über 40°C heiß werden. Das Bellagio hat 3.950 Zimmer und die Fontänen schießen bis zu 140 Meter hoch!",
     joke: { q: "Was macht ein Kaktus in Las Vegas?", a: "Er spielt Stachel-Poker!" } },
-
   { day: 2, date: "18. Juli", place: "Las Vegas – The Sphere!", color: "#E76F51",
-    program: "Heute geht's in die SPHERE! 🎬 Wizard of Oz um 11:00 Uhr (Türen 10:15). Nachmittags: Fremont Street Experience mit der Zipline über den Köpfen, oder den High Roller — das höchste Riesenrad der Welt (167m)!",
-    info: "Die Sphere ist die größte Kugel der Welt: 160m Durchmesser, 580.000 LED-Panels außen und der größte LED-Bildschirm der Welt innen mit 16K-Auflösung!", weather: "sonnig, sehr heiß",
+    program: "Heute geht's in die SPHERE! Wizard of Oz um 11:00 Uhr (Türen 10:15). Nachmittags: Fremont Street mit der Zipline, oder der High Roller — das höchste Riesenrad der Welt (167m)!",
+    info: "Die Sphere ist die größte Kugel der Welt: 160m Durchmesser, 580.000 LED-Panels außen und der größte LED-Bildschirm der Welt innen mit 16K!",
     joke: { q: "Warum tragen Kamele keine Sonnenbrillen?", a: "Weil sie schon Wüsten-Augen haben!" } },
-
   { day: 3, date: "19. Juli", place: "Grand Canyon Helikopter!", color: "#E76F51",
-    program: "HELIKOPTER über den Grand Canyon! 🚁 Abflug 07:00 Uhr morgens. Ihr fliegt über die Wüste und dann über den riesigen Canyon — 1.800m tief! Nachmittags Pool im Bellagio oder nochmal den Strip erkunden.",
-    info: "Der Grand Canyon ist 450 km lang, bis zu 29 km breit und 1.800 Meter tief. Der Colorado River hat über 5 Millionen Jahre gebraucht, um ihn auszuwaschen!", weather: "sonnig, sehr heiß",
+    program: "HELIKOPTER über den Grand Canyon! Abflug 07:00 Uhr. Ihr fliegt über die Wüste und dann über den riesigen Canyon — 1.800m tief! Nachmittags Pool im Bellagio.",
+    info: "Der Grand Canyon ist 450 km lang, bis 29 km breit und 1.800m tief. Der Colorado River brauchte über 5 Mio. Jahre dafür!",
     joke: { q: "Was sagt der Helikopter zum Grand Canyon?", a: "Du bist echt tiefgründig!" } },
-
   { day: 4, date: "20. Juli", place: "Las Vegas → Los Angeles", color: "#E9C46A",
-    program: "Roadtrip nach LA! 🚗 Ca. 4,5 Stunden Fahrt durch die Mojave-Wüste. Unterwegs: Ausguck nach Joshua Trees (die sehen aus wie Alien-Bäume!). Ankunft in Marina del Rey am Meer — euer Townhouse hat 2 Schlafzimmer!",
-    drive: "🚗 ~430 km, ca. 4,5 Std. über die I-15 durch die Mojave-Wüste",
-    info: "Los Angeles heißt 'Die Stadt der Engel'. Die Stadt hat über 300 Sonnentage im Jahr! Marina del Rey ist der größte von Menschenhand geschaffene Yachthafen der Welt.", weather: "sonnig, warm",
+    program: "Roadtrip nach LA! Ca. 4,5 Std. Fahrt durch die Mojave-Wüste. Ausguck nach Joshua Trees (sehen aus wie Alien-Bäume!). Ankunft in Marina del Rey am Meer!",
+    drive: "~430 km · 4,5 Std. · I-15 durch die Mojave-Wüste",
+    info: "Los Angeles heißt 'Die Stadt der Engel'. Marina del Rey ist der größte von Menschenhand geschaffene Yachthafen der Welt!",
     joke: { q: "Was sagt ein Auto in der Wüste?", a: "Ich hab so einen trockenen Humor!" } },
-
-  { day: 5, date: "21. Juli", place: "Universal Studios VIP Tour!", color: "#E9C46A",
-    program: "UNIVERSAL STUDIOS VIP TOUR! 🎬 Ab 09:30 Uhr den ganzen Tag exklusiv hinter die Kulissen von Hollywood. Ihr seht echte Film-Sets von Jurassic Park, Harry Potter, Fast & Furious und mehr. Gratis Parken in der Frankenstein Valet Garage!",
-    info: "Universal Studios Hollywood wurde 1912 gegründet. Bei der VIP Tour kommt ihr in Bereiche, die normale Besucher nie sehen! Echte Film-Sets, Spezialeffekte und alle Rides ohne Anstehen!", weather: "sonnig, warm",
+  { day: 5, date: "21. Juli", place: "Universal Studios VIP!", color: "#E9C46A",
+    program: "UNIVERSAL STUDIOS VIP TOUR ab 09:30! Den ganzen Tag exklusiv hinter die Kulissen: Jurassic Park, Harry Potter, Fast & Furious Film-Sets. Alle Rides ohne Anstehen!",
+    info: "Universal Studios wurde 1912 gegründet. Bei der VIP Tour kommt ihr in Bereiche, die normale Besucher nie sehen — echte Film-Sets und Spezialeffekte!",
     joke: { q: "Was macht ein Dino im Filmstudio?", a: "Er dreht einen Brüller!" } },
-
-  { day: 6, date: "22. Juli", place: "Los Angeles – Hollywood & Beach", color: "#E9C46A",
-    program: "Hollywood Walk of Fame ⭐ und den berühmten Hollywood-Schriftzug sehen! Nachmittags an den Santa Monica Beach — der Santa Monica Pier hat einen kleinen Freizeitpark direkt am Meer. Venice Beach Boardwalk mit Straßenkünstlern!",
-    info: "Der Hollywood-Schriftzug ist 137 Meter lang! Jeder Buchstabe ist 14 Meter hoch. Er wurde 1923 als Werbung für Immobilien aufgestellt — und blieb einfach stehen!", weather: "sonnig, warm",
+  { day: 6, date: "22. Juli", place: "Hollywood & Santa Monica", color: "#E9C46A",
+    program: "Hollywood Walk of Fame und den berühmten Schriftzug sehen! Santa Monica Pier mit Freizeitpark am Meer. Venice Beach Boardwalk mit Straßenkünstlern und Skatern!",
+    info: "Der Hollywood-Schriftzug ist 137m lang, jeder Buchstabe 14m hoch! 1923 als Immobilien-Werbung aufgestellt — und blieb einfach stehen!",
     joke: { q: "Warum wurde der Strand verhaftet?", a: "Weil er so viele Wellen geschlagen hat!" } },
-
-  { day: 7, date: "23. Juli", place: "LA → Sequoia National Park", color: "#2A9D8F",
-    program: "Auf in die Berge! 🏔️ Fahrt von LA in die Sierra Nevada. Unterwegs durch das San Joaquin Valley — riesige Felder und Obstplantagen. Ankunft in der Wuksachi Lodge mitten im Sequoia NP!",
-    drive: "🚗 ~420 km, ca. 4,5 Std. über die CA-99 durch das Central Valley",
-    info: "Der General Sherman Tree ist der größte lebende Baum der Welt! 84 Meter hoch, 31 Meter Umfang und über 2.000 Jahre alt. Sein Gewicht: ca. 1.900 Tonnen!", weather: "warm tagsüber, kühl abends",
+  { day: 7, date: "23. Juli", place: "LA → Sequoia NP", color: "#2A9D8F",
+    program: "Ab in die Berge! Fahrt durch das San Joaquin Valley mit riesigen Feldern. Ankunft in der Wuksachi Lodge mitten im Sequoia NP zwischen den größten Bäumen der Welt!",
+    drive: "~420 km · 4,5 Std. · CA-99 durch das Central Valley",
+    info: "Der General Sherman Tree ist der größte lebende Baum! 84m hoch, 31m Umfang, über 2.000 Jahre alt, ca. 1.900 Tonnen schwer!",
     joke: { q: "Warum können Bäume nicht ins Internet?", a: "Weil sie ständig in ihren Ringen hängen!" } },
-
   { day: 8, date: "24. Juli", place: "Sequoia National Park", color: "#2A9D8F",
-    program: "Ganzer Tag im Sequoia NP! 🌲 Wanderung zum General Sherman Tree, durch den Tunnel Log (ein umgefallener Mammutbaum, durch den man durchlaufen kann!), Moro Rock besteigen (350 Stufen für eine krasse Aussicht!). Augen auf: Schwarzbären, Maultierhirsche und Kojoten!",
-    info: "Mammutbäume haben eine feuerfeste Rinde — bis zu 60 cm dick! Feuer hilft ihnen sogar: Es öffnet ihre Zapfen, damit die Samen rauskommen.", weather: "sonnig, angenehm",
+    program: "Ganzer Tag Sequoia NP! General Sherman Tree, Tunnel Log (durch einen Baum laufen!), Moro Rock (350 Stufen, krasse Aussicht!). Augen auf: Schwarzbären, Hirsche, Kojoten!",
+    info: "Mammutbäume haben feuerfeste Rinde — bis 60 cm dick! Feuer hilft ihnen sogar: Es öffnet ihre Zapfen für die Samen.",
     joke: { q: "Was sagt ein Mammutbaum zum anderen?", a: "Hey, du bist ja riesig! — Du aber auch!" } },
-
   { day: 9, date: "25. Juli", place: "Sequoia → Yosemite NP", color: "#2A9D8F",
-    program: "Weiter nach Yosemite! 🏞️ Fahrt durch die Sierra Nevada mit mega Bergpanoramen. Ankunft im legendären Ahwahnee Hotel (dort haben schon Könige und Präsidenten geschlafen!). Abends: Blick auf El Capitan im Sonnenuntergang!",
-    drive: "🚗 ~300 km, ca. 4 Std. über Fresno und die CA-41",
-    info: "El Capitan ist die größte freistehende Granitwand der Welt — 900 Meter senkrecht! Profi-Kletterer brauchen mehrere Tage, um da hochzukommen.", weather: "sonnig",
+    program: "Weiter nach Yosemite! Sierra Nevada mit mega Bergpanoramen. Ankunft im Ahwahnee Hotel (dort schliefen schon Könige!). Abends: El Capitan im Sonnenuntergang!",
+    drive: "~300 km · 4 Std. · über Fresno und CA-41",
+    info: "El Capitan ist die größte Granitwand der Welt — 900m senkrecht! Profi-Kletterer brauchen mehrere Tage nach oben.",
     joke: { q: "Warum klettern Bergsteiger auf Berge?", a: "Weil sie nicht durch sie durchgehen können!" } },
-
   { day: 10, date: "26. Juli", place: "Yosemite National Park", color: "#2A9D8F",
-    program: "Abenteuer-Tag in Yosemite! 💧 Yosemite Falls sehen (739m hoch!), Mirror Lake wandern, und den Blick auf Half Dome genießen. Augen auf: Kojoten, Schwarzbären, Waschbären und Stellersche Blauhäher (knallblau!).",
-    info: "Die Yosemite Falls sind 739 Meter hoch — der höchste Wasserfall in Nordamerika! Das Wasser fällt in drei Stufen. Im Sommer kann der Wasserfall fast austrocknen.", weather: "sonnig, warm",
+    program: "Abenteuer in Yosemite! Yosemite Falls (739m!), Mirror Lake wandern, Half Dome bestaunen. Augen auf: Kojoten, Schwarzbären, Waschbären, Blauhäher (knallblau!).",
+    info: "Die Yosemite Falls sind 739m hoch — höchster Wasserfall Nordamerikas! Das Wasser fällt in drei Stufen. Im Sommer kann er fast austrocknen.",
     joke: { q: "Was sagt der Wasserfall zum Fluss?", a: "Lass dich fallen, das macht Spaß!" } },
-
   { day: 11, date: "27. Juli", place: "Yosemite → San Francisco", color: "#E9C46A",
-    program: "Ab nach San Francisco! 🌉 Fahrt durch die Gold-Rush-Country und über die Bay Bridge nach SF. Euer Argonaut Hotel liegt direkt am Fisherman's Wharf! Nachmittags: Cable Car fahren, Pier 39 mit den Seelöwen checken!",
-    drive: "🚗 ~310 km, ca. 4 Std. über die CA-120 und I-580",
-    info: "Die Golden Gate Bridge ist 2.737 Meter lang und in 'International Orange' gestrichen. Bei Nebel heulen die Foghorns — das klingt wie ein riesiges Schiff!", weather: "kühl, oft neblig",
+    program: "Ab nach SF! Durch Gold-Rush-Country über die Bay Bridge. Argonaut Hotel am Fisherman's Wharf! Cable Car fahren, Pier 39 mit den Seelöwen checken!",
+    drive: "~310 km · 4 Std. · CA-120 und I-580",
+    info: "Die Golden Gate Bridge ist 2.737m lang, in 'International Orange' gestrichen. Bei Nebel heulen die Foghorns wie ein riesiges Schiff!",
     joke: { q: "Warum ist die Golden Gate Bridge nie einsam?", a: "Weil immer so viele Autos über sie fahren!" } },
-
   { day: 12, date: "28. Juli", place: "San Francisco – Alcatraz!", color: "#E9C46A",
-    program: "ALCATRAZ! 🏴‍☠️ Fähre um 10:35 Uhr ab Pier 33 (um 10:05 da sein!). Audio-Tour durch das berühmteste Gefängnis der Welt. Nachmittags: Chinatown (das älteste in den USA!), Lombard Street (die krummste Straße der Welt) und Golden Gate Bridge!",
-    info: "Alcatraz war 29 Jahre lang ein Hochsicherheitsgefängnis. 36 Häftlinge versuchten zu fliehen — offiziell hat es keiner geschafft. Aber 3 wurden nie gefunden... 🤔", weather: "kühl, neblig",
+    program: "ALCATRAZ! Fähre 10:35 ab Pier 33 (10:05 da sein!). Audio-Tour durchs berühmteste Gefängnis. Nachmittags: Chinatown, Lombard Street, Golden Gate Bridge!",
+    info: "Alcatraz: 29 Jahre Hochsicherheitsgefängnis. 36 versuchten zu fliehen — offiziell schaffte es keiner. Aber 3 wurden nie gefunden...",
     joke: { q: "Warum fährt man gern Cable Car?", a: "Weil man sich an den Seilen nicht festfahren kann!" } },
-
   { day: 13, date: "29. Juli", place: "SF → Benbow KOA (Wohnmobil!)", color: "#2A9D8F",
-    program: "WOHNMOBIL-TAG! 🚐 Morgens den Mietwagen abgeben und das Wohnmobil übernehmen. Dann auf die legendäre US-101 Richtung Norden! Durch die ersten Redwood-Wälder. Abends: Erstes Lagerfeuer auf dem KOA Campingplatz!",
-    drive: "🚐 ~400 km, ca. 5 Std. über die US-101 an der Küste entlang, dann durch die Redwoods",
-    info: "Ab heute seid ihr Wohnmobil-Abenteurer! Die Redwoods sind die höchsten Bäume der Welt — bis zu 116 Meter! Das ist so hoch wie ein 35-stöckiges Haus.", weather: "angenehm, warm",
+    program: "WOHNMOBIL-TAG! Mietwagen abgeben, Wohnmobil übernehmen. Auf die US-101 Richtung Norden durch die ersten Redwoods. Abends: Erstes Lagerfeuer am KOA!",
+    drive: "~400 km · 5 Std. · US-101 Küste + Redwoods",
+    info: "Ab jetzt seid ihr Wohnmobil-Abenteurer! Die Redwoods sind die höchsten Bäume der Welt — bis 116m hoch wie ein 35-stöckiges Haus!",
     joke: { q: "Was sagt das Wohnmobil zum Zelt?", a: "Ich hab vier Räder und du nur Heringe!" } },
-
-  { day: 14, date: "30. Juli", place: "Benbow → Crescent City KOA", color: "#2A9D8F",
-    program: "Avenue of the Giants! 🌲 50 km lange Straße durch uralte Mammutbäume. Stopps: Shrine Drive-Thru Tree (mit dem Auto durch einen Baum fahren!), Founders Grove mit dem Dyerville Giant (107m lang!). Weiter zur Küste nach Crescent City.",
-    drive: "🚐 ~310 km, ca. 4,5 Std. über die Avenue of the Giants und US-101",
-    info: "Die Avenue of the Giants hat Bäume, die 1.500 Jahre alt sind! Als die Wikinger in Amerika landeten, waren diese Bäume schon 500 Jahre alt.", weather: "angenehm",
+  { day: 14, date: "30. Juli", place: "Benbow → Crescent City", color: "#2A9D8F",
+    program: "Avenue of the Giants! 50 km durch uralte Mammutbäume. Shrine Drive-Thru Tree (mit dem Auto durch einen Baum!). Founders Grove mit dem Dyerville Giant (107m!).",
+    drive: "~310 km · 4,5 Std. · Avenue of the Giants + US-101",
+    info: "Die Avenue of the Giants hat 1.500 Jahre alte Bäume! Als die Wikinger Amerika entdeckten, waren sie schon 500 Jahre alt.",
     joke: { q: "Welcher Baum kann am besten schwimmen?", a: "Die Strand-Kiefer!" } },
-
   { day: 15, date: "31. Juli", place: "Crescent City / Redwoods", color: "#2A9D8F",
-    program: "Redwood National Park erkunden! 🦎 Fern Canyon wandern (eine Schlucht mit Farnwänden — hier wurde Jurassic Park 2 gedreht!). Battery Point Lighthouse bei Ebbe zu Fuß erreichen! Augen auf: Bananenschnecken (knallgelb, 25 cm lang!), Elche, Seelöwen!",
-    info: "In den Redwoods leben Bananenschnecken — sie sind knallgelb und können 25 cm lang werden! Das Battery Point Lighthouse kann man nur bei Ebbe erreichen — sonst steht es im Wasser.", weather: "kühl, neblig",
+    program: "Redwood National Park! Fern Canyon (Farnwände — Jurassic Park 2 wurde hier gedreht!). Battery Point Lighthouse bei Ebbe zu Fuß! Augen auf: Bananenschnecken (knallgelb, 25 cm!), Elche, Seelöwen!",
+    info: "Bananenschnecken sind knallgelb und bis 25 cm lang! Das Battery Point Lighthouse erreicht man nur bei Ebbe — sonst steht es im Wasser.",
     joke: { q: "Warum haben Schnecken keine Angst im Wald?", a: "Sie tragen ihr Haus immer dabei!" } },
-
   { day: 16, date: "1. August", place: "Crescent City → Bullards Beach", color: "#2A9D8F",
-    program: "Willkommen in Oregon! 🌊 Die Küste wird wilder und dramatischer. Stopp an den Samuel H. Boardman Scenic Corridors (krasse Felsen im Meer!). Bullards Beach State Park bei Bandon — Leuchtturm Coquille River bei Sonnenuntergang!",
-    drive: "🚐 ~320 km, ca. 4,5 Std. die Oregon-Küste hoch über die US-101",
-    info: "Oregon hat 584 km Küste und JEDER Strand ist öffentlich! Die Felsformationen an der Küste wurden über Jahrtausende vom Pazifik geformt. Haltet Ausschau nach Walen! 🐋", weather: "kühl, windig",
+    program: "Willkommen in Oregon! Die Küste wird wilder. Samuel H. Boardman Scenic Corridors (krasse Felsen!). Bullards Beach bei Bandon — Leuchtturm Coquille River bei Sonnenuntergang!",
+    drive: "~320 km · 4,5 Std. · US-101 Oregon-Küste",
+    info: "Oregon: 584 km Küste und JEDER Strand ist öffentlich! Felsformationen vom Pazifik geformt. Haltet Ausschau nach Walen!",
     joke: { q: "Was macht eine Krabbe am Strand?", a: "Sie geht seitwärts shoppen!" } },
-
   { day: 17, date: "2. August", place: "Bullards Beach → Waldport", color: "#2A9D8F",
-    program: "Oregon-Küste pur! 🦀 Stopp an den Oregon Dunes (riesige Sanddünen am Meer!). In Newport: Oregon Coast Aquarium besuchen — Haie, Seeotter und ein Unterwasser-Tunnel! Gezeitenpools am Strand: Seesterne, Anemonen, Krebse suchen!",
-    drive: "🚐 ~220 km, ca. 3 Std. über die US-101 an der Küste",
-    info: "Die Oregon-Küste ist berühmt für ihre Gezeitenpools — kleine Wasserbecken in den Felsen, in denen Seesterne, Seeigel und Anemonen leben. Das Oregon Coast Aquarium hat einen gläsernen Unterwasser-Tunnel!", weather: "kühl, bewölkt",
+    program: "Oregon-Küste pur! Oregon Dunes (riesige Sanddünen!). Newport: Oregon Coast Aquarium — Haie, Seeotter, Unterwasser-Tunnel! Gezeitenpools am Strand: Seesterne, Anemonen, Krebse!",
+    drive: "~220 km · 3 Std. · US-101 Küste",
+    info: "Die Gezeitenpools sind kleine Wasserbecken in den Felsen mit Seesternen, Seeigeln und Anemonen. Das Aquarium hat einen gläsernen Unterwasser-Tunnel!",
     joke: { q: "Was singt der Wal unter der Dusche?", a: "Waaal-zer von Strauss!" } },
-
   { day: 18, date: "3. August", place: "Waldport → Astoria KOA", color: "#2A9D8F",
-    program: "Weiter die Küste hoch! 🏖️ Stopp in Tillamook (Käse- und Eisfabrik!). Cannon Beach sehen — der Haystack Rock ist 72m hoch und steht direkt im Meer. Astoria ist die älteste Stadt an der US-Westküste! Astoria Column: 164 Stufen für mega Aussicht!",
-    drive: "🚐 ~300 km, ca. 4 Std. über die US-101 an der Küste",
-    info: "In Astoria wurde der Film 'Die Goonies' gedreht! Die Astoria Column hat eine 190m lange Spirale mit Bildern der Geschichte Oregons. Der Haystack Rock bei Cannon Beach ist einer der meistfotografierten Felsen der Welt.", weather: "kühl, bewölkt",
+    program: "Tillamook Käse- & Eisfabrik! Cannon Beach — Haystack Rock (72m hoch im Meer!). Astoria: älteste Stadt der US-Westküste, Goonies-Drehort! Astoria Column: 164 Stufen, mega Aussicht!",
+    drive: "~300 km · 4 Std. · US-101 Küste",
+    info: "In Astoria wurden 'Die Goonies' gedreht! Die Astoria Column hat eine Spirale mit Bildern. Der Haystack Rock ist einer der meistfotografierten Felsen der Welt.",
     joke: { q: "Warum können Fische nicht Klavier spielen?", a: "Weil sie Angst vor den Schuppen haben!" } },
-
   { day: 19, date: "4. August", place: "Astoria → La Push", color: "#264653",
-    program: "Über die Grenze nach Washington! 🌧️ Fahrt über die Astoria-Megler Bridge (6,5 km lang!). Weiter zum Quileute-Reservat in La Push — hier wurden Teile von Twilight gedreht! Rialto Beach mit riesigen Sea Stacks (Felsen im Meer). Treibholz-Skulpturen!",
-    drive: "🚐 ~350 km, ca. 5 Std. über die US-101 durch den Olympic NP",
-    info: "La Push liegt im Quileute-Reservat. Die Quileute sind ein Stamm der Ureinwohner Amerikas. In Twilight sind sie die Werwölfe! Der Strand hat dramatische Felsen und riesige Treibholzstämme.", weather: "kühl, neblig",
+    program: "Washington State! Astoria-Megler Bridge (6,5 km!). Weiter zum Quileute-Reservat in La Push — Twilight-Drehort! Rialto Beach mit Sea Stacks. Treibholz-Skulpturen bauen!",
+    drive: "~350 km · 5 Std. · US-101 durch Olympic NP",
+    info: "La Push liegt im Quileute-Reservat. In Twilight sind die Quileute die Werwölfe! Der Strand hat dramatische Felsen und riesige Treibholzstämme.",
     joke: { q: "Was sagt der Regen zum Wald?", a: "Kopf hoch, ich mach dich grün!" } },
-
   { day: 20, date: "5. August", place: "La Push → Port Angeles", color: "#2A9D8F",
-    program: "Hoh Rainforest! 🌿 Der einzige gemäßigte Regenwald in den USA. Die Bäume sind komplett mit Moos bedeckt — wie in einem Märchen oder auf Dagobah (Star Wars)! Augen auf: Roosevelt-Elche (riesig!), Schwarzbären, Weißkopfseeadler!",
-    drive: "🚐 ~160 km, ca. 3 Std. durch den Olympic NP",
-    info: "Im Hoh Rainforest regnet es bis zu 4 Meter pro Jahr! Die Bäume sind mit Moos bedeckt wie in einem Märchenwald. Roosevelt-Elche können 500 kg schwer werden — so schwer wie ein kleines Auto!", weather: "feucht, kühl",
+    program: "Hoh Rainforest! Einziger Regenwald der USA. Bäume komplett mit Moos — wie Dagobah (Star Wars)! Augen auf: Roosevelt-Elche (riesig!), Schwarzbären, Weißkopfseeadler!",
+    drive: "~160 km · 3 Std. · durch den Olympic NP",
+    info: "Im Hoh Rainforest regnet es 4m pro Jahr! Roosevelt-Elche können 500 kg werden — so schwer wie ein kleines Auto!",
     joke: { q: "Warum tragen Elche kein GPS?", a: "Sie finden den Wald auch so!" } },
-
   { day: 21, date: "6. August", place: "Olympic NP / Port Angeles", color: "#2A9D8F",
-    program: "Olympic NP Abenteuer! ⛰️ Hurricane Ridge (1.600m hoch — Blick auf Berge, Gletscher und bis nach Kanada!). Ruby Beach oder Second Beach wandern — Treibholz-Skulpturen bauen! Augen auf: Murmeltiere, Bergziegen, Adler, Wale!",
-    info: "Olympic NP hat alles: Regenwald, Berge mit Gletschern UND wilde Strände — alles in einem Park! Von Hurricane Ridge kann man bei klarem Wetter bis nach Kanada und den Mount Rainier sehen.", weather: "kühl, windig",
+    program: "Olympic NP Tag! Hurricane Ridge (1.600m — Blick bis Kanada!). Ruby Beach oder Second Beach wandern. Treibholz-Skulpturen bauen! Augen auf: Murmeltiere, Bergziegen, Adler, Wale!",
+    info: "Olympic NP hat Regenwald, Berge mit Gletschern UND wilde Strände — alles in einem Park! Von Hurricane Ridge sieht man bis Kanada und den Mount Rainier.",
     joke: { q: "Warum schwimmen Fische im Meer?", a: "Weil sie nicht fliegen können — naja, Fliegende Fische schon!" } },
-
   { day: 22, date: "7. August", place: "Port Angeles → Seattle", color: "#E76F51",
-    program: "Tschüss Wohnmobil, hallo Seattle! 🏙️ Fahrt mit der Fähre von Port Angeles über die Puget Sound (mega Aussicht auf die Olympic Mountains!). Wohnmobil abgeben, Mietwagen (Chevrolet Suburban!) holen. Sound Hotel einchecken, Pike Place Market!",
-    drive: "🚐 ~230 km, ca. 3,5 Std. inkl. Fähre über Bainbridge Island",
-    info: "Seattle hat den Spitznamen 'Emerald City' wegen der vielen Bäume. Am Pike Place Market fliegen die Fische — die Verkäufer werfen sie sich zu! Der allererste Starbucks der Welt ist hier (seit 1971).", weather: "mild, bewölkt",
+    program: "Tschüss Wohnmobil! Fähre über Puget Sound (mega Aussicht!). Wohnmobil abgeben, Chevrolet Suburban holen. Sound Hotel, Pike Place Market — die Verkäufer werfen Fische!",
+    drive: "~230 km · 3,5 Std. · inkl. Fähre Bainbridge Island",
+    info: "Seattle = 'Emerald City'. Am Pike Place Market fliegen die Fische! Der allererste Starbucks (1971) ist hier.",
     joke: { q: "Was sagt der Vulkan wenn er wütend ist?", a: "Ich könnte EXPLODIEREN!" } },
-
   { day: 23, date: "8. August", place: "Seattle → Leavenworth", color: "#F4A261",
-    program: "Bayerisches Dorf in Amerika! 🥨 Fahrt über den Stevens Pass in die Cascade Mountains. Leavenworth sieht aus wie in Bayern — Fachwerkhäuser, Brezeln, Schnitzel! Berg Haus Leavenworth hat Feuerstelle und Grill. Abends: Marshmallows rösten!",
-    drive: "🚗 ~210 km, ca. 2,5 Std. über den Stevens Pass durch die Cascades",
-    info: "Leavenworth war in den 1960ern eine sterbende Holzfällerstadt. Die Bewohner haben ALLE Häuser im bayerischen Stil umgebaut — und jetzt kommen über 2 Millionen Besucher pro Jahr!", weather: "warm, sonnig",
+    program: "Bayerisches Dorf in Amerika! Stevens Pass durch die Cascade Mountains. Leavenworth: Fachwerkhäuser, Brezeln, Schnitzel! Berg Haus mit Feuerstelle. Abends: Marshmallows rösten!",
+    drive: "~210 km · 2,5 Std. · Stevens Pass, Cascades",
+    info: "Leavenworth war eine sterbende Holzfällerstadt. ALLE Häuser wurden bayerisch umgebaut — jetzt kommen 2 Mio. Besucher pro Jahr!",
     joke: { q: "Was sagt die Brezel zum Weißwurst?", a: "Ohne mich bist du nackig!" } },
-
   { day: 24, date: "9. August", place: "Leavenworth (Berg Haus)", color: "#F4A261",
-    program: "Chilltag in Leavenworth! 🏔️ Wandern am Icicle Creek, Tubing auf dem Wenatchee River (mit Schläuchen den Fluss runtertreiben!), Minigolf, oder einfach am Berg Haus relaxen mit Grillen und Feuerstelle. Letzte Nacht in den Bergen!",
-    info: "Die Cascade Mountains haben über 300 Gletscher! Der nahegelegene Mount Stuart ist 2.871m hoch. Im Sommer gibt es hier die besten Sterne, weil es so wenig Licht gibt.", weather: "warm, sonnig",
+    program: "Chilltag! Wandern am Icicle Creek, Tubing auf dem Wenatchee River (mit Schläuchen den Fluss runter!), Minigolf, Grillen am Berg Haus mit Feuerstelle. Letzte Nacht in den Bergen!",
+    info: "Die Cascade Mountains haben über 300 Gletscher! Mount Stuart ist 2.871m hoch. Im Sommer die besten Sterne weil so wenig Licht!",
     joke: { q: "Warum regnet es so oft in Seattle?", a: "Damit die Kaffeebohnen besser wachsen!" } },
-
   { day: 25, date: "10. August", place: "Seattle – Space Needle!", color: "#E76F51",
-    program: "Seattle Sightseeing! 🚀 Space Needle (184m hoch, gläserner Boden!), Museum of Pop Culture (MoPOP — Gitarren, Sci-Fi, Gaming!), Chihuly Garden (verrückte Glasskulpturen). Abends: Abschiedsdinner im Hotel 1000!",
-    drive: "🚗 ~210 km, ca. 2,5 Std. zurück über den Stevens Pass",
-    info: "Die Space Needle ist 184 Meter hoch und wurde für die Weltausstellung 1962 gebaut. Sie hat einen gläsernen Boden — traut ihr euch draufzustellen? Das MoPOP hat echte Gitarren von Jimi Hendrix!", weather: "mild",
+    program: "Space Needle (184m, gläserner Boden!), MoPOP Museum (Gitarren, Sci-Fi, Gaming!), Chihuly Garden (verrückte Glasskulpturen). Abends: Abschiedsdinner im Hotel 1000!",
+    drive: "~210 km · 2,5 Std. · zurück über Stevens Pass",
+    info: "Die Space Needle (184m) hat einen gläsernen Boden — traut ihr euch? Das MoPOP hat echte Gitarren von Jimi Hendrix!",
     joke: { q: "Was sieht man von der Space Needle?", a: "Alles — außer die Space Needle!" } },
-
-  { day: 26, date: "11. August", place: "Seattle → Heimreise ✈️", color: "#E76F51",
-    program: "Letzter Tag! 😢 Morgens noch durch Seattle schlendern, letzte Souvenirs kaufen. Mietwagen abgeben am SEA Airport. Flug um 13:30 Uhr mit Air France über Paris nach Berlin. Ca. 9.500 km Luftlinie — in 12 Stunden seid ihr zuhause!",
-    info: "Ihr fliegt ca. 9.500 km zurück nach Deutschland! Die Erde dreht sich unter euch weg — deshalb 'gewinnt' ihr auf dem Rückflug Zeit. Seattle → Paris → Berlin!", weather: "???",
+  { day: 26, date: "11. August", place: "Seattle → Heimreise", color: "#E76F51",
+    program: "Letzter Tag! Morgens Seattle, letzte Souvenirs. Mietwagen ab am SEA Airport. Flug 13:30 Air France über Paris nach Berlin. 9.500 km — in 12 Std. seid ihr zuhause!",
+    info: "9.500 km zurück! Die Erde dreht sich unter euch weg — deshalb 'gewinnt' ihr auf dem Rückflug Zeit. Seattle → Paris → Berlin!",
     joke: { q: "Was sagt das Flugzeug beim Abschied?", a: "Ich heb dann mal ab!" } },
 ];
 
@@ -289,23 +310,28 @@ function generateBook() {
   // === COVER ===
   container.innerHTML += `
     <div class="page cover">
-      <div class="deco deco-tl">🌎</div>
-      <div class="deco deco-br">✈️</div>
-      <div class="plane">✈️</div>
+      <div class="deco" style="top:8mm;left:12mm;font-size:70pt;">🌎</div>
+      <div class="deco" style="bottom:8mm;right:12mm;font-size:70pt;">🏕️</div>
+      <div class="deco" style="top:8mm;right:12mm;font-size:50pt;">🦅</div>
+      <div class="deco" style="bottom:8mm;left:12mm;font-size:50pt;">🐻</div>
+      <div style="font-size:60pt;margin-bottom:5mm;">✈️</div>
       <h1>Reisetagebuch</h1>
       <h2>USA Westküste 2026</h2>
       <div class="child-name">${CHILD_NAME}</div>
       <div class="subtitle">Familie Dahrendorf</div>
       <div class="dates">17. Juli — 11. August 2026</div>
+      <div style="margin-top:6mm;display:flex;gap:8mm;font-size:28pt;opacity:0.3;">
+        <span>🎰</span><span>🎬</span><span>🌲</span><span>🌉</span><span>🚐</span><span>🦌</span><span>🏔️</span><span>🚀</span>
+      </div>
     </div>
   `;
 
-  // === ROUTE MAP PAGE ===
+  // === ROUTE MAP ===
   container.innerHTML += `
     <div class="page" style="padding:8mm;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-      <h2 style="font-family:'Fraunces',serif;font-size:22pt;color:#264653;margin-bottom:4mm;text-align:center;">🗺️ Unsere Reiseroute</h2>
-      <p style="font-size:11pt;color:#8D99AE;margin-bottom:4mm;text-align:center;">Las Vegas → Los Angeles → San Francisco → Oregon Coast → Olympic NP → Seattle</p>
-      <svg viewBox="0 0 700 480" style="width:260mm;height:170mm;" xmlns="http://www.w3.org/2000/svg">
+      <h2 style="font-family:'Fraunces',serif;font-size:22pt;color:#264653;margin-bottom:3mm;">🗺️ Unsere Reiseroute</h2>
+      <p style="font-size:10pt;color:#8D99AE;margin-bottom:3mm;">Las Vegas → LA → San Francisco → Oregon → Olympic NP → Seattle</p>
+      <svg viewBox="0 0 700 480" style="width:260mm;height:168mm;" xmlns="http://www.w3.org/2000/svg">
         <rect width="700" height="480" fill="#f0f4f8" rx="12"/>
         <path d="M0 0 L180 0 L140 80 L100 160 L80 240 L60 300 L50 340 L40 380 L80 430 L120 480 L0 480 Z" fill="#d4e8f0" opacity="0.5"/>
         <text x="40" y="200" font-size="14" fill="#8bafc4" font-family="Nunito" font-weight="600" transform="rotate(-90,40,200)">PACIFIC OCEAN</text>
@@ -317,62 +343,40 @@ function generateBook() {
         <text x="660" y="240" font-size="12" fill="#bbb" font-family="Nunito" font-weight="600">OREGON</text>
         <text x="660" y="100" font-size="12" fill="#bbb" font-family="Nunito" font-weight="600">WASHINGTON</text>
         <text x="400" y="460" font-size="11" fill="#bbb" font-family="Nunito">NEVADA</text>
-        <path d="M580 440 L260 415 L300 370 L250 355 L170 345 L120 310 L100 275 L85 240 L80 210 L75 185 L110 145 L130 100 L200 65 L260 55 L310 55"
-              fill="none" stroke="#2A9D8F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+        <path d="M580 440 L260 415 L300 370 L250 355 L170 345 L120 310 L100 275 L85 240 L80 210 L75 185 L110 145 L130 100 L200 65 L260 55 L310 55" fill="none" stroke="#2A9D8F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
         <path d="M310 55 L260 55" fill="none" stroke="#E76F51" stroke-width="2" stroke-dasharray="6,3" opacity="0.5"/>
-        <circle cx="580" cy="440" r="8" fill="#E76F51"/>
-        <text x="595" y="435" font-size="11" fill="#264653" font-family="Nunito" font-weight="700">Las Vegas</text>
-        <text x="595" y="449" font-size="9" fill="#8D99AE" font-family="Nunito">Tag 1-3</text>
-        <circle cx="260" cy="415" r="8" fill="#E9C46A"/>
-        <text x="275" y="410" font-size="11" fill="#264653" font-family="Nunito" font-weight="700">Los Angeles</text>
-        <text x="275" y="424" font-size="9" fill="#8D99AE" font-family="Nunito">Tag 4-6</text>
-        <circle cx="300" cy="370" r="6" fill="#2A9D8F"/>
-        <text x="315" y="367" font-size="10" fill="#264653" font-family="Nunito" font-weight="700">Sequoia NP</text>
-        <text x="315" y="379" font-size="8" fill="#8D99AE" font-family="Nunito">Tag 7-8</text>
-        <circle cx="250" cy="355" r="6" fill="#2A9D8F"/>
-        <text x="265" y="352" font-size="10" fill="#264653" font-family="Nunito" font-weight="700">Yosemite NP</text>
-        <text x="265" y="364" font-size="8" fill="#8D99AE" font-family="Nunito">Tag 9-10</text>
-        <circle cx="170" cy="345" r="8" fill="#E9C46A"/>
-        <text x="185" y="340" font-size="11" fill="#264653" font-family="Nunito" font-weight="700">San Francisco</text>
-        <text x="185" y="354" font-size="9" fill="#8D99AE" font-family="Nunito">Tag 11-12</text>
-        <circle cx="120" cy="310" r="5" fill="#2A9D8F"/>
-        <text x="135" y="313" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Benbow KOA</text>
-        <circle cx="100" cy="275" r="5" fill="#2A9D8F"/>
-        <text x="115" y="278" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Crescent City</text>
-        <circle cx="85" cy="240" r="5" fill="#264653"/>
-        <text x="100" y="243" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Bullards Beach</text>
-        <circle cx="80" cy="210" r="5" fill="#264653"/>
-        <text x="95" y="213" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Waldport</text>
-        <circle cx="75" cy="185" r="5" fill="#264653"/>
-        <text x="90" y="188" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Astoria</text>
-        <circle cx="110" cy="145" r="5" fill="#2A9D8F"/>
-        <text x="125" y="148" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">La Push</text>
-        <circle cx="130" cy="100" r="5" fill="#2A9D8F"/>
-        <text x="145" y="103" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Port Angeles</text>
-        <circle cx="200" cy="65" r="8" fill="#E76F51"/>
-        <text x="215" y="60" font-size="11" fill="#264653" font-family="Nunito" font-weight="700">Seattle</text>
-        <text x="215" y="74" font-size="9" fill="#8D99AE" font-family="Nunito">Tag 22, 25-26</text>
-        <circle cx="310" cy="55" r="6" fill="#F4A261"/>
-        <text x="325" y="52" font-size="10" fill="#264653" font-family="Nunito" font-weight="700">Leavenworth</text>
-        <text x="325" y="64" font-size="8" fill="#8D99AE" font-family="Nunito">Tag 23-24</text>
+        <circle cx="580" cy="440" r="8" fill="#E76F51"/><text x="595" y="435" font-size="11" fill="#264653" font-family="Nunito" font-weight="700">Las Vegas</text><text x="595" y="449" font-size="9" fill="#8D99AE" font-family="Nunito">Tag 1-3</text>
+        <circle cx="260" cy="415" r="8" fill="#E9C46A"/><text x="275" y="410" font-size="11" fill="#264653" font-family="Nunito" font-weight="700">Los Angeles</text><text x="275" y="424" font-size="9" fill="#8D99AE" font-family="Nunito">Tag 4-6</text>
+        <circle cx="300" cy="370" r="6" fill="#2A9D8F"/><text x="315" y="367" font-size="10" fill="#264653" font-family="Nunito" font-weight="700">Sequoia NP</text>
+        <circle cx="250" cy="355" r="6" fill="#2A9D8F"/><text x="265" y="352" font-size="10" fill="#264653" font-family="Nunito" font-weight="700">Yosemite NP</text>
+        <circle cx="170" cy="345" r="8" fill="#E9C46A"/><text x="185" y="340" font-size="11" fill="#264653" font-family="Nunito" font-weight="700">San Francisco</text><text x="185" y="354" font-size="9" fill="#8D99AE" font-family="Nunito">Tag 11-12</text>
+        <circle cx="120" cy="310" r="5" fill="#2A9D8F"/><text x="135" y="313" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Benbow KOA</text>
+        <circle cx="100" cy="275" r="5" fill="#2A9D8F"/><text x="115" y="278" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Crescent City</text>
+        <circle cx="85" cy="240" r="5" fill="#264653"/><text x="100" y="243" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Bullards Beach</text>
+        <circle cx="80" cy="210" r="5" fill="#264653"/><text x="95" y="213" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Waldport</text>
+        <circle cx="75" cy="185" r="5" fill="#264653"/><text x="90" y="188" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Astoria</text>
+        <circle cx="110" cy="145" r="5" fill="#2A9D8F"/><text x="125" y="148" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">La Push</text>
+        <circle cx="130" cy="100" r="5" fill="#2A9D8F"/><text x="145" y="103" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Port Angeles</text>
+        <circle cx="200" cy="65" r="8" fill="#E76F51"/><text x="215" y="60" font-size="11" fill="#264653" font-family="Nunito" font-weight="700">Seattle</text><text x="215" y="74" font-size="9" fill="#8D99AE" font-family="Nunito">Tag 22, 25-26</text>
+        <circle cx="310" cy="55" r="6" fill="#F4A261"/><text x="325" y="52" font-size="10" fill="#264653" font-family="Nunito" font-weight="700">Leavenworth</text><text x="325" y="64" font-size="8" fill="#8D99AE" font-family="Nunito">Tag 23-24</text>
         <text x="555" y="460" font-size="9" fill="#E76F51" font-family="Nunito" font-weight="800">START</text>
         <text x="175" y="88" font-size="9" fill="#E76F51" font-family="Nunito" font-weight="800">ENDE</text>
-        <rect x="430" y="15" width="255" height="70" rx="8" fill="white" opacity="0.8"/>
-        <circle cx="450" cy="33" r="5" fill="#E76F51"/><text x="462" y="37" font-size="9" fill="#264653" font-family="Nunito">Hotels in Städten</text>
-        <circle cx="450" cy="53" r="5" fill="#2A9D8F"/><text x="462" y="57" font-size="9" fill="#264653" font-family="Nunito">Natur & Camping</text>
-        <circle cx="570" cy="33" r="5" fill="#E9C46A"/><text x="582" y="37" font-size="9" fill="#264653" font-family="Nunito">Highlights</text>
-        <circle cx="570" cy="53" r="5" fill="#F4A261"/><text x="582" y="57" font-size="9" fill="#264653" font-family="Nunito">Leavenworth</text>
+        <rect x="430" y="15" width="255" height="65" rx="8" fill="white" opacity="0.8"/>
+        <circle cx="450" cy="32" r="5" fill="#E76F51"/><text x="462" y="36" font-size="9" fill="#264653" font-family="Nunito">Stadt-Hotels</text>
+        <circle cx="450" cy="52" r="5" fill="#2A9D8F"/><text x="462" y="56" font-size="9" fill="#264653" font-family="Nunito">Natur & Camping</text>
+        <circle cx="570" cy="32" r="5" fill="#E9C46A"/><text x="582" y="36" font-size="9" fill="#264653" font-family="Nunito">Highlights</text>
+        <circle cx="570" cy="52" r="5" fill="#F4A261"/><text x="582" y="56" font-size="9" fill="#264653" font-family="Nunito">Leavenworth</text>
       </svg>
     </div>
   `;
 
-  // === ROUTE OVERVIEW ===
+  // === ROUTE CHECKLIST ===
   const stops = [
-    { day: "1-3", place: "Las Vegas (Bellagio)", dates: "17.-20. Juli", color: "#E76F51" },
-    { day: "4-6", place: "Los Angeles (Marina del Rey)", dates: "20.-23. Juli", color: "#E9C46A" },
-    { day: "7-8", place: "Sequoia NP (Wuksachi Lodge)", dates: "23.-25. Juli", color: "#2A9D8F" },
-    { day: "9-10", place: "Yosemite NP (The Ahwahnee)", dates: "25.-27. Juli", color: "#2A9D8F" },
-    { day: "11-12", place: "San Francisco (Argonaut Hotel)", dates: "27.-29. Juli", color: "#E9C46A" },
+    { day: "1-3", place: "Las Vegas (Bellagio)", dates: "17.-20. Jul", color: "#E76F51" },
+    { day: "4-6", place: "Los Angeles (Marina del Rey)", dates: "20.-23. Jul", color: "#E9C46A" },
+    { day: "7-8", place: "Sequoia NP (Wuksachi Lodge)", dates: "23.-25. Jul", color: "#2A9D8F" },
+    { day: "9-10", place: "Yosemite NP (The Ahwahnee)", dates: "25.-27. Jul", color: "#2A9D8F" },
+    { day: "11-12", place: "San Francisco (Argonaut Hotel)", dates: "27.-29. Jul", color: "#E9C46A" },
     { day: "13", place: "Benbow KOA Holiday", dates: "29.-30. Jul", color: "#2A9D8F" },
     { day: "14-15", place: "Crescent City KOA (Redwoods)", dates: "30. Jul-1. Aug", color: "#2A9D8F" },
     { day: "16", place: "Bullards Beach SP, Oregon", dates: "1.-2. Aug", color: "#2A9D8F" },
@@ -384,87 +388,68 @@ function generateBook() {
     { day: "23-24", place: "Leavenworth (Berg Haus)", dates: "8.-10. Aug", color: "#F4A261" },
     { day: "25-26", place: "Seattle (Hotel 1000) → Heimreise", dates: "10.-11. Aug", color: "#E76F51" },
   ];
-
   container.innerHTML += `
     <div class="page route-page">
       <h2>🗺️ Unsere Route — 15 Stopps!</h2>
       <p class="route-subtitle">Kreuze jeden Stopp an, wenn ihr dort wart!</p>
       <div class="route-list">
-        ${stops.map(s => `
-          <div class="route-item">
-            <div class="route-dot" style="background:${s.color}">${s.day}</div>
-            <div class="info">
-              <div class="place">${s.place}</div>
-              <div class="dates">${s.dates}</div>
-            </div>
-            <div class="checkbox"></div>
-          </div>
-        `).join('')}
+        ${stops.map(s => `<div class="route-item"><div class="route-dot" style="background:${s.color}">${s.day}</div><div class="info"><div class="place">${s.place}</div><div class="dates">${s.dates}</div></div><div class="checkbox"></div></div>`).join('')}
       </div>
-      <p class="route-legend">✏️ Kreuze die Kästchen an, wenn ihr dort angekommen seid!</p>
+      <p style="text-align:center;margin-top:4mm;font-size:9pt;color:#8D99AE;">✏️ Kreuze die Kästchen an, wenn ihr dort angekommen seid!</p>
     </div>
   `;
 
-  // === DAY PAGES (2 pages per day) ===
-  days.forEach(d => {
-    // PAGE 1: Left page — program, fun fact, weather, smileys, coolest, snack, joke
+  // === DAY PAGES ===
+  days.forEach((d, idx) => {
+    const decoEmojis = ['🎰','🔮','🚁','🚗','🎬','🏖️','🏔️','🌲','⛰️','💧','🌉','🏴‍☠️','🚐','🌲','🔦','🐋','⭐','🏖️','🌧️','🦌','🦅','⛴️','🥨','🔥','🚀','✈️'];
+    const deco = decoEmojis[idx] || '🌎';
+
+    // LEFT PAGE
     container.innerHTML += `
       <div class="page day-left-page">
+        <div class="page-stripe" style="background:${d.color};"></div>
+        <div class="page-deco-br">${deco}</div>
+
         <div class="day-header">
-          <div class="day-number" style="color:${d.color}">Tag ${d.day}</div>
-          <div class="day-meta">
-            <div class="day-date">${d.date} 2026</div>
-            <div class="day-location">${d.place}</div>
+          <div class="day-badge" style="background:${d.color};">
+            <div class="badge-num">${d.day}</div>
+            <div class="badge-label">Tag</div>
           </div>
+          <div class="day-info">
+            <div class="day-date">${d.date} 2026</div>
+            <div class="day-location" style="color:${d.color};">${d.place}</div>
+          </div>
+          <div class="day-icon">${icon(dayIcons[idx], 50)}</div>
         </div>
 
         <div class="program-box">
           <div class="program-title">📋 Was steht heute auf dem Programm?</div>
           <div class="program-text">${d.program}</div>
-          ${d.drive ? `<div class="program-drive">${d.drive}</div>` : ''}
+          ${d.drive ? `<div class="program-drive">🚗 ${d.drive}</div>` : ''}
         </div>
 
         <div class="fun-fact">
-          <strong>🤓 Wusstest du?</strong> ${d.info}
+          <strong>🤓 Krass!</strong> ${d.info}
         </div>
 
-        <div style="display:flex;gap:8mm;">
+        <div style="display:flex;gap:6mm;">
           <div style="flex:1;">
-            <div class="section-title">☀️ Wetter heute</div>
+            <div class="section-title">☀️ Wetter</div>
             <div class="weather-row">
-              ${['☀️', '⛅', '🌧️', '🌬️', '🥵', '🥶'].map(w => `
-                <div class="weather-option"><div class="weather-circle"></div> ${w}</div>
-              `).join('')}
+              ${['☀️','⛅','🌧️','🌬️','🥵','🥶'].map(w => `<div class="weather-option"><div class="weather-circle"></div>${w}</div>`).join('')}
             </div>
           </div>
           <div style="flex:1;">
-            <div class="section-title">😊 Mein Tag war...</div>
+            <div class="section-title">😊 Mein Tag</div>
             <div class="smiley-row">
-              ${[
-                { emoji: '🤩', label: 'mega' },
-                { emoji: '😊', label: 'schön' },
-                { emoji: '😐', label: 'okay' },
-                { emoji: '😴', label: 'müde' },
-                { emoji: '😤', label: 'krass' },
-              ].map(s => `
-                <div class="smiley-item">
-                  <span class="emoji">${s.emoji}</span>
-                  <div class="smiley-circle"></div>
-                </div>
-              `).join('')}
+              ${['🤩','😊','😐','😴','😤'].map(e => `<div class="smiley-item"><span class="emoji">${e}</span><div class="smiley-circle"></div></div>`).join('')}
             </div>
           </div>
         </div>
 
-        <div style="display:flex;gap:8mm;">
-          <div style="flex:1;">
-            <div class="section-title">⭐ Am coolsten war...</div>
-            <div class="coolest-section"><div class="coolest-line"></div></div>
-          </div>
-          <div style="flex:1;">
-            <div class="section-title">🍕 Bester Snack / Drink</div>
-            <div class="coolest-section"><div class="coolest-line"></div></div>
-          </div>
+        <div style="display:flex;gap:6mm;">
+          <div style="flex:1;"><div class="section-title">⭐ Am coolsten war...</div><div class="coolest-line"></div></div>
+          <div style="flex:1;"><div class="section-title">🍕 Bester Snack</div><div class="coolest-line"></div></div>
         </div>
 
         <div class="joke-box">
@@ -475,17 +460,20 @@ function generateBook() {
       </div>
     `;
 
-    // PAGE 2: Right page — photo (10x15cm) + diary
+    // RIGHT PAGE
     container.innerHTML += `
       <div class="page day-right-page">
+        <div class="page-stripe" style="background:${d.color};opacity:0.3;"></div>
+        <div class="page-deco-tl" style="opacity:0.04;">${deco}</div>
+
         <div class="right-page-header">
           <div class="right-page-tag">Tag ${d.day} — ${d.place}</div>
-          <div class="day-date">${d.date} 2026</div>
+          <div style="font-weight:700;font-size:11pt;color:#8D99AE;">${d.date} 2026</div>
         </div>
 
-        <div class="section-title">📸 Mein Bild des Tages <span style="font-weight:400;font-size:8pt;text-transform:none;color:#8D99AE;">(Foto einkleben 10×15 cm oder reinmalen!)</span></div>
+        <div class="section-title">📸 Mein Bild des Tages <span style="font-weight:400;font-size:7pt;text-transform:none;color:#8D99AE;">(Foto einkleben 10×15 cm oder reinmalen!)</span></div>
         <div class="photo-box">
-          <div class="photo-hint" style="opacity:0.4;">✂️ Foto hier einkleben<br>oder reinmalen!</div>
+          <div class="photo-hint" style="opacity:0.3;">✂️ Foto einkleben oder reinmalen!</div>
           <div class="photo-size">10 × 15 cm</div>
         </div>
 
@@ -501,6 +489,125 @@ function generateBook() {
         </div>
       </div>
     `;
+
+    // === ACTIVITY PAGES between sections ===
+    if (d.day === 6) {
+      // After LA: ANIMAL CHECKLIST
+      container.innerHTML += `
+        <div class="page activity-page">
+          <h2 style="color:#2A9D8F;">🦌 Tier-Checkliste</h2>
+          <p class="activity-subtitle">Hast du diese Tiere auf der Reise gesehen? Kreuze an!</p>
+          <div class="checklist-grid">
+            ${[
+              {e:'🐻',n:'Schwarzbär',w:'Sequoia, Yosemite, Olympic'},
+              {e:'🦌',n:'Maultierhirsch',w:'Sequoia, Yosemite'},
+              {e:'🦅',n:'Weißkopfseeadler',w:'Oregon, Washington'},
+              {e:'🐿️',n:'Streifenhörnchen',w:'Sequoia, Yosemite'},
+              {e:'🦝',n:'Waschbär',w:'Überall in den Parks'},
+              {e:'🐋',n:'Grauwal',w:'Oregon-Küste'},
+              {e:'🦭',n:'Seelöwe',w:'SF Pier 39, Küste'},
+              {e:'🦎',n:'Eidechse',w:'Las Vegas, Wüste'},
+              {e:'🐛',n:'Bananenschnecke',w:'Redwoods (knallgelb!)'},
+              {e:'🦀',n:'Krabbe',w:'Oregon-Küste'},
+              {e:'🐦',n:'Blauhäher',w:'Yosemite (knallblau!)'},
+              {e:'🦫',n:'Biber',w:'Olympic NP, Flüsse'},
+              {e:'🐺',n:'Kojote',w:'Yosemite, Sequoia'},
+              {e:'🫎',n:'Roosevelt-Elch',w:'Hoh Rainforest (riesig!)'},
+              {e:'⭐',n:'Seestern',w:'Oregon Gezeitenpools'},
+              {e:'🦈',n:'Hai (im Aquarium)',w:'Newport Aquarium'},
+              {e:'🐿️',n:'Murmeltier',w:'Hurricane Ridge'},
+              {e:'🐐',n:'Bergziege',w:'Olympic NP Berge'},
+              {e:'🦉',n:'Eule',w:'Redwoods (nachts!)'},
+              {e:'🦋',n:'Schmetterling',w:'Überall im Sommer'},
+              {e:'🐚',n:'Seeanemone',w:'Gezeitenpools'},
+            ].map(a => `<div class="checklist-item"><div class="check"></div><div class="animal-icon">${a.e}</div><div class="animal-info"><div class="animal-name">${a.n}</div><div class="animal-where">${a.w}</div></div></div>`).join('')}
+          </div>
+          <p style="text-align:center;margin-top:4mm;font-size:9pt;color:#8D99AE;">Bonus: Hast du ein Tier gesehen, das nicht auf der Liste steht? Schreib es hier: ________________________</p>
+        </div>
+      `;
+    }
+
+    if (d.day === 12) {
+      // After SF: STICKER/STAMP COLLECTION
+      container.innerHTML += `
+        <div class="page activity-page">
+          <h2 style="color:#E76F51;">🏅 Meine Stempel-Sammlung</h2>
+          <p class="activity-subtitle">Sammle Stempel, Eintrittskarten oder male/klebe etwas rein!</p>
+          <div class="stamp-grid">
+            ${[
+              {i:'🎰',l:'Las Vegas'},
+              {i:'🔮',l:'The Sphere'},
+              {i:'🚁',l:'Grand Canyon'},
+              {i:'🎬',l:'Universal Studios'},
+              {i:'⭐',l:'Hollywood'},
+              {i:'🌲',l:'Sequoia NP'},
+              {i:'⛰️',l:'Yosemite NP'},
+              {i:'🌉',l:'Golden Gate'},
+              {i:'🏴‍☠️',l:'Alcatraz'},
+              {i:'🚐',l:'Wohnmobil'},
+              {i:'🌲',l:'Redwoods'},
+              {i:'🔦',l:'Lighthouse'},
+              {i:'🐋',l:'Oregon Coast'},
+              {i:'🏖️',l:'Cannon Beach'},
+              {i:'🌧️',l:'La Push'},
+              {i:'🦌',l:'Hoh Rainforest'},
+              {i:'⛰️',l:'Hurricane Ridge'},
+              {i:'⛴️',l:'Fähre Seattle'},
+              {i:'🥨',l:'Leavenworth'},
+              {i:'🚀',l:'Space Needle'},
+            ].map(s => `<div class="stamp-box"><div class="stamp-icon" style="opacity:0.15;">${s.i}</div><div class="stamp-label">${s.l}</div></div>`).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    if (d.day === 21) {
+      // After Olympic NP: COLORING PAGE with nature SVGs
+      container.innerHTML += `
+        <div class="page activity-page" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+          <h2 style="color:#2A9D8F;margin-bottom:3mm;">🎨 Ausmalseite — Unsere Reise!</h2>
+          <p class="activity-subtitle">Male diese Bilder von eurer Reise bunt an!</p>
+          <div style="display:flex;gap:12mm;flex-wrap:wrap;justify-content:center;margin-top:4mm;">
+            <div style="text-align:center;">
+              <div style="border:2px solid #e0e0e0;border-radius:12px;padding:4mm;background:#fafafa;">
+                ${icon('bridge', 100)}
+              </div>
+              <div style="font-size:9pt;font-weight:700;margin-top:2mm;color:#8D99AE;">Golden Gate Bridge</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="border:2px solid #e0e0e0;border-radius:12px;padding:4mm;background:#fafafa;">
+                ${icon('tree', 100)}
+              </div>
+              <div style="font-size:9pt;font-weight:700;margin-top:2mm;color:#8D99AE;">Mammutbaum</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="border:2px solid #e0e0e0;border-radius:12px;padding:4mm;background:#fafafa;">
+                ${icon('rv', 100)}
+              </div>
+              <div style="font-size:9pt;font-weight:700;margin-top:2mm;color:#8D99AE;">Unser Wohnmobil</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="border:2px solid #e0e0e0;border-radius:12px;padding:4mm;background:#fafafa;">
+                ${icon('elk', 100)}
+              </div>
+              <div style="font-size:9pt;font-weight:700;margin-top:2mm;color:#8D99AE;">Roosevelt-Elch</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="border:2px solid #e0e0e0;border-radius:12px;padding:4mm;background:#fafafa;">
+                ${icon('eagle', 100)}
+              </div>
+              <div style="font-size:9pt;font-weight:700;margin-top:2mm;color:#8D99AE;">Weißkopfseeadler</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="border:2px solid #e0e0e0;border-radius:12px;padding:4mm;background:#fafafa;">
+                ${icon('needle', 100)}
+              </div>
+              <div style="font-size:9pt;font-weight:700;margin-top:2mm;color:#8D99AE;">Space Needle</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
   });
 
   // === LAST PAGE ===
@@ -508,41 +615,35 @@ function generateBook() {
     <div class="page last-page">
       <h2>🏆 Meine Reise-Highlights</h2>
       <div class="fav-section">
-        <div class="fav-line"><span class="fav-label">🥇 Mein absoluter Lieblingsort:</span></div>
-        <div class="fav-line"><span class="fav-label">🍔 Das leckerste Essen:</span></div>
-        <div class="fav-line"><span class="fav-label">🎢 Die coolste Aktivität:</span></div>
-        <div class="fav-line"><span class="fav-label">🏕️ Der schönste Campingplatz:</span></div>
-        <div class="fav-line"><span class="fav-label">🦌 Das tollste Tier, das ich gesehen habe:</span></div>
-        <div class="fav-line"><span class="fav-label">😂 Der lustigste Moment:</span></div>
-        <div class="fav-line"><span class="fav-label">💪 Das Mutigste, was ich gemacht habe:</span></div>
-        <div class="fav-line"><span class="fav-label">🤝 Mein bester Reise-Kumpel:</span></div>
+        ${[
+          ['🥇','Mein absoluter Lieblingsort'],
+          ['🍔','Das leckerste Essen'],
+          ['🎢','Die coolste Aktivität'],
+          ['🏕️','Der schönste Campingplatz'],
+          ['🦌','Das tollste Tier'],
+          ['😂','Der lustigste Moment'],
+          ['💪','Das Mutigste, was ich gemacht habe'],
+          ['🤝','Mein bester Reise-Kumpel'],
+        ].map(([e,l]) => `<div class="fav-line"><span class="fav-label">${e} ${l}:</span></div>`).join('')}
       </div>
       <div class="big-draw">✏️ Male hier dein schönstes Reise-Erlebnis!</div>
     </div>
   `;
 
-  // === JOKE SOLUTIONS PAGE ===
+  // === JOKE SOLUTIONS ===
   container.innerHTML += `
     <div class="page solutions-page">
       <h2>😂 Witz-Lösungen</h2>
-      <p class="solutions-subtitle">Hier findest du alle Antworten — aber nicht schummeln!</p>
+      <p class="solutions-subtitle">Alle Antworten — aber nicht schummeln!</p>
       <div class="solutions-grid">
-        ${days.map(d => `
-          <div class="solution-item">
-            <div class="sol-day">Tag ${d.day} — ${d.place}</div>
-            <div class="sol-q">${d.joke.q}</div>
-            <div class="sol-a">→ ${d.joke.a}</div>
-          </div>
-        `).join('')}
+        ${days.map(d => `<div class="solution-item"><div class="sol-day">Tag ${d.day} — ${d.place}</div><div class="sol-q">${d.joke.q}</div><div class="sol-a">→ ${d.joke.a}</div></div>`).join('')}
       </div>
     </div>
   `;
 }
-
 </script>
 
 <div id="book"></div>
-
 <script>generateBook();</script>
 </body>
 </html>
