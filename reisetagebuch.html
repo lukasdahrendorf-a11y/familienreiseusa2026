@@ -179,6 +179,94 @@ function generateBook() {
     </div>
   `;
 
+  // === ROUTE MAP PAGE ===
+  container.innerHTML += `
+    <div class="page" style="padding:8mm;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+      <h2 style="font-family:'Fraunces',serif;font-size:22pt;color:#264653;margin-bottom:4mm;text-align:center;">🗺️ Unsere Reiseroute</h2>
+      <p style="font-size:11pt;color:#8D99AE;margin-bottom:4mm;text-align:center;">Las Vegas → Los Angeles → San Francisco → Oregon Coast → Olympic NP → Seattle</p>
+      <svg viewBox="0 0 700 480" style="width:260mm;height:170mm;" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background -->
+        <rect width="700" height="480" fill="#f0f4f8" rx="12"/>
+        <!-- Pacific Ocean -->
+        <path d="M0 0 L180 0 L140 80 L100 160 L80 240 L60 300 L50 340 L40 380 L80 430 L120 480 L0 480 Z" fill="#d4e8f0" opacity="0.5"/>
+        <text x="40" y="200" font-size="14" fill="#8bafc4" font-family="Nunito" font-weight="600" transform="rotate(-90,40,200)">PACIFIC OCEAN</text>
+        <!-- State borders (simplified) -->
+        <path d="M100 310 L680 310" stroke="#ccc" stroke-width="1" stroke-dasharray="6,4" opacity="0.6"/>
+        <text x="640" y="303" font-size="10" fill="#aaa" font-family="Nunito" text-anchor="end">California / Oregon</text>
+        <path d="M60 170 L680 170" stroke="#ccc" stroke-width="1" stroke-dasharray="6,4" opacity="0.6"/>
+        <text x="640" y="163" font-size="10" fill="#aaa" font-family="Nunito" text-anchor="end">Oregon / Washington</text>
+        <text x="660" y="450" font-size="12" fill="#bbb" font-family="Nunito" font-weight="600">CALIFORNIA</text>
+        <text x="660" y="240" font-size="12" fill="#bbb" font-family="Nunito" font-weight="600">OREGON</text>
+        <text x="660" y="100" font-size="12" fill="#bbb" font-family="Nunito" font-weight="600">WASHINGTON</text>
+        <text x="400" y="460" font-size="11" fill="#bbb" font-family="Nunito">NEVADA</text>
+        <!-- Route line -->
+        <path d="M580 440 L260 415 L300 370 L250 355 L170 345 L120 310 L100 275 L85 240 L80 210 L75 185 L110 145 L130 100 L200 65 L260 55 L310 55"
+              fill="none" stroke="#2A9D8F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+        <!-- Dashed return to Seattle -->
+        <path d="M310 55 L260 55" fill="none" stroke="#E76F51" stroke-width="2" stroke-dasharray="6,3" opacity="0.5"/>
+        <!-- Stops -->
+        <!-- 1. Las Vegas -->
+        <circle cx="580" cy="440" r="8" fill="#E76F51"/>
+        <text x="595" y="435" font-size="11" fill="#264653" font-family="Nunito" font-weight="700">Las Vegas</text>
+        <text x="595" y="449" font-size="9" fill="#8D99AE" font-family="Nunito">Tag 1-3</text>
+        <!-- 2. Los Angeles -->
+        <circle cx="260" cy="415" r="8" fill="#E9C46A"/>
+        <text x="275" y="410" font-size="11" fill="#264653" font-family="Nunito" font-weight="700">Los Angeles</text>
+        <text x="275" y="424" font-size="9" fill="#8D99AE" font-family="Nunito">Tag 4-6</text>
+        <!-- 3. Sequoia -->
+        <circle cx="300" cy="370" r="6" fill="#2A9D8F"/>
+        <text x="315" y="367" font-size="10" fill="#264653" font-family="Nunito" font-weight="700">Sequoia NP</text>
+        <text x="315" y="379" font-size="8" fill="#8D99AE" font-family="Nunito">Tag 7-8</text>
+        <!-- 4. Yosemite -->
+        <circle cx="250" cy="355" r="6" fill="#2A9D8F"/>
+        <text x="265" y="352" font-size="10" fill="#264653" font-family="Nunito" font-weight="700">Yosemite NP</text>
+        <text x="265" y="364" font-size="8" fill="#8D99AE" font-family="Nunito">Tag 9-10</text>
+        <!-- 5. San Francisco -->
+        <circle cx="170" cy="345" r="8" fill="#E9C46A"/>
+        <text x="185" y="340" font-size="11" fill="#264653" font-family="Nunito" font-weight="700">San Francisco</text>
+        <text x="185" y="354" font-size="9" fill="#8D99AE" font-family="Nunito">Tag 11-12</text>
+        <!-- 6. Benbow / Redwoods South -->
+        <circle cx="120" cy="310" r="5" fill="#2A9D8F"/>
+        <text x="135" y="313" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Benbow KOA</text>
+        <!-- 7. Crescent City -->
+        <circle cx="100" cy="275" r="5" fill="#2A9D8F"/>
+        <text x="115" y="278" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Crescent City</text>
+        <!-- 8. Bullards Beach -->
+        <circle cx="85" cy="240" r="5" fill="#264653"/>
+        <text x="100" y="243" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Bullards Beach</text>
+        <!-- 9. Waldport -->
+        <circle cx="80" cy="210" r="5" fill="#264653"/>
+        <text x="95" y="213" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Waldport</text>
+        <!-- 10. Astoria -->
+        <circle cx="75" cy="185" r="5" fill="#264653"/>
+        <text x="90" y="188" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Astoria</text>
+        <!-- 11. La Push -->
+        <circle cx="110" cy="145" r="5" fill="#2A9D8F"/>
+        <text x="125" y="148" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">La Push</text>
+        <!-- 12. Port Angeles -->
+        <circle cx="130" cy="100" r="5" fill="#2A9D8F"/>
+        <text x="145" y="103" font-size="9" fill="#264653" font-family="Nunito" font-weight="600">Port Angeles</text>
+        <!-- 13. Seattle -->
+        <circle cx="200" cy="65" r="8" fill="#E76F51"/>
+        <text x="215" y="60" font-size="11" fill="#264653" font-family="Nunito" font-weight="700">Seattle</text>
+        <text x="215" y="74" font-size="9" fill="#8D99AE" font-family="Nunito">Tag 22, 25-26</text>
+        <!-- 14. Leavenworth -->
+        <circle cx="310" cy="55" r="6" fill="#F4A261"/>
+        <text x="325" y="52" font-size="10" fill="#264653" font-family="Nunito" font-weight="700">Leavenworth</text>
+        <text x="325" y="64" font-size="8" fill="#8D99AE" font-family="Nunito">Tag 23-24</text>
+        <!-- Start/End markers -->
+        <text x="555" y="460" font-size="9" fill="#E76F51" font-family="Nunito" font-weight="800">✈️ START</text>
+        <text x="175" y="88" font-size="9" fill="#E76F51" font-family="Nunito" font-weight="800">✈️ ENDE</text>
+        <!-- Legend -->
+        <rect x="430" y="15" width="255" height="70" rx="8" fill="white" opacity="0.8"/>
+        <circle cx="450" cy="33" r="5" fill="#E76F51"/><text x="462" y="37" font-size="9" fill="#264653" font-family="Nunito">Hotels in Städten</text>
+        <circle cx="450" cy="53" r="5" fill="#2A9D8F"/><text x="462" y="57" font-size="9" fill="#264653" font-family="Nunito">Natur & Camping</text>
+        <circle cx="570" cy="33" r="5" fill="#E9C46A"/><text x="582" y="37" font-size="9" fill="#264653" font-family="Nunito">Highlights</text>
+        <circle cx="570" cy="53" r="5" fill="#F4A261"/><text x="582" y="57" font-size="9" fill="#264653" font-family="Nunito">Leavenworth</text>
+      </svg>
+    </div>
+  `;
+
   // === ROUTE OVERVIEW ===
   const stops = [
     { day: "1-3", place: "Las Vegas (Bellagio)", dates: "17.-20. Juli", color: "#E76F51" },
